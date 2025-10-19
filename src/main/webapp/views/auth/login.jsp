@@ -29,27 +29,27 @@
                     </div>
                 </div>
 
-                <h1 class="brand-title">Bienvenue sur votre plateforme médicale</h1>
+                <h1 class="brand-title">Bienvenue sur Clinique Excellence</h1>
                 <p class="brand-description">
-                    Accédez à votre espace personnel pour gérer vos consultations, rendez-vous et dossiers médicaux en toute sécurité.
+                    Accédez à votre espace personnel pour gérer vos consultations et rendez-vous médicaux.
                 </p>
 
                 <ul class="brand-features">
                     <li>
                         <i class="fas fa-shield-alt"></i>
-                        <span>Connexion 100% sécurisée</span>
+                        <span>Sécurité maximale</span>
                     </li>
                     <li>
                         <i class="fas fa-clock"></i>
-                        <span>Disponible 24/7</span>
+                        <span>Service 24/7</span>
                     </li>
                     <li>
-                        <i class="fas fa-user-lock"></i>
-                        <span>Données cryptées et protégées</span>
+                        <i class="fas fa-user-md"></i>
+                        <span>Suivi médical complet</span>
                     </li>
                     <li>
                         <i class="fas fa-mobile-alt"></i>
-                        <span>Accessible sur tous vos appareils</span>
+                        <span>Multi-plateformes</span>
                     </li>
                 </ul>
             </div>

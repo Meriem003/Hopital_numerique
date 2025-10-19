@@ -175,4 +175,19 @@ public class SalleRepositoryImpl implements SalleRepository {
             em.close();
         }
     }
+
+    @Override
+    public List<Salle> findByDepartementId(Long departementId) {
+        EntityManager em = HibernateUtil.getEntityManager();
+        try {
+            TypedQuery<Salle> query = em.createQuery(
+                "SELECT s FROM Salle s WHERE s.departement.id = :departementId ORDER BY s.nomSalle",
+                Salle.class
+            );
+            query.setParameter("departementId", departementId);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
 }

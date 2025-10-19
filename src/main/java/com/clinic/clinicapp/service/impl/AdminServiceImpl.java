@@ -122,21 +122,28 @@ public class AdminServiceImpl implements AdminService {
         if (departementId == null) {
             throw new IllegalArgumentException("L'ID du département est obligatoire");
         }
-        if (salleId == null) {
-            throw new IllegalArgumentException("L'ID de la salle est obligatoire");
-        }
         
         Optional<Departement> departement = departementRepository.findById(departementId);
         if (!departement.isPresent()) {
             throw new IllegalArgumentException("Le département avec l'ID " + departementId + " n'existe pas");
         }
         
-        Optional<Salle> salle = salleRepository.findById(salleId);
-        if (!salle.isPresent()) {
-            throw new IllegalArgumentException("La salle avec l'ID " + salleId + " n'existe pas");
+        // La salle est optionnelle
+        Salle salle = null;
+        if (salleId != null) {
+            Optional<Salle> salleOpt = salleRepository.findById(salleId);
+            if (!salleOpt.isPresent()) {
+                throw new IllegalArgumentException("La salle avec l'ID " + salleId + " n'existe pas");
+            }
+            salle = salleOpt.get();
         }
         
-        Docteur docteur = new Docteur(nom, prenom, email, motDePasse, specialite, departement.get(), salle.get());
+        Docteur docteur;
+        if (salle != null) {
+            docteur = new Docteur(nom, prenom, email, motDePasse, specialite, departement.get(), salle);
+        } else {
+            docteur = new Docteur(nom, prenom, email, motDePasse, specialite, departement.get());
+        }
         
         return docteurRepository.save(docteur);
     }
@@ -246,8 +253,13 @@ public class AdminServiceImpl implements AdminService {
         if (salleRepository.existsByNomSalle(salle.getNomSalle())) {
             throw new IllegalArgumentException("Une salle avec ce nom existe déjà");
         }
-        if (salle.getCapacite() == null || salle.getCapacite() <= 0) {
+        // Validation de la capacité uniquement si elle est fournie
+        if (salle.getCapacite() != null && salle.getCapacite() <= 0) {
             throw new IllegalArgumentException("La capacité de la salle doit être supérieure à 0");
+        }
+        // Validation du département
+        if (salle.getDepartement() == null) {
+            throw new IllegalArgumentException("Le département est obligatoire");
         }
         return salleRepository.save(salle);
     }
@@ -267,8 +279,13 @@ public class AdminServiceImpl implements AdminService {
         if (salle.getNomSalle() == null || salle.getNomSalle().trim().isEmpty()) {
             throw new IllegalArgumentException("Le nom de la salle est obligatoire");
         }
-        if (salle.getCapacite() == null || salle.getCapacite() <= 0) {
+        // Validation de la capacité uniquement si elle est fournie
+        if (salle.getCapacite() != null && salle.getCapacite() <= 0) {
             throw new IllegalArgumentException("La capacité de la salle doit être supérieure à 0");
+        }
+        // Validation du département
+        if (salle.getDepartement() == null) {
+            throw new IllegalArgumentException("Le département est obligatoire");
         }
         return salleRepository.update(salle);
     }
@@ -297,6 +314,14 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public List<Salle> listerToutesLesSalles() {
         return salleRepository.findAll();
+    }
+
+    @Override
+    public List<Salle> listerSallesByDepartement(Long departementId) {
+        if (departementId == null) {
+            throw new IllegalArgumentException("L'ID du département ne peut pas être null");
+        }
+        return salleRepository.findByDepartementId(departementId);
     }
 
     @Override
@@ -480,6 +505,34 @@ public class AdminServiceImpl implements AdminService {
             return patientRepository.findAll();
         }
         return patientRepository.findByNom(nom);
+    }
+
+    @Override
+    public Patient modifierPatient(Patient patient) {
+        if (patient == null) {
+            throw new IllegalArgumentException("Le patient ne peut pas être null");
+        }
+        if (patient.getId() == null) {
+            throw new IllegalArgumentException("L'ID du patient ne peut pas être null");
+        }
+        
+        Optional<Patient> patientExistant = patientRepository.findById(patient.getId());
+        if (!patientExistant.isPresent()) {
+            throw new IllegalArgumentException("Patient non trouvé avec l'ID: " + patient.getId());
+        }
+        
+        // Validation des données
+        if (patient.getNom() == null || patient.getNom().trim().isEmpty()) {
+            throw new IllegalArgumentException("Le nom du patient est obligatoire");
+        }
+        if (patient.getPrenom() == null || patient.getPrenom().trim().isEmpty()) {
+            throw new IllegalArgumentException("Le prénom du patient est obligatoire");
+        }
+        if (patient.getEmail() == null || patient.getEmail().trim().isEmpty()) {
+            throw new IllegalArgumentException("L'email du patient est obligatoire");
+        }
+        
+        return patientRepository.update(patient);
     }
 
     @Override

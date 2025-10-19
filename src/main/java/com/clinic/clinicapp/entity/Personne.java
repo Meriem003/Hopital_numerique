@@ -6,7 +6,6 @@ import com.clinic.clinicapp.enums.TypeUtilisateur;
 @Entity
 @Table(name = "personnes")
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "type_personne")
 public abstract class Personne {
     
     @Id
@@ -25,10 +24,6 @@ public abstract class Personne {
     @Column(name = "mot_de_passe", nullable = false)
     private String motDePasse;
     
-    @Enumerated(EnumType.STRING)
-    @Column(name = "type_utilisateur", nullable = false)
-    private TypeUtilisateur typeUtilisateur;
-    
     public Personne() {}
     
     public Personne(String nom, String prenom, String email, String motDePasse, TypeUtilisateur typeUtilisateur) {
@@ -36,7 +31,6 @@ public abstract class Personne {
         this.prenom = prenom;
         this.email = email;
         this.motDePasse = motDePasse;
-        this.typeUtilisateur = typeUtilisateur;
     }
     
     public Long getId() {
@@ -79,12 +73,34 @@ public abstract class Personne {
         this.motDePasse = motDePasse;
     }
     
+    /**
+     * Retourne le type d'utilisateur basé sur le type réel de l'instance.
+     * Cette méthode remplace l'ancienne colonne type_utilisateur en base de données.
+     * Le type est maintenant calculé dynamiquement à partir de la classe (instanceof).
+     * 
+     * @return TypeUtilisateur correspondant au type de l'instance
+     */
     public TypeUtilisateur getTypeUtilisateur() {
-        return typeUtilisateur;
+        if (this instanceof Admin) {
+            return TypeUtilisateur.ADMIN;
+        } else if (this instanceof Docteur) {
+            return TypeUtilisateur.DOCTEUR;
+        } else if (this instanceof Patient) {
+            return TypeUtilisateur.PATIENT;
+        }
+        return null;
     }
     
+    /**
+     * Méthode conservée pour compatibilité avec le code existant.
+     * Le type d'utilisateur est maintenant déterminé automatiquement par la classe.
+     * 
+     * @param typeUtilisateur ignoré (le type est déterminé par instanceof)
+     * @deprecated Le type est déterminé automatiquement par la classe elle-même
+     */
+    @Deprecated
     public void setTypeUtilisateur(TypeUtilisateur typeUtilisateur) {
-        this.typeUtilisateur = typeUtilisateur;
+        // Ne fait rien - le type est déterminé automatiquement par la classe
     }
     
     public String getNomComplet() {
@@ -98,7 +114,7 @@ public abstract class Personne {
                 ", nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
                 ", email='" + email + '\'' +
-                ", typeUtilisateur=" + typeUtilisateur +
+                ", typeUtilisateur=" + getTypeUtilisateur() +
                 '}';
     }
 }

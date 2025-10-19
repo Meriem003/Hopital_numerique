@@ -23,6 +23,10 @@ public class Salle {
     @Column(name = "description")
     private String description;
     
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "departement_id", nullable = false)
+    private Departement departement;
+    
     @OneToMany(mappedBy = "salle", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Consultation> consultations = new ArrayList<>();
     
@@ -69,6 +73,14 @@ public class Salle {
     
     public void setDescription(String description) {
         this.description = description;
+    }
+    
+    public Departement getDepartement() {
+        return departement;
+    }
+    
+    public void setDepartement(Departement departement) {
+        this.departement = departement;
     }
     
     public List<Consultation> getConsultations() {

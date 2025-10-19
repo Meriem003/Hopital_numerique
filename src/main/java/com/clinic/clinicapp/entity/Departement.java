@@ -19,8 +19,17 @@ public class Departement {
     @Column(name = "description")
     private String description;
     
+    @Column(name = "icone")
+    private String icone;
+    
+    @Column(name = "actif")
+    private boolean actif = true;
+    
     @OneToMany(mappedBy = "departement", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Docteur> docteurs = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "departement", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Salle> salles = new ArrayList<>();
     
     public Departement() {}
     
@@ -53,6 +62,22 @@ public class Departement {
         this.description = description;
     }
     
+    public String getIcone() {
+        return icone;
+    }
+    
+    public void setIcone(String icone) {
+        this.icone = icone;
+    }
+    
+    public boolean isActif() {
+        return actif;
+    }
+    
+    public void setActif(boolean actif) {
+        this.actif = actif;
+    }
+    
     public List<Docteur> getDocteurs() {
         return docteurs;
     }
@@ -69,6 +94,24 @@ public class Departement {
     public void removeDocteur(Docteur docteur) {
         docteurs.remove(docteur);
         docteur.setDepartement(null);
+    }
+    
+    public List<Salle> getSalles() {
+        return salles;
+    }
+    
+    public void setSalles(List<Salle> salles) {
+        this.salles = salles;
+    }
+    
+    public void addSalle(Salle salle) {
+        salles.add(salle);
+        salle.setDepartement(this);
+    }
+    
+    public void removeSalle(Salle salle) {
+        salles.remove(salle);
+        salle.setDepartement(null);
     }
     
     @Override

@@ -3,6 +3,8 @@ package com.clinic.clinicapp.entity;
 import jakarta.persistence.*;
 import com.clinic.clinicapp.enums.StatusConsultation;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 
 @Entity
 @Table(name = "consultations")
@@ -76,6 +78,14 @@ public class Consultation {
         return dateHeure;
     }
     
+    // Méthode pour compatibilité JSP avec fmt:formatDate
+    public Date getDate() {
+        if (dateHeure == null) {
+            return null;
+        }
+        return Date.from(dateHeure.atZone(ZoneId.systemDefault()).toInstant());
+    }
+
     public void setDateHeure(LocalDateTime dateHeure) {
         this.dateHeure = dateHeure;
         this.dateModification = LocalDateTime.now();

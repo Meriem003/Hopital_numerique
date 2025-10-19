@@ -1,0 +1,301 @@
+/* Profil Docteur - Styles additionnels */
+
+.profil-container {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.profil-header {
+    animation: slideInDown 0.6s ease-out;
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.info-card {
+    animation: slideInUp 0.6s ease-out;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* Effet de focus sur les inputs */
+.form-group input:focus,
+.form-group select:focus {
+    transform: scale(1.02);
+}
+
+/* Animation du bouton */
+.btn-primary {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-primary:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Effet de survol sur les stats */
+.stat-item {
+    transition: transform 0.3s;
+}
+
+.stat-item:hover {
+    transform: scale(1.1);
+}
+
+/* Amélioration des alertes */
+.alert {
+    animation: slideInRight 0.5s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Transition fluide des onglets */
+.tab-content {
+    animation: fadeInContent 0.4s ease-in;
+}
+
+@keyframes fadeInContent {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Style pour les badges */
+.badge {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Amélioration des lignes d'info */
+.info-row {
+    transition: background-color 0.3s;
+}
+
+.info-row:hover {
+    background-color: #f8f9fa;
+}
+
+/* Avatar animé */
+.profil-avatar {
+    animation: rotateIn 0.8s ease-out;
+}
+
+@keyframes rotateIn {
+    from {
+        opacity: 0;
+        transform: rotate(-180deg) scale(0);
+    }
+    to {
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+    }
+}
+
+/* Effet sur les onglets */
+.tab-btn {
+    position: relative;
+}
+
+.tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: #667eea;
+    transition: width 0.3s, left 0.3s;
+}
+
+.tab-btn:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+.tab-btn.active::after {
+    width: 100%;
+    left: 0;
+}
+
+/* Responsive amélioré */
+@media (max-width: 768px) {
+    .profil-avatar {
+        width: 80px;
+        height: 80px;
+        font-size: 2rem;
+    }
+
+    .profil-info h1 {
+        font-size: 1.5rem;
+    }
+
+    .tabs {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .tab-btn {
+        text-align: left;
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid #e0e0e0;
+    }
+}
+
+/* Amélioration du formulaire */
+.form-group input,
+.form-group select {
+    position: relative;
+}
+
+.form-group input::placeholder {
+    color: #999;
+    transition: color 0.3s;
+}
+
+.form-group input:focus::placeholder {
+    color: #ccc;
+}
+
+/* Style pour les messages d'erreur de validation */
+.form-group small {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+}
+
+/* Effet de loading pour les boutons */
+.btn-primary:active {
+    transform: scale(0.95);
+}
+
+/* Amélioration de la section stats */
+.profil-stats {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+/* Style pour les sélecteurs */
+.form-group select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23667eea' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 12px;
+    appearance: none;
+}
+
+/* Grille responsive améliorée */
+@media (max-width: 1024px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Effet sur les cartes d'info */
+.info-card {
+    border: 1px solid transparent;
+    transition: all 0.3s;
+}
+
+.info-card:hover {
+    border-color: #e7eaff;
+}
+
+/* Animation des icônes */
+.info-card h2 i {
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Amélioration de la spécialité badge */
+.profil-specialite {
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Style pour la validation des inputs */
+.form-group input:valid {
+    border-color: #28a745;
+}
+
+.form-group input:invalid:not(:placeholder-shown) {
+    border-color: #dc3545;
+}

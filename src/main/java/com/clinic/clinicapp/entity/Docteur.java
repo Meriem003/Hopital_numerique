@@ -7,7 +7,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "docteurs")
-@DiscriminatorValue("DOCTEUR")
 public class Docteur extends Personne {
     
     @Column(name = "specialite", nullable = false)
@@ -26,7 +25,7 @@ public class Docteur extends Personne {
     
     public Docteur() {
         super();
-        setTypeUtilisateur(TypeUtilisateur.DOCTEUR);
+        // Le type DOCTEUR est déterminé automatiquement par instanceof
     }
     
     public Docteur(String nom, String prenom, String email, String motDePasse, String specialite) {

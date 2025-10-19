@@ -7,6 +7,39 @@
 document.addEventListener('DOMContentLoaded', function() {
     
     // ============================================
+    // MOBILE MENU TOGGLE
+    // ============================================
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const navMenu = document.getElementById('navMenu');
+    
+    if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Close menu when clicking on a link
+        const navLinks = navMenu.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!navMenu.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                mobileMenuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    }
+    
+    // ============================================
     // SMOOTH SCROLL FOR ANCHOR LINKS
     // ============================================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -347,9 +380,31 @@ document.addEventListener('DOMContentLoaded', function() {
     createBackToTop();
 
     // ============================================
+    // FAQ ACCORDION FUNCTIONALITY
+    // ============================================
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        
+        question.addEventListener('click', () => {
+            // Close other items
+            faqItems.forEach(otherItem => {
+                if (otherItem !== item && otherItem.classList.contains('active')) {
+                    otherItem.classList.remove('active');
+                }
+            });
+            
+            // Toggle current item
+            item.classList.toggle('active');
+        });
+    });
+
+    // ============================================
     // CONSOLE WELCOME MESSAGE
     // ============================================
     console.log('%c🏥 Clinique Excellence', 'color: #3b82f6; font-size: 24px; font-weight: bold;');
     console.log('%cBienvenue sur notre plateforme médicale premium!', 'color: #475569; font-size: 14px;');
     
 });
+

@@ -28,6 +28,7 @@
         <mapping class="com.clinic.clinicapp.entity.Personne"/>
         <mapping class="com.clinic.clinicapp.entity.Patient"/>
         <mapping class="com.clinic.clinicapp.entity.Docteur"/>
+        <mapping class="com.clinic.clinicapp.entity.Admin"/>
         <mapping class="com.clinic.clinicapp.entity.Departement"/>
         <mapping class="com.clinic.clinicapp.entity.Salle"/>
         <mapping class="com.clinic.clinicapp.entity.Consultation"/>

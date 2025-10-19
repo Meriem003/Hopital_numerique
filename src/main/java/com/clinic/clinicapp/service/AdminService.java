@@ -48,6 +48,8 @@ public interface AdminService {
     
     List<Salle> listerToutesLesSalles();
     
+    List<Salle> listerSallesByDepartement(Long departementId);
+    
     boolean verifierDisponibiliteSalle(Long salleId, LocalDateTime dateHeure);
     
     Salle trouverSalleDisponible(LocalDateTime dateHeure);
@@ -71,6 +73,8 @@ public interface AdminService {
     List<Patient> listerTousLesPatients();
     
     List<Patient> rechercherPatientsByNom(String nom);
+    
+    Patient modifierPatient(Patient patient);
     
     boolean supprimerPatient(Long patientId);
     

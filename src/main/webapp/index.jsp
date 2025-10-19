@@ -18,12 +18,13 @@
     
     <!-- Custom CSS -->
     <link href="${pageContext.request.contextPath}/assets/css/home.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/assets/css/medical-animations.css" rel="stylesheet">
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <div class="logo-container">
+            <a href="${pageContext.request.contextPath}/" class="logo-container">
                 <div class="logo-icon">
                     <i class="fas fa-hospital-symbol"></i>
                 </div>
@@ -31,11 +32,27 @@
                     <div class="logo-title">Clinique Excellence</div>
                     <div class="logo-subtitle">Medical Platform</div>
                 </div>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#profils">Profils</a></li>
+            </a>
+            
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="${pageContext.request.contextPath}/" class="nav-link active">
+                    <i class="fas fa-home"></i>
+                    <span>Accueil</span>
+                </a></li>
+                <li><a href="#profils" class="nav-link">
+                    <i class="fas fa-user-md"></i>
+                    <span>Profils</span>
+                </a></li>
+                <li><a href="${pageContext.request.contextPath}/contact.jsp" class="nav-link">
+                    <i class="fas fa-envelope"></i>
+                    <span>Contact</span>
+                </a></li>
                 <c:choose>
                     <c:when test="${not empty sessionScope.user}">
                         <li>
@@ -62,48 +79,79 @@
     <section class="hero" id="accueil">
         <div class="hero-container">
             <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-heartbeat"></i>
+                    <span>Plateforme Médicale Certifiée</span>
+                </div>
                 <h1 class="hero-title">
-                    La <span class="gradient-text">Digitalisation</span> au Service de Votre Santé
+                    Votre Santé,<br>
+                    <span class="gradient-text">Notre Priorité</span>
                 </h1>
+                <p class="hero-description">
+                    Plateforme médicale moderne pour la gestion de vos consultations, 
+                    rendez-vous et suivi médical en toute simplicité.
+                </p>
                 <div class="hero-buttons">
                     <c:choose>
                         <c:when test="${not empty sessionScope.user}">
                             <a href="${pageContext.request.contextPath}/${sessionScope.role.toLowerCase()}/dashboard" class="btn btn-primary">
                                 <i class="fas fa-tachometer-alt"></i>
-                                Mon Tableau de Bord
+                                Tableau de Bord
                             </a>
                         </c:when>
                         <c:otherwise>
                             <a href="${pageContext.request.contextPath}/register" class="btn btn-primary">
-                                <i class="fas fa-user-plus"></i>
-                                Commencer Maintenant
+                                <i class="fas fa-calendar-check"></i>
+                                Prendre Rendez-vous
                             </a>
                             <a href="#services" class="btn btn-outline">
-                                <i class="fas fa-play-circle"></i>
-                                Découvrir Plus
+                                <i class="fas fa-info-circle"></i>
+                                En savoir plus
                             </a>
                         </c:otherwise>
                     </c:choose>
                 </div>
                 <div class="hero-stats">
                     <div class="stat">
-                        <div class="stat-number">99.9%</div>
-                        <div class="stat-label">Disponibilité</div>
+                        <div class="stat-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number">150+</div>
+                            <div class="stat-label">Médecins</div>
+                        </div>
                     </div>
                     <div class="stat">
-                        <div class="stat-number">24/7</div>
-                        <div class="stat-label">Support</div>
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number">25k+</div>
+                            <div class="stat-label">Patients</div>
+                        </div>
                     </div>
                     <div class="stat">
-                        <div class="stat-number">100%</div>
-                        <div class="stat-label">Sécurisé</div>
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number">24h</div>
+                            <div class="stat-label">Disponible</div>
+                        </div>
                     </div>
                 </div>
             </div>
             
             <div class="hero-visual">
-                <div class="floating-element float-1"></div>
-                <div class="floating-element float-2"></div>
+                <div class="floating-element float-1">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <div class="floating-element float-2">
+                    <i class="fas fa-stethoscope"></i>
+                </div>
+                <div class="floating-element float-3">
+                    <i class="fas fa-briefcase-medical"></i>
+                </div>
                 <div class="dashboard-mockup">
                     <div class="mockup-header">
                         <div class="mockup-dot"></div>
@@ -116,7 +164,7 @@
                                 <i class="fas fa-calendar-check"></i>
                             </div>
                             <div class="mockup-info">
-                                <h4>Consultations Actives</h4>
+                                <h4>Rendez-vous</h4>
                                 <p>Gestion en temps réel</p>
                             </div>
                         </div>
@@ -125,17 +173,17 @@
                                 <i class="fas fa-user-md"></i>
                             </div>
                             <div class="mockup-info">
-                                <h4>Équipe Médicale</h4>
-                                <p>Planning optimisé</p>
+                                <h4>Médecins</h4>
+                                <p>150+ spécialistes</p>
                             </div>
                         </div>
                         <div class="mockup-card">
                             <div class="mockup-icon">
-                                <i class="fas fa-chart-line"></i>
+                                <i class="fas fa-heartbeat"></i>
                             </div>
                             <div class="mockup-info">
-                                <h4>Statistiques Live</h4>
-                                <p>Tableau de bord analytique</p>
+                                <h4>Suivi Santé</h4>
+                                <p>Monitoring continu</p>
                             </div>
                         </div>
                     </div>
@@ -147,69 +195,41 @@
     <!-- Services Section -->
     <section class="services" id="services">
         <div class="section-header">
-            <span class="section-label">Nos Services</span>
-            <h2 class="section-title">Fonctionnalités Premium</h2>
+            <span class="section-label">
+                <i class="fas fa-heartbeat"></i> Nos Services
+            </span>
+            <h2 class="section-title">Solutions de Santé Digitale</h2>
             <p class="section-description">
-                Une suite complète d'outils professionnels pour une gestion médicale moderne et efficace
+                Des outils modernes pour une gestion médicale efficace et sécurisée
             </p>
         </div>
         <div class="services-grid">
             <div class="service-card">
                 <div class="service-icon">
-                    <i class="fas fa-calendar-alt"></i>
+                    <i class="fas fa-calendar-check"></i>
                 </div>
-                <h3>Gestion Intelligente</h3>
-                <p>Système de réservation automatisé avec créneaux de 30 minutes et vérification de disponibilité en temps réel pour une efficacité maximale.</p>
+                <h3>Prise de Rendez-vous</h3>
+                <p>Réservation en ligne simplifiée avec vérification automatique de disponibilité et notifications.</p>
                 <a href="#" class="service-link">
                     En savoir plus <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
             <div class="service-card">
                 <div class="service-icon">
-                    <i class="fas fa-chart-pie"></i>
+                    <i class="fas fa-heartbeat"></i>
                 </div>
-                <h3>Analytics & Rapports</h3>
-                <p>Tableaux de bord interactifs avec statistiques en temps réel, KPIs et rapports détaillés pour une meilleure prise de décision.</p>
+                <h3>Suivi Médical</h3>
+                <p>Historique complet de vos consultations et suivi en temps réel de votre santé.</p>
                 <a href="#" class="service-link">
                     En savoir plus <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
             <div class="service-card">
                 <div class="service-icon">
-                    <i class="fas fa-shield-alt"></i>
+                    <i class="fas fa-shield-virus"></i>
                 </div>
-                <h3>Sécurité Maximale</h3>
-                <p>Protection des données médicales conforme aux normes avec chiffrement, authentification sécurisée et gestion granulaire des droits.</p>
-                <a href="#" class="service-link">
-                    En savoir plus <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-user-md"></i>
-                </div>
-                <h3>Espace Docteurs</h3>
-                <p>Interface professionnelle dédiée avec planning personnalisé, validation des consultations et accès complet aux dossiers médicaux.</p>
-                <a href="#" class="service-link">
-                    En savoir plus <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-folder-open"></i>
-                </div>
-                <h3>Dossiers Digitaux</h3>
-                <p>Archivage électronique sécurisé avec historique complet des consultations, diagnostics et traitements accessibles instantanément.</p>
-                <a href="#" class="service-link">
-                    En savoir plus <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-door-open"></i>
-                </div>
-                <h3>Optimisation des Salles</h3>
-                <p>Gestion intelligente des espaces avec allocation automatique et optimisation de l'occupation pour maximiser la productivité.</p>
+                <h3>Sécurité Garantie</h3>
+                <p>Protection maximale de vos données avec chiffrement et authentification sécurisée.</p>
                 <a href="#" class="service-link">
                     En savoir plus <i class="fas fa-arrow-right"></i>
                 </a>
@@ -221,9 +241,9 @@
     <section class="profiles" id="profils">
         <div class="section-header">
             <span class="section-label">Nos Départements</span>
-            <h2 class="section-title">Une Interface Pour Chacun</h2>
+            <h2 class="section-title">Services Médicaux Spécialisés</h2>
             <p class="section-description">
-                Des espaces dédiés pour chaque service médical, adaptés à vos besoins spécifiques
+                Des espaces dédiés pour chaque service médical
             </p>
         </div>
         <div class="profiles-grid">
@@ -231,7 +251,7 @@
                 <div class="profile-icon">
                     <i class="fas fa-ambulance"></i>
                 </div>
-                <h3>Service des urgences</h3>
+                <h3>Service des Urgences</h3>
                 <p class="subtitle">Prise en charge immédiate</p>
                 <ul class="profile-features">
                     <li>
@@ -244,15 +264,11 @@
                     </li>
                     <li>
                         <i class="fas fa-check-circle"></i>
-                        Soins immédiats et stabilisation
+                        Soins immédiats
                     </li>
                     <li>
                         <i class="fas fa-check-circle"></i>
                         Équipements de réanimation
-                    </li>
-                    <li>
-                        <i class="fas fa-check-circle"></i>
-                        Transfert vers services spécialisés
                     </li>
                 </ul>
                 <a href="${pageContext.request.contextPath}/login" class="btn-profile">
@@ -263,16 +279,16 @@
                 <div class="profile-icon">
                     <i class="fas fa-stethoscope"></i>
                 </div>
-                <h3>Service de médecine générale</h3>
-                <p class="subtitle">Consultations courantes et suivi</p>
+                <h3>Médecine Générale</h3>
+                <p class="subtitle">Consultations et suivi</p>
                 <ul class="profile-features">
                     <li>
                         <i class="fas fa-check-circle"></i>
-                        Consultations médicales générales
+                        Consultations générales
                     </li>
                     <li>
                         <i class="fas fa-check-circle"></i>
-                        Suivi régulier des patients
+                        Suivi régulier
                     </li>
                     <li>
                         <i class="fas fa-check-circle"></i>
@@ -281,10 +297,6 @@
                     <li>
                         <i class="fas fa-check-circle"></i>
                         Prévention et dépistage
-                    </li>
-                    <li>
-                        <i class="fas fa-check-circle"></i>
-                        Orientation vers spécialistes
                     </li>
                 </ul>
                 <a href="${pageContext.request.contextPath}/login" class="btn-profile">
@@ -295,28 +307,24 @@
                 <div class="profile-icon">
                     <i class="fas fa-brain"></i>
                 </div>
-                <h3>Service de neurologie</h3>
-                <p class="subtitle">Spécialiste du système nerveux</p>
+                <h3>Neurologie</h3>
+                <p class="subtitle">Spécialiste système nerveux</p>
                 <ul class="profile-features">
                     <li>
                         <i class="fas fa-check-circle"></i>
-                        Diagnostic des maladies neurologiques
+                        Diagnostic neurologique
                     </li>
                     <li>
                         <i class="fas fa-check-circle"></i>
-                        Traitement cerveau et nerfs
+                        Traitement spécialisé
                     </li>
                     <li>
                         <i class="fas fa-check-circle"></i>
-                        Soins de la moelle épinière
+                        Examens avancés
                     </li>
                     <li>
                         <i class="fas fa-check-circle"></i>
-                        Examens neurologiques avancés
-                    </li>
-                    <li>
-                        <i class="fas fa-check-circle"></i>
-                        Suivi personnalisé des pathologies
+                        Suivi personnalisé
                     </li>
                 </ul>
                 <a href="${pageContext.request.contextPath}/login" class="btn-profile">
@@ -326,93 +334,290 @@
         </div>
     </section>
 
-    <!-- Footer Minimal -->
-    <footer>
-        <div class="footer-wave">
-            <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-                <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25"></path>
-                <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5"></path>
-                <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"></path>
-            </svg>
+    <!-- Pourquoi Nous Choisir Section -->
+    <section class="why-choose-us">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">
+                    <i class="fas fa-award"></i> Excellence
+                </span>
+                <h2 class="section-title">Pourquoi Nous Choisir</h2>
+                <p class="section-subtitle">
+                    Des services médicaux de qualité avec une technologie moderne
+                </p>
+            </div>
+            <div class="why-grid">
+                <div class="why-card">
+                    <div class="why-number">01</div>
+                    <div class="why-icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h3>Équipe Experte</h3>
+                    <p>Médecins qualifiés avec plusieurs années d'expérience dans leurs spécialités.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-number">02</div>
+                    <div class="why-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Disponibilité 24/7</h3>
+                    <p>Service d'urgence disponible 24h/24 pour répondre à vos besoins médicaux.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-number">03</div>
+                    <div class="why-icon">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <h3>Technologie Avancée</h3>
+                    <p>Équipements médicaux de dernière génération pour des diagnostics précis.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-number">04</div>
+                    <div class="why-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Sécurité Maximale</h3>
+                    <p>Protection complète de vos données avec protocoles de sécurité stricts.</p>
+                </div>
+            </div>
         </div>
-        
-        <div class="footer-content">
-            <div class="footer-brand">
-                <div class="footer-logo">
-                    <div class="footer-logo-container">
-                        <div class="footer-logo-icon">
-                            <i class="fas fa-hospital-symbol"></i>
+    </section>
+
+    <!-- Témoignages Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">
+                    <i class="fas fa-comments"></i> Témoignages
+                </span>
+                <h2 class="section-title">Ce Que Disent Nos Patients</h2>
+                <p class="section-subtitle">
+                    Retours d'expérience de nos patients satisfaits
+                </p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "Service exceptionnel et équipe très professionnelle. La plateforme en ligne 
+                        facilite grandement la prise de rendez-vous."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
                         </div>
-                        <div class="footer-logo-text">
-                            <div class="footer-logo-title">Clinique Excellence</div>
-                            <div class="footer-logo-subtitle">Medical Platform</div>
+                        <div class="author-info">
+                            <h4>Sarah L.</h4>
+                            <span>Patiente depuis 2023</span>
                         </div>
                     </div>
                 </div>
-                <p class="footer-description">
-                    Plateforme médicale digitale de nouvelle génération offrant des solutions innovantes pour la gestion des consultations, 
-                    dossiers patients et planification médicale. Votre santé, notre priorité.
-                </p>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "Médecins compétents et à l'écoute. Le suivi médical en ligne est très pratique 
+                        pour consulter mon historique."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Ahmed M.</h4>
+                            <span>Patient depuis 2022</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">
+                        "Infrastructure moderne et accueil chaleureux. Je recommande vivement cette clinique 
+                        pour sa qualité de service."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Fatima Z.</h4>
+                            <span>Patiente depuis 2024</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">
+                    <i class="fas fa-question-circle"></i> Support
+                </span>
+                <h2 class="section-title">Questions Fréquentes</h2>
+                <p class="section-subtitle">
+                    Trouvez rapidement les réponses à vos questions
+                </p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Comment prendre un rendez-vous en ligne ?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Créez un compte, connectez-vous, puis accédez à l'espace rendez-vous. Sélectionnez 
+                        votre médecin, choisissez une date disponible et confirmez votre réservation.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Mes données médicales sont-elles sécurisées ?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolument. Nous utilisons un chiffrement de niveau bancaire et respectons 
+                        strictement les normes de confidentialité médicale pour protéger vos informations.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Puis-je annuler ou modifier mon rendez-vous ?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Oui, vous pouvez modifier ou annuler votre rendez-vous jusqu'à 24h avant l'heure 
+                        prévue via votre espace patient.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Comment accéder à mon historique médical ?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Connectez-vous à votre espace patient et accédez à la section "Historique". 
+                        Vous y trouverez toutes vos consultations, prescriptions et résultats d'examens.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Quels sont les moyens de paiement acceptés ?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Nous acceptons les paiements en espèces, par carte bancaire, et les règlements 
+                        via assurance maladie pour les patients couverts.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <div class="cta-text">
+                    <h2>Prêt à Prendre Soin de Votre Santé ?</h2>
+                    <p>Rejoignez des milliers de patients qui nous font confiance pour leur suivi médical.</p>
+                </div>
+                <div class="cta-buttons">
+                    <a href="${pageContext.request.contextPath}/register" class="btn btn-primary btn-large">
+                        <i class="fas fa-user-plus"></i>
+                        Créer un Compte
+                    </a>
+                    <a href="#services" class="btn btn-outline-light btn-large">
+                        <i class="fas fa-phone-alt"></i>
+                        Nous Contacter
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <div class="footer-logo-icon">
+                        <i class="fas fa-hospital-symbol"></i>
+                    </div>
+                    <div class="footer-logo-text">
+                        <div class="footer-logo-title">Clinique Excellence</div>
+                        <div class="footer-logo-subtitle">Plateforme Médicale</div>
+                    </div>
+                </div>
+                <p class="footer-description">
+                    Solution moderne pour la gestion médicale et le suivi des patients.
+                </p>
                 <div class="social-links">
-                    <a href="#" class="social-link" title="Facebook" aria-label="Facebook">
+                    <a href="#" class="social-link" aria-label="Facebook">
                         <i class="fab fa-facebook-f"></i>
                     </a>
-                    <a href="#" class="social-link" title="LinkedIn" aria-label="LinkedIn">
+                    <a href="#" class="social-link" aria-label="LinkedIn">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
-
-                    <a href="#" class="social-link" title="Twitter" aria-label="Twitter">
+                    <a href="#" class="social-link" aria-label="Twitter">
                         <i class="fab fa-twitter"></i>
                     </a>
                 </div>
             </div>
             
             <div class="footer-section">
-                <h4><i class="fas fa-hospital"></i> Nos Départements</h4>
+                <h4>Départements</h4>
                 <ul class="footer-links">
-                    <li><a href="#profils"><i class="fas fa-ambulance"></i> Service des Urgences</a></li>
-                    <li><a href="#profils"><i class="fas fa-stethoscope"></i> Médecine Générale</a></li>
-                    <li><a href="#profils"><i class="fas fa-brain"></i> Neurologie</a></li>
-                    <li><a href="#services"><i class="fas fa-heartbeat"></i> Cardiologie</a></li>
-                    <li><a href="#services"><i class="fas fa-user-md"></i> Pédiatrie</a></li>
+                    <li><a href="#profils">Urgences</a></li>
+                    <li><a href="#profils">Médecine Générale</a></li>
+                    <li><a href="#profils">Neurologie</a></li>
+                    <li><a href="#services">Cardiologie</a></li>
                 </ul>
             </div>
             
             <div class="footer-section">
-                <h4><i class="fas fa-link"></i> Liens Rapides</h4>
+                <h4>Liens Rapides</h4>
                 <ul class="footer-links">
-                    <li><a href="#accueil"><i class="fas fa-home"></i> Accueil</a></li>
-                    <li><a href="#services"><i class="fas fa-concierge-bell"></i> Services</a></li>
-                    <li><a href="#profils"><i class="fas fa-users"></i> Nos Équipes</a></li>
-                    <li><a href="${pageContext.request.contextPath}/login"><i class="fas fa-sign-in-alt"></i> Connexion</a></li>
-                    <li><a href="${pageContext.request.contextPath}/register"><i class="fas fa-user-plus"></i> Inscription</a></li>
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#profils">Équipes</a></li>
+                    <li><a href="${pageContext.request.contextPath}/login">Connexion</a></li>
                 </ul>
             </div>
             
             <div class="footer-section">
-                <h4><i class="fas fa-info-circle"></i> Informations</h4>
+                <h4>Contact</h4>
                 <ul class="footer-links footer-contact">
                     <li>
                         <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <strong>Adresse</strong>
-                            <span>Avenue Hassan II, Fès 30000, Maroc</span>
-                        </div>
+                        <span>Avenue Hassan II, Fès 30000</span>
                     </li>
                     <li>
                         <i class="fas fa-phone-alt"></i>
-                        <div>
-                            <strong>Téléphone</strong>
-                            <span>+212 535-XX-XX-XX</span>
-                        </div>
+                        <span>+212 535-XX-XX-XX</span>
                     </li>
                     <li>
                         <i class="fas fa-envelope"></i>
-                        <div>
-                            <strong>Email</strong>
-                            <span>contact@clinique-excellence.ma</span>
-                        </div>
+                        <span>contact@clinique-excellence.ma</span>
                     </li>
                 </ul>
             </div>
@@ -421,13 +626,12 @@
         <div class="footer-bottom">
             <div class="footer-bottom-content">
                 <p class="footer-copyright">
-                    <i class="fas fa-copyright"></i> 2025 <strong>Clinique Excellence</strong>. Tous droits réservés.
+                    © 2025 <strong>Clinique Excellence</strong>. Tous droits réservés.
                 </p>
                 <div class="footer-legal">
-                    <a href="#"><i class="fas fa-shield-alt"></i> Confidentialité</a>
-                    <a href="#"><i class="fas fa-file-contract"></i> Conditions d'utilisation</a>
-                    <a href="#"><i class="fas fa-cookie-bite"></i> Politique de Cookies</a>
-                    <a href="#"><i class="fas fa-universal-access"></i> Accessibilité</a>
+                    <a href="#">Confidentialité</a>
+                    <a href="#">Conditions</a>
+                    <a href="#">Cookies</a>
                 </div>
             </div>
         </div>

@@ -5,23 +5,28 @@
 }
 
 :root {
+    /* Couleurs médicales - identiques à home.css */
     --primary: #0f172a;
-    --secondary: #1e40af;
-    --accent: #3b82f6;
+    --secondary: #0891b2;
+    --accent: #06b6d4;
+    --medical-teal: #14b8a6;
     --gold: #f59e0b;
     --white: #ffffff;
     --gray-50: #f8fafc;
     --gray-100: #f1f5f9;
     --gray-200: #e2e8f0;
+    --gray-300: #cbd5e1;
     --gray-600: #475569;
     --gray-900: #0f172a;
     --danger: #ef4444;
     --success: #10b981;
+    
+    /* Gradients médicaux */
+    --gradient-medical: linear-gradient(135deg, #0891b2 0%, #06b6d4 50%, #14b8a6 100%);
 }
-
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    background: var(--gray-50);
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -33,30 +38,20 @@ body {
 body::before {
     content: '';
     position: absolute;
-    top: -50%;
-    right: -20%;
-    width: 1000px;
-    height: 1000px;
-    background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
-    border-radius: 50%;
-    animation: pulse 8s ease-in-out infinite;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230891b2' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.4;
+    animation: bgMove 18s linear infinite;
+    background-size: 120px 120px;
 }
 
-body::after {
-    content: '';
-    position: absolute;
-    bottom: -30%;
-    left: -10%;
-    width: 800px;
-    height: 800px;
-    background: radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, transparent 70%);
-    border-radius: 50%;
-    animation: pulse 8s ease-in-out infinite 4s;
-}
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 0.5; }
-    50% { transform: scale(1.1); opacity: 0.8; }
+@keyframes bgMove {
+    0% { background-position: 0 0; }
+    50% { background-position: 60px 40px; }
+    100% { background-position: 0 0; }
 }
 
 .login-container {
@@ -86,8 +81,8 @@ body::after {
 
 /* Left Side - Branding */
 .login-brand {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-    padding: 4rem;
+    background: var(--gradient-medical);
+    padding: 3rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -96,6 +91,17 @@ body::after {
 }
 
 .login-brand::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.3;
+}
+
+.login-brand::after {
     content: '';
     position: absolute;
     top: 0;
@@ -119,17 +125,18 @@ body::after {
 }
 
 .brand-logo-icon {
-    width: 60px;
-    height: 60px;
-    background: rgba(255, 255, 255, 0.15);
+    width: 56px;
+    height: 56px;
+    background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--white);
-    font-size: 1.75rem;
+    font-size: 1.6rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .brand-logo-text {
@@ -153,18 +160,18 @@ body::after {
 }
 
 .brand-title {
-    font-size: 2.5rem;
-    font-weight: 800;
+    font-size: 2.25rem;
+    font-weight: 700;
     color: var(--white);
-    margin-bottom: 1.5rem;
-    line-height: 1.2;
-    letter-spacing: -1px;
+    margin-bottom: 1.25rem;
+    line-height: 1.3;
+    letter-spacing: -0.5px;
 }
 
 .brand-description {
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1.8;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.7;
     margin-bottom: 2rem;
 }
 
@@ -296,8 +303,8 @@ body::after {
 
 .form-input:focus {
     outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.1);
 }
 
 .form-input::placeholder {
@@ -342,8 +349,8 @@ body::after {
 
 .submit-btn {
     width: 100%;
-    padding: 1rem;
-    background: var(--primary);
+    padding: 1rem 2rem;
+    background: var(--gradient-medical);
     color: var(--white);
     border: none;
     border-radius: 12px;
@@ -359,9 +366,8 @@ body::after {
 }
 
 .submit-btn:hover {
-    background: var(--secondary);
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.3);
+    box-shadow: 0 8px 25px rgba(8, 145, 178, 0.35);
 }
 
 .submit-btn:active {
@@ -394,6 +400,189 @@ body::after {
     font-size: 0.95rem;
 }
 
+/* Section collapsible (register-specific) */
+.form-section {
+    margin-bottom: 1.5rem;
+    border: 2px solid var(--gray-200);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s;
+}
+
+.form-section.collapsed {
+    border-color: var(--gray-100);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: var(--gray-50);
+    cursor: pointer;
+    transition: all 0.3s;
+    user-select: none;
+}
+
+.section-header:hover {
+    background: var(--gray-100);
+}
+
+.section-header.active {
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+    color: var(--white);
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.section-header.active .section-title {
+    color: var(--white);
+}
+
+.section-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--white);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: var(--secondary);
+}
+
+.section-header.active .section-icon {
+    background: rgba(255, 255, 255, 0.2);
+    color: var(--white);
+}
+
+.toggle-btn {
+    width: 32px;
+    height: 32px;
+    background: var(--white);
+    border: 2px solid var(--gray-200);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: var(--primary);
+}
+
+.section-header.active .toggle-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: var(--white);
+}
+
+.toggle-btn i {
+    transition: transform 0.3s;
+}
+
+.toggle-btn.rotated i {
+    transform: rotate(180deg);
+}
+
+.section-content {
+    padding: 1.5rem;
+    background: var(--white);
+    max-height: 1000px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.section-content.collapsed {
+    max-height: 0;
+    padding: 0 1.5rem;
+    opacity: 0;
+}
+
+.section-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    background: var(--success);
+    color: var(--white);
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-left: auto;
+    margin-right: 0.5rem;
+}
+
+.section-badge i {
+    font-size: 0.65rem;
+}
+
+/* Password strength bar and units */
+.password-strength {
+    height: 4px;
+    background: var(--gray-200);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+
+.password-strength-bar {
+    height: 100%;
+    transition: all 0.3s;
+    width: 0%;
+}
+
+.strength-weak {
+    background: var(--danger);
+    width: 33%;
+}
+
+.strength-medium {
+    background: var(--gold);
+    width: 66%;
+}
+
+.strength-strong {
+    background: var(--success);
+    width: 100%;
+}
+
+/* Responsive tweaks for register page */
+@media (max-width: 1024px) {
+    .login-container {
+        grid-template-columns: 1fr;
+        max-width: 700px;
+    }
+
+    .login-brand {
+        display: none;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    body {
+        padding: 1rem;
+    }
+
+    .login-form-container {
+        padding: 2rem;
+    }
+
+    .form-title {
+        font-size: 1.75rem;
+    }
+}
+
 .register-link a {
     color: var(--secondary);
     text-decoration: none;
@@ -409,24 +598,30 @@ body::after {
     position: fixed;
     top: 2rem;
     left: 1rem;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    color: var(--white);
+    color: var(--secondary);
     text-decoration: none;
     font-weight: 600;
     padding: 0.75rem 1.5rem;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 12px;
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
     transition: all 0.3s;
     z-index: 100;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.back-home i {
+    font-size: 1rem;
 }
 
 .back-home:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateX(-5px);
+    background: var(--gray-50);
+    border-color: var(--secondary);
+    transform: translateX(-3px);
+    box-shadow: 0 4px 12px rgba(8, 145, 178, 0.15);
 }
 
 /* Alert Messages */

@@ -17,4 +17,5 @@ public interface SalleRepository {
     List<Salle> searchByNom(String nom);
     Long count();
     boolean existsByNomSalle(String nomSalle);
+    List<Salle> findByDepartementId(Long departementId);
 }
