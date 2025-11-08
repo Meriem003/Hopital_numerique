@@ -1,0 +1,724 @@
+/* ============================================
+   FORMULAIRE DÉPARTEMENT - STYLE MODERNE
+   Design professionnel et harmonieux
+   ============================================ */
+
+:root {
+  /* Couleurs médicales - cohérentes avec le système */
+  --primary: #0f172a;
+  --secondary: #0891b2;
+  --accent: #06b6d4;
+  --medical-teal: #14b8a6;
+  --white: #ffffff;
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-300: #cbd5e1;
+  --gray-400: #94a3b8;
+  --gray-500: #64748b;
+  --gray-600: #475569;
+  --gray-900: #0f172a;
+  --success: #10b981;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --info: #3b82f6;
+  
+  /* Gradients médicaux */
+  --gradient-medical: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
+  --gradient-soft: linear-gradient(135deg, rgba(67, 206, 162, 0.1) 0%, rgba(24, 90, 157, 0.1) 100%);
+}
+
+/* ============================================
+   HEADER ÉLÉGANT
+   ============================================ */
+
+.consultations-header {
+    background: var(--gradient-medical);
+    padding: 1.4rem;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(8, 145, 178, 0.15);
+}
+
+.consultations-header .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.consultations-header h1 {
+    color: white;
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.consultations-header h1 i {
+    font-size: 1.5rem;
+}
+
+.consultations-header p {
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    font-size: 1rem;
+}
+
+.btn-header-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.75rem;
+    background: white;
+    color: var(--secondary);
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+.btn-header-back:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.95);
+}
+
+/* ============================================
+   FORM PAGE - Layout principal
+   ============================================ */
+
+.form-page {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* ============================================
+   FORM CARD - Style premium
+   ============================================ */
+
+.form-card {
+  background: var(--white);
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--gray-200);
+  padding: 2.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.form-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-medical);
+}
+
+.form-card:hover {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+/* ============================================
+   FORM HEADER - Indicateur d'étapes
+   ============================================ */
+
+.form-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid var(--gray-100);
+}
+
+.form-step-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--gray-200);
+  color: var(--gray-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.step-item.active .step-number {
+  background: var(--gradient-medical);
+  color: white;
+  box-shadow: 0 4px 12px rgba(8, 145, 178, 0.3);
+  transform: scale(1.1);
+}
+
+.step-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--gray-600);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.step-item.active .step-label {
+  color: var(--secondary);
+}
+
+.step-line {
+  width: 80px;
+  height: 2px;
+  background: var(--gray-200);
+  margin: 0 0.5rem;
+}
+
+/* ============================================
+   ALERTS - Style moderne
+   ============================================ */
+
+.alert {
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 500;
+  border-left: 4px solid;
+  animation: slideIn 0.4s ease-out;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.alert-error {
+  background: linear-gradient(135deg, #fee2e2, #fecaca);
+  color: #7f1d1d;
+  border-left-color: var(--danger);
+}
+
+.alert-success {
+  background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+  color: #065f46;
+  border-left-color: var(--success);
+}
+
+.alert-info {
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+  color: #1e40af;
+  border-left-color: var(--info);
+}
+
+.alert i {
+  font-size: 1.3rem;
+}
+
+/* ============================================
+   FORM GROUPS - Champs avec icônes intégrées
+   ============================================ */
+
+.form-group {
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.875rem;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.2px;
+  transition: all 0.3s ease;
+}
+
+.form-group label i {
+  color: var(--secondary);
+  margin-right: 0.625rem;
+  width: 18px;
+  text-align: center;
+}
+
+.form-group label .required {
+  color: var(--danger);
+  margin-left: 0.25rem;
+  font-size: 1.1rem;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper .input-icon {
+  position: absolute;
+  right: 1.25rem;
+  color: var(--gray-400);
+  font-size: 1.1rem;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.form-group input[type="text"]:focus ~ .input-icon,
+.form-group textarea:focus ~ .input-icon {
+  color: var(--secondary);
+  transform: scale(1.1);
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+  width: 100%;
+  padding: 1.125rem 3rem 1.125rem 1.25rem;
+  border: 2px solid var(--gray-200);
+  border-radius: 12px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: var(--white);
+  color: var(--primary);
+  font-family: inherit;
+  line-height: 1.6;
+}
+
+.form-group input[type="text"]:hover,
+.form-group textarea:hover {
+  border-color: var(--gray-300);
+  background: var(--gray-50);
+}
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--secondary);
+  background: white;
+  box-shadow: 0 0 0 4px rgba(8, 145, 178, 0.1);
+}
+
+.form-group input[type="text"]::placeholder,
+.form-group textarea::placeholder {
+  color: var(--gray-400);
+  opacity: 0.8;
+}
+
+.form-group textarea {
+  min-height: 140px;
+  resize: vertical;
+  line-height: 1.7;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+.form-group .help-text {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  color: var(--gray-500);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.form-group .help-text i {
+  color: var(--secondary);
+  font-size: 0.9rem;
+}
+
+.form-group .help-text a {
+  color: var(--secondary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.form-group .help-text a:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* ============================================
+   CHECKBOX GROUP - Style élégant
+   ============================================ */
+
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: var(--gradient-soft);
+  border-radius: 12px;
+  border: 2px solid var(--gray-200);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.checkbox-group::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-medical);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.checkbox-group:hover {
+  background: linear-gradient(135deg, rgba(67, 206, 162, 0.15) 0%, rgba(24, 90, 157, 0.15) 100%);
+  border-color: var(--secondary);
+}
+
+.checkbox-group:hover::before {
+  opacity: 1;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  accent-color: var(--secondary);
+  margin: 0;
+}
+
+.checkbox-group label {
+  margin: 0;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--primary);
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1rem;
+}
+
+.checkbox-group label i {
+  color: var(--success);
+  font-size: 1.1rem;
+}
+
+.checkbox-help {
+  color: var(--gray-500);
+  font-size: 0.875rem;
+  margin-left: 2.5rem;
+  font-weight: 400;
+}
+
+/* ============================================
+   FORM ACTIONS - Boutons premium
+   ============================================ */
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-top: 2.5rem;
+  border-top: 2px solid var(--gray-100);
+}
+
+.btn {
+  padding: 1.125rem 2.5rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn i {
+  font-size: 1.1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.btn span {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-primary {
+  background: var(--gradient-medical);
+  color: white;
+  flex: 1;
+  box-shadow: 0 4px 15px rgba(8, 145, 178, 0.2);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 6px 25px rgba(8, 145, 178, 0.35);
+  transform: translateY(-2px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: white;
+  color: var(--primary);
+  border: 2px solid var(--gray-300);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.btn-secondary:hover {
+  background: var(--gray-50);
+  border-color: var(--gray-400);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================
+   ICON PREVIEW - Aperçu élégant
+   ============================================ */
+
+.icon-preview {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: white;
+  border-radius: 12px;
+  border: 2px solid var(--secondary);
+  transition: all 0.3s ease;
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.icon-preview:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 15px rgba(8, 145, 178, 0.15);
+}
+
+.icon-preview-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: var(--gradient-medical);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.6rem;
+  box-shadow: 0 4px 12px rgba(8, 145, 178, 0.25);
+  transition: all 0.3s ease;
+}
+
+.icon-preview:hover .icon-preview-circle {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 6px 20px rgba(8, 145, 178, 0.35);
+}
+
+.icon-preview-text {
+  color: var(--gray-700);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+/* ============================================
+   ÉTATS DE VALIDATION
+   ============================================ */
+
+.form-group.has-error input[type="text"],
+.form-group.has-error textarea {
+  border-color: var(--danger);
+  background: var(--danger-light);
+}
+
+.form-group.has-error label {
+  color: var(--danger);
+}
+
+.form-group.has-success input[type="text"],
+.form-group.has-success textarea {
+  border-color: var(--success);
+  background: var(--success-light);
+}
+
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  color: var(--danger);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.error-message i {
+  font-size: 1rem;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+  .consultations-header .header-content {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-header-back {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .form-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .form-step-indicator {
+    gap: 0.5rem;
+  }
+
+  .step-line {
+    width: 40px;
+  }
+
+  .step-label {
+    font-size: 0.75rem;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+    gap: 0.75rem;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .checkbox-group {
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .consultations-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .form-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .form-header {
+    margin-bottom: 2rem;
+  }
+
+  .form-step-indicator {
+    transform: scale(0.9);
+  }
+
+  .form-group input[type="text"],
+  .form-group textarea {
+    padding: 1rem 2.5rem 1rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .checkbox-group {
+    padding: 1rem;
+  }
+
+  .alert {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .icon-preview {
+    padding: 1rem;
+  }
+
+  .icon-preview-circle {
+    width: 48px;
+    height: 48px;
+    font-size: 1.4rem;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITÉ
+   ============================================ */
+
+.btn:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--secondary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

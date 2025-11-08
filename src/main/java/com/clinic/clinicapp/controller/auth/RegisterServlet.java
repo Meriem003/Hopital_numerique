@@ -26,6 +26,14 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
+        // Récupérer le paramètre mode (login ou signup)
+        String mode = request.getParameter("mode");
+        
+        // Passer le mode à la JSP pour afficher le bon formulaire
+        if (mode != null) {
+            request.setAttribute("mode", mode);
+        }
+        
         request.getRequestDispatcher("/views/auth/register.jsp").forward(request, response);
     }
     
@@ -45,18 +53,21 @@ public class RegisterServlet extends HttpServlet {
             email == null || email.trim().isEmpty() ||
             motDePasse == null || motDePasse.trim().isEmpty()) {
             request.setAttribute("error", "Tous les champs obligatoires doivent être remplis");
+            request.setAttribute("mode", "signup"); // Rester sur le formulaire d'inscription
             request.getRequestDispatcher("/views/auth/register.jsp").forward(request, response);
             return;
         }
         
         if (!motDePasse.equals(confirmPassword)) {
             request.setAttribute("error", "Les mots de passe ne correspondent pas");
+            request.setAttribute("mode", "signup"); // Rester sur le formulaire d'inscription
             request.getRequestDispatcher("/views/auth/register.jsp").forward(request, response);
             return;
         }
         
         if (authService.emailExiste(email)) {
             request.setAttribute("error", "Cet email est déjà utilisé");
+            request.setAttribute("mode", "signup"); // Rester sur le formulaire d'inscription
             request.getRequestDispatcher("/views/auth/register.jsp").forward(request, response);
             return;
         }
@@ -77,12 +88,15 @@ public class RegisterServlet extends HttpServlet {
             
             authService.inscrirePatient(patient);
             
-            response.sendRedirect(request.getContextPath() + "/login?register=success");
+            // Rediriger vers la page register avec le mode login et message de succès
+            response.sendRedirect(request.getContextPath() + "/register?mode=login&register=success");
         } catch (NumberFormatException e) {
             request.setAttribute("error", "Format invalide pour le poids ou la taille");
+            request.setAttribute("mode", "signup"); // Rester sur le formulaire d'inscription
             request.getRequestDispatcher("/views/auth/register.jsp").forward(request, response);
         } catch (Exception e) {
             request.setAttribute("error", "Erreur lors de l'inscription: " + e.getMessage());
+            request.setAttribute("mode", "signup"); // Rester sur le formulaire d'inscription
             request.getRequestDispatcher("/views/auth/register.jsp").forward(request, response);
         }
     }

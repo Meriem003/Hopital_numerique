@@ -1,0 +1,782 @@
+/* ============================================
+   CONSULTATIONS PATIENT - THÈME SANTÉ ÉLÉGANT
+   ============================================ */
+
+:root {
+    --medical-blue: #0891b2;
+    --medical-light: #06b6d4;
+    --medical-dark: #0e7490;
+    --success-green: #10b981;
+    --warning-amber: #f59e0b;
+    --danger-red: #ef4444;
+    --neutral-100: #f8fafc;
+    --neutral-200: #e2e8f0;
+    --neutral-300: #cbd5e1;
+    --neutral-600: #475569;
+    --neutral-700: #334155;
+    --neutral-800: #1e293b;
+}
+
+/* ============================================
+   HEADER SECTION
+   ============================================ */
+
+.consultations-header {
+    background: linear-gradient(135deg, var(--medical-blue) 0%, var(--medical-light) 100%);
+    padding: 1.4rem;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(8, 145, 178, 0.15);
+}
+
+.consultations-header .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.consultations-header h1 {
+    color: white;
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.consultations-header p {
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    font-size: 1rem;
+}
+
+/* ============================================
+   STATISTICS OVERVIEW
+   ============================================ */
+
+.stats-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--neutral-200);
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border-color: var(--medical-blue);
+}
+
+.stat-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    flex-shrink: 0;
+}
+
+.stat-icon.upcoming {
+    background: linear-gradient(135deg, rgba(8, 145, 178, 0.1), rgba(6, 182, 212, 0.15));
+    color: var(--medical-blue);
+}
+
+.stat-icon.completed {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.15));
+    color: var(--success-green);
+}
+
+.stat-icon.cancelled {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.15));
+    color: var(--danger-red);
+}
+
+.stat-details h3 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--neutral-800);
+    margin: 0 0 0.25rem 0;
+    line-height: 1;
+}
+
+.stat-details p {
+    font-size: 0.875rem;
+    color: var(--neutral-600);
+    margin: 0;
+    font-weight: 500;
+}
+
+/* ============================================
+   TABS NAVIGATION - ELEGANT STYLE
+   ============================================ */
+
+.tabs-container {
+    background: white;
+    border-radius: 12px;
+    padding: 0.75rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--neutral-200);
+}
+
+.tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+}
+
+.tab {
+    padding: 1rem 1.5rem;
+    background: transparent;
+    border: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--neutral-600);
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.tab:hover {
+    background: var(--neutral-100);
+    color: var(--medical-blue);
+}
+
+.tab.active {
+    background: linear-gradient(135deg, var(--medical-blue), var(--medical-light));
+    color: white;
+    box-shadow: 0 4px 12px rgba(8, 145, 178, 0.25);
+}
+
+.tab i {
+    font-size: 1.1rem;
+}
+
+.tab-badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.125rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.tab.active .tab-badge {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* ============================================
+   TAB CONTENT
+   ============================================ */
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* ============================================
+   CONSULTATION CARDS - PROFESSIONAL LAYOUT
+   ============================================ */
+
+.consultations-grid {
+    display: grid;
+    gap: 1.25rem;
+}
+
+.consultation-card {
+    background: white;
+    border-radius: 16px;
+    padding: 0;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    border: 1px solid var(--neutral-200);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    position: relative;
+}
+
+.consultation-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: var(--medical-blue);
+    transition: width 0.3s ease;
+}
+
+.consultation-card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    transform: translateY(-3px);
+    border-color: var(--medical-blue);
+}
+
+.consultation-card:hover::before {
+    width: 8px;
+}
+
+.consultation-card.completed::before {
+    background: var(--success-green);
+}
+
+.consultation-card.cancelled::before {
+    background: var(--danger-red);
+}
+
+/* Card Header */
+.card-header {
+    background: linear-gradient(to right, var(--neutral-100), white);
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--neutral-200);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.doctor-info {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.doctor-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--medical-blue), var(--medical-light));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(8, 145, 178, 0.2);
+    flex-shrink: 0;
+}
+
+.doctor-details h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--neutral-800);
+    margin: 0 0 0.5rem 0;
+}
+
+.doctor-specialty {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--neutral-600);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.doctor-specialty i {
+    color: var(--medical-blue);
+}
+
+/* Status Badge */
+.status-badge {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.status-badge.validated {
+    background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+    color: #166534;
+}
+
+.status-badge.pending {
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+    color: #92400e;
+}
+
+.status-badge.completed {
+    background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+    color: #1e40af;
+}
+
+.status-badge.cancelled {
+    background: linear-gradient(135deg, #fee2e2, #fecaca);
+    color: #991b1b;
+}
+
+/* Card Body */
+.card-body {
+    padding: 1.5rem 2rem;
+}
+
+.consultation-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+}
+
+.detail-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.detail-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--neutral-100);
+    color: var(--medical-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+
+.detail-content {
+    flex: 1;
+}
+
+.detail-label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--neutral-600);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.detail-value {
+    display: block;
+    font-size: 1rem;
+    color: var(--neutral-800);
+    font-weight: 600;
+}
+
+/* Motif / Notes Section */
+.consultation-notes {
+    margin-top: 1.5rem;
+    padding: 1.25rem;
+    background: var(--neutral-100);
+    border-radius: 10px;
+    border-left: 4px solid var(--medical-blue);
+}
+
+.consultation-notes .notes-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--neutral-700);
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+}
+
+.consultation-notes p {
+    margin: 0;
+    color: var(--neutral-600);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Compte Rendu Section */
+.compte-rendu-section {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(16, 185, 129, 0.02));
+    border-radius: 12px;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.compte-rendu-section .section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--success-green);
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.compte-rendu-section .section-content {
+    color: var(--neutral-700);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* Card Footer / Actions */
+.card-footer {
+    padding: 1.25rem 2rem;
+    background: var(--neutral-100);
+    border-top: 1px solid var(--neutral-200);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.consultation-info-footer {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--neutral-600);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.consultation-info-footer i {
+    color: var(--medical-blue);
+}
+
+.consultation-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.btn-action {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-cancel {
+    background: white;
+    color: var(--danger-red);
+    border: 2px solid var(--danger-red);
+}
+
+.btn-cancel:hover {
+    background: var(--danger-red);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.btn-details {
+    background: white;
+    color: var(--medical-blue);
+    border: 2px solid var(--medical-blue);
+}
+
+.btn-details:hover {
+    background: var(--medical-blue);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(8, 145, 178, 0.3);
+}
+
+/* ============================================
+   EMPTY STATE - REFINED
+   ============================================ */
+
+.empty-state {
+    text-align: center;
+    padding: 5rem 2rem;
+    background: white;
+    border-radius: 16px;
+    border: 2px dashed var(--neutral-300);
+}
+
+.empty-state-icon {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--neutral-100), var(--neutral-200));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: var(--neutral-300);
+}
+
+.empty-state h3 {
+    font-size: 1.5rem;
+    color: var(--neutral-700);
+    margin: 0 0 0.75rem 0;
+    font-weight: 700;
+}
+
+.empty-state p {
+    font-size: 1rem;
+    color: var(--neutral-600);
+    margin: 0 0 2rem 0;
+}
+
+.btn-primary-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, var(--medical-blue), var(--medical-light));
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(8, 145, 178, 0.3);
+}
+
+.btn-primary-action:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(8, 145, 178, 0.4);
+}
+
+/* ============================================
+   ALERTS
+   ============================================ */
+
+.alert {
+    padding: 1.25rem 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    animation: slideInDown 0.4s ease;
+}
+
+.alert i {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
+    color: #166534;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.05));
+    color: #991b1b;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* ============================================
+   CONFIRMATION MODAL - ELEGANT
+   ============================================ */
+
+.confirmation-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+}
+
+.confirmation-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.confirmation-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    max-width: 480px;
+    width: 90%;
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.confirmation-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.05));
+    color: var(--danger-red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+}
+
+.confirmation-content h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--neutral-800);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.confirmation-content p {
+    text-align: center;
+    color: var(--neutral-600);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+}
+
+.warning-text {
+    color: var(--danger-red);
+    font-weight: 700;
+    font-size: 0.95rem !important;
+    margin-bottom: 2rem !important;
+}
+
+.confirmation-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.btn-confirm-cancel,
+.btn-confirm-keep {
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn-confirm-cancel {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.btn-confirm-cancel:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);
+}
+
+.btn-confirm-keep {
+    background: white;
+    color: var(--neutral-700);
+    border: 2px solid var(--neutral-300);
+}
+
+.btn-confirm-keep:hover {
+    background: var(--neutral-100);
+    border-color: var(--neutral-400);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .consultation-details {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .consultations-header .header-content {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .stats-overview {
+        grid-template-columns: 1fr;
+    }
+    
+    .tabs {
+        grid-template-columns: 1fr;
+    }
+    
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .card-footer {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: stretch;
+    }
+    
+    .consultation-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .btn-action {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .confirmation-actions {
+        grid-template-columns: 1fr;
+    }
+}

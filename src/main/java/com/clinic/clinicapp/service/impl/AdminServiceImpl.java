@@ -550,27 +550,62 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public long obtenirNombreTotalPatients() {
-        return 0;
+        return patientRepository.findAll().size();
     }
 
     @Override
     public long obtenirNombreTotalDocteurs() {
-        return 0;
+        return docteurRepository.findAll().size();
     }
 
     @Override
     public long obtenirNombreTotalConsultations() {
-        return 0;
+        return consultationRepository.findAll().size();
     }
 
     @Override
     public Map<String, Long> obtenirNombreConsultationsByStatut() {
-        return null;
+        Map<String, Long> result = new java.util.HashMap<>();
+        result.put("RESERVEE", consultationRepository.countByStatut(StatusConsultation.RESERVEE));
+        result.put("VALIDEE", consultationRepository.countByStatut(StatusConsultation.VALIDEE));
+        result.put("TERMINEE", consultationRepository.countByStatut(StatusConsultation.TERMINEE));
+        result.put("ANNULEE", consultationRepository.countByStatut(StatusConsultation.ANNULEE));
+        return result;
     }
 
     @Override
     public double calculerTauxOccupationGlobalSalles(LocalDateTime dateDebut, LocalDateTime dateFin) {
-        return 0.0;
+        if (dateDebut == null || dateFin == null) {
+            throw new IllegalArgumentException("Les dates de début et de fin ne peuvent pas être null");
+        }
+        if (dateDebut.isAfter(dateFin)) {
+            throw new IllegalArgumentException("La date de début doit être antérieure à la date de fin");
+        }
+        
+        List<Salle> salles = salleRepository.findAll();
+        if (salles.isEmpty()) {
+            return 0.0;
+        }
+        
+        double tauxTotal = 0.0;
+        for (Salle salle : salles) {
+            List<Consultation> consultations = consultationRepository.findBySalleId(salle.getId())
+                .stream()
+                .filter(c -> c.getDateHeure() != null)
+                .filter(c -> !c.getDateHeure().isBefore(dateDebut) && !c.getDateHeure().isAfter(dateFin))
+                .collect(java.util.stream.Collectors.toList());
+            
+            // Calculer le taux d'occupation pour cette salle
+            // On considère qu'une consultation dure 1 heure en moyenne
+            long heuresOccupees = consultations.size();
+            long heuresDisponibles = java.time.Duration.between(dateDebut, dateFin).toHours();
+            
+            if (heuresDisponibles > 0) {
+                tauxTotal += (heuresOccupees * 100.0) / heuresDisponibles;
+            }
+        }
+        
+        return tauxTotal / salles.size();
     }
 
     @Override

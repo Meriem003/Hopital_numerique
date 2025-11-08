@@ -1,13 +1,214 @@
-/* Profil Docteur - Styles additionnels */
+/* ============================================
+   PROFIL DOCTEUR - STYLE MINIMALISTE
+   ============================================ */
+
+:root {
+    --primary: #0f172a;
+    --secondary: #0891b2;
+    --accent: #06b6d4;
+    --medical-teal: #14b8a6;
+    --white: #ffffff;
+    --gray-50: #f8fafc;
+    --gray-100: #f1f5f9;
+    --gray-200: #e2e8f0;
+    --gray-300: #cbd5e1;
+    --gray-400: #94a3b8;
+    --gray-600: #475569;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --gradient-medical: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
+}
+
+/* ============================================
+   PROFIL CONTAINER
+   ============================================ */
 
 .profil-container {
-    animation: fadeIn 0.5s ease-in;
+    padding: 0;
+    max-width: 100%;
+}
+
+/* ============================================
+   PROFIL HEADER
+   ============================================ */
+
+.profil-header {
+    background: var(--gradient-medical);
+    border-radius: 16px;
+    padding: 2rem;
+    color: white;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(8, 145, 178, 0.15);
+}
+
+.profil-header-content {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.profil-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 16px;
+    background: white;
+    color: var(--secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: 700;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    flex-shrink: 0;
+}
+
+.profil-info h1 {
+    margin: 0 0 0.75rem 0;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.profil-specialite {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1.25rem;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.profil-stats {
+    display: flex;
+    gap: 2.5rem;
+    margin-top: 1.25rem;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-item .number {
+    font-size: 2rem;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.stat-item .label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* ============================================
+   ALERTS
+   ============================================ */
+
+.alert {
+    padding: 1rem 1.25rem;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    animation: slideDown 0.3s ease-out;
+    font-weight: 500;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+    color: #065f46;
+    border: 1px solid #6ee7b7;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #fee2e2, #fecaca);
+    color: #7f1d1d;
+    border: 1px solid #fca5a5;
+}
+
+.alert i {
+    font-size: 1.2rem;
+}
+
+/* ============================================
+   TABS
+   ============================================ */
+
+.tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    background: var(--white);
+    padding: 0.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--gray-200);
+    overflow-x: auto;
+}
+
+.tab-btn {
+    padding: 0.875rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--gray-600);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+}
+
+.tab-btn:hover {
+    background: var(--gray-100);
+    color: var(--primary);
+}
+
+.tab-btn.active {
+    background: var(--gradient-medical);
+    color: white;
+    box-shadow: 0 4px 12px rgba(8, 145, 178, 0.2);
+}
+
+.tab-btn i {
+    font-size: 1rem;
+}
+
+/* ============================================
+   TAB CONTENT
+   ============================================ */
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+.tab-content.active {
+    display: block;
 }
 
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(10px);
     }
     to {
         opacity: 1;
@@ -15,178 +216,249 @@
     }
 }
 
-.profil-header {
-    animation: slideInDown 0.6s ease-out;
-}
-
-@keyframes slideInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+/* ============================================
+   INFO CARD
+   ============================================ */
 
 .info-card {
-    animation: slideInUp 0.6s ease-out;
-    transition: transform 0.3s, box-shadow 0.3s;
+    background: var(--white);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--gray-200);
+    margin-bottom: 2rem;
 }
 
-@keyframes slideInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.info-card h2 {
+    margin: 0 0 1.5rem 0;
+    color: var(--primary);
+    font-size: 1.25rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
 }
 
-.info-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+.info-card h2 i {
+    color: var(--secondary);
 }
 
-/* Effet de focus sur les inputs */
+/* ============================================
+   FORM ELEMENTS
+   ============================================ */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 0;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    background: var(--white);
+    color: var(--primary);
+}
+
 .form-group input:focus,
 .form-group select:focus {
-    transform: scale(1.02);
+    outline: none;
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.1);
 }
 
-/* Animation du bouton */
+.form-group input:disabled {
+    background-color: var(--gray-100);
+    cursor: not-allowed;
+    color: var(--gray-600);
+}
+
+.form-group small {
+    display: block;
+    margin-top: 0.5rem;
+    color: var(--gray-600);
+    font-size: 0.85rem;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
 .btn-primary {
-    position: relative;
-    overflow: hidden;
+    background: linear-gradient(135deg, var(--secondary), var(--accent));
+    color: white;
+    padding: 0.875rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-.btn-primary::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(8, 145, 178, 0.3);
 }
 
-.btn-primary:hover::before {
-    width: 300px;
-    height: 300px;
+.btn-secondary {
+    background: var(--gray-600);
+    color: white;
+    padding: 0.875rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-/* Effet de survol sur les stats */
-.stat-item {
-    transition: transform 0.3s;
+.btn-secondary:hover {
+    background: var(--gray-700);
+    transform: translateY(-2px);
 }
 
-.stat-item:hover {
-    transform: scale(1.1);
-}
+/* ============================================
+   INFO ROWS
+   ============================================ */
 
-/* Amélioration des alertes */
-.alert {
-    animation: slideInRight 0.5s ease-out;
-}
-
-@keyframes slideInRight {
-    from {
-        opacity: 0;
-        transform: translateX(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-/* Transition fluide des onglets */
-.tab-content {
-    animation: fadeInContent 0.4s ease-in;
-}
-
-@keyframes fadeInContent {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-/* Style pour les badges */
-.badge {
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-}
-
-/* Amélioration des lignes d'info */
 .info-row {
-    transition: background-color 0.3s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--gray-200);
 }
 
-.info-row:hover {
-    background-color: #f8f9fa;
+.info-row:last-child {
+    border-bottom: none;
 }
 
-/* Avatar animé */
-.profil-avatar {
-    animation: rotateIn 0.8s ease-out;
+.info-label {
+    color: var(--gray-600);
+    font-weight: 500;
+    font-size: 0.95rem;
 }
 
-@keyframes rotateIn {
-    from {
-        opacity: 0;
-        transform: rotate(-180deg) scale(0);
-    }
-    to {
-        opacity: 1;
-        transform: rotate(0deg) scale(1);
-    }
+.info-value {
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 0.95rem;
 }
 
-/* Effet sur les onglets */
-.tab-btn {
-    position: relative;
+/* ============================================
+   BADGES
+   ============================================ */
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
 }
 
-.tab-btn::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 3px;
-    background: #667eea;
-    transition: width 0.3s, left 0.3s;
+.badge-primary {
+    background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+    color: #1e40af;
 }
 
-.tab-btn:hover::after {
-    width: 100%;
-    left: 0;
+.badge-success {
+    background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+    color: #166534;
 }
 
-.tab-btn.active::after {
-    width: 100%;
-    left: 0;
+.badge i {
+    font-size: 0.9rem;
 }
 
-/* Responsive amélioré */
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
 @media (max-width: 768px) {
+    .profil-header {
+        padding: 1.5rem;
+    }
+
+    .profil-header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profil-avatar {
+        width: 100px;
+        height: 100px;
+        font-size: 2.5rem;
+    }
+
+    .profil-info h1 {
+        font-size: 1.5rem;
+    }
+
+    .profil-stats {
+        justify-content: center;
+        gap: 1.5rem;
+    }
+
+    .stat-item .number {
+        font-size: 1.5rem;
+    }
+
+    .tabs {
+        overflow-x: auto;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .info-card {
+        padding: 1.5rem;
+    }
+
+    .info-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .profil-header {
+        padding: 1.25rem;
+    }
+
     .profil-avatar {
         width: 80px;
         height: 80px;
@@ -194,108 +466,25 @@
     }
 
     .profil-info h1 {
-        font-size: 1.5rem;
+        font-size: 1.35rem;
     }
 
-    .tabs {
+    .profil-stats {
         flex-direction: column;
-        gap: 0;
+        gap: 1rem;
     }
 
-    .tab-btn {
-        text-align: left;
-        padding: 0.75rem 1rem;
-        border-bottom: 1px solid #e0e0e0;
+    .info-card {
+        padding: 1.25rem;
     }
-}
 
-/* Amélioration du formulaire */
-.form-group input,
-.form-group select {
-    position: relative;
-}
-
-.form-group input::placeholder {
-    color: #999;
-    transition: color 0.3s;
-}
-
-.form-group input:focus::placeholder {
-    color: #ccc;
-}
-
-/* Style pour les messages d'erreur de validation */
-.form-group small {
-    display: block;
-    margin-top: 0.25rem;
-    font-size: 0.875rem;
-}
-
-/* Effet de loading pour les boutons */
-.btn-primary:active {
-    transform: scale(0.95);
-}
-
-/* Amélioration de la section stats */
-.profil-stats {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 1rem;
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
-}
-
-/* Style pour les sélecteurs */
-.form-group select {
-    cursor: pointer;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23667eea' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 0.75rem center;
-    background-size: 12px;
-    appearance: none;
-}
-
-/* Grille responsive améliorée */
-@media (max-width: 1024px) {
-    .form-grid {
-        grid-template-columns: 1fr;
+    .info-card h2 {
+        font-size: 1.1rem;
     }
-}
 
-/* Effet sur les cartes d'info */
-.info-card {
-    border: 1px solid transparent;
-    transition: all 0.3s;
-}
-
-.info-card:hover {
-    border-color: #e7eaff;
-}
-
-/* Animation des icônes */
-.info-card h2 i {
-    animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-    0%, 100% {
-        transform: translateY(0);
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+        justify-content: center;
     }
-    50% {
-        transform: translateY(-5px);
-    }
-}
-
-/* Amélioration de la spécialité badge */
-.profil-specialite {
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-/* Style pour la validation des inputs */
-.form-group input:valid {
-    border-color: #28a745;
-}
-
-.form-group input:invalid:not(:placeholder-shown) {
-    border-color: #dc3545;
 }

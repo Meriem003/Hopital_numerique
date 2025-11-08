@@ -31,13 +31,13 @@ public class NosDocteursServlet extends HttpServlet {
         
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
-            response.sendRedirect(request.getContextPath() + "/views/auth/login.jsp");
+            response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
         
         String role = (String) session.getAttribute("role");
         if (!"PATIENT".equals(role)) {
-            response.sendRedirect(request.getContextPath() + "/views/auth/login.jsp");
+            response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
         

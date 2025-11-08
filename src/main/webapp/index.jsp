@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -9,19 +8,12 @@
     <meta name="keywords" content="clinique, médecin, consultation, santé, soins médicaux">
     <meta name="author" content="Clinique Excellence">
     <title>Clinique Excellence - Gestion Médicale Premium</title>
-    
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/assets/images/favicon.ico">
-    
-    <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    
-    <!-- Custom CSS -->
     <link href="${pageContext.request.contextPath}/assets/css/home.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/assets/css/medical-animations.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="${pageContext.request.contextPath}/" class="logo-container">
@@ -53,24 +45,12 @@
                     <i class="fas fa-envelope"></i>
                     <span>Contact</span>
                 </a></li>
-                <c:choose>
-                    <c:when test="${not empty sessionScope.user}">
                         <li>
-                            <a href="${pageContext.request.contextPath}/${sessionScope.role.toLowerCase()}/dashboard" class="btn-login btn-dashboard">
-                                <i class="fas fa-tachometer-alt"></i>
-                                <span>Mon Dashboard</span>
-                            </a>
-                        </li>
-                    </c:when>
-                    <c:otherwise>
-                        <li>
-                            <a href="${pageContext.request.contextPath}/login" class="btn-login btn-primary-nav">
+                            <a href="${pageContext.request.contextPath}/register?mode=login" class="btn-login btn-primary-nav">
                                 <i class="fas fa-user-circle"></i>
                                 <span>Connexion</span>
                             </a>
                         </li>
-                    </c:otherwise>
-                </c:choose>
             </ul>
         </div>
     </nav>
@@ -92,15 +72,7 @@
                     rendez-vous et suivi médical en toute simplicité.
                 </p>
                 <div class="hero-buttons">
-                    <c:choose>
-                        <c:when test="${not empty sessionScope.user}">
-                            <a href="${pageContext.request.contextPath}/${sessionScope.role.toLowerCase()}/dashboard" class="btn btn-primary">
-                                <i class="fas fa-tachometer-alt"></i>
-                                Tableau de Bord
-                            </a>
-                        </c:when>
-                        <c:otherwise>
-                            <a href="${pageContext.request.contextPath}/register" class="btn btn-primary">
+                            <a href="${pageContext.request.contextPath}/register?mode=signup" class="btn btn-primary">
                                 <i class="fas fa-calendar-check"></i>
                                 Prendre Rendez-vous
                             </a>
@@ -108,8 +80,6 @@
                                 <i class="fas fa-info-circle"></i>
                                 En savoir plus
                             </a>
-                        </c:otherwise>
-                    </c:choose>
                 </div>
                 <div class="hero-stats">
                     <div class="stat">
@@ -153,11 +123,6 @@
                     <i class="fas fa-briefcase-medical"></i>
                 </div>
                 <div class="dashboard-mockup">
-                    <div class="mockup-header">
-                        <div class="mockup-dot"></div>
-                        <div class="mockup-dot"></div>
-                        <div class="mockup-dot"></div>
-                    </div>
                     <div class="mockup-content">
                         <div class="mockup-card">
                             <div class="mockup-icon">

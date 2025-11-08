@@ -23,7 +23,7 @@
     --info: #3b82f6;
     
     /* Gradients médicaux */
-    --gradient-medical: linear-gradient(135deg, #0891b2 0%, #06b6d4 50%, #14b8a6 100%);
+--gradient-medical: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
 }
 
 body {
@@ -184,9 +184,9 @@ body {
     margin-top: 2rem;
     width: 100%;
     padding: 1rem 1.25rem;
-    background: rgba(239, 68, 68, 0.15);
-    color: #fca5a5;
-    border: 1px solid rgba(239, 68, 68, 0.3);
+    background: rgba(59, 59, 59, 0.15);
+    color: #eeeeee;
+    border: 1px solid rgba(59, 59, 59, 0.3);
     border-radius: 12px;
     font-weight: 600;
     cursor: pointer;
@@ -219,35 +219,62 @@ body {
     background: var(--gray-50);
 }
 
-.header {
-    background: var(--white);
-    padding: 1.75rem 2rem;
+/* ============================================
+   HEADER - STYLE COHÉRENT AVEC LES AUTRES PAGES
+   ============================================ */
+
+.consultations-header {
+    background: var(--gradient-medical);
+    padding: 1.4rem;
     border-radius: 16px;
     margin-bottom: 2rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-    border: 1px solid var(--gray-200);
+    box-shadow: 0 4px 20px rgba(8, 145, 178, 0.15);
+}
+
+.consultations-header .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.consultations-header h1 {
+    color: white;
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.consultations-header h1 i {
+    font-size: 1.5rem;
+}
+
+.consultations-header p {
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    font-size: 1rem;
+}
+
+.btn-header {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: white;
+    color: var(--secondary);
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
 }
 
-.header:hover {
-    box-shadow: 0 4px 12px rgba(8, 145, 178, 0.08);
-}
-
-.header-title h1 {
-    font-size: 1.85rem;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 800;
-    margin-bottom: 0.35rem;
-    letter-spacing: -0.5px;
-}
-
-.header-title p {
-    color: var(--gray-600);
-    font-size: 0.95rem;
-    font-weight: 500;
+.btn-header:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.95);
 }
 
 /* ============================================

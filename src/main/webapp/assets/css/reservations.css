@@ -1,407 +1,630 @@
-/* Styles pour la page des réservations */
+/* ============================================
+   RÉSERVATIONS - STYLE MINIMALISTE SANTÉ
+   ============================================ */
 
-.reservations-container {
-    padding: 20px;
+:root {
+  --primary: #0f172a;
+  --secondary: #0891b2;
+  --accent: #06b6d4;
+  --medical-teal: #14b8a6;
+  --white: #ffffff;
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-300: #cbd5e1;
+  --gray-600: #475569;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --info: #3b82f6;
+  --gradient-medical: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
+    --medical-blue: #0891b2;
+    --medical-light: #06b6d4;
+    --medical-dark: #0e7490;
+    --success-green: #10b981;
+    --warning-amber: #f59e0b;
+    --danger-red: #ef4444;
+    --neutral-100: #f8fafc;
+    --neutral-200: #e2e8f0;
+    --neutral-300: #cbd5e1;
+    --neutral-600: #475569;
+    --neutral-700: #334155;
+    --neutral-800: #1e293b;
 }
 
-.alert {
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 8px;
+/* ============================================
+   HEADER
+   ============================================ */
+
+
+.consultations-header {
+    background: var(--gradient-medical);
+    padding: 1.4rem;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(8, 145, 178, 0.15);
+}
+
+.consultations-header .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.consultations-header h1 {
+    color: white;
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
     display: flex;
     align-items: center;
-    gap: 10px;
-    animation: slideDown 0.3s ease-out;
-    transition: opacity 0.3s;
+    gap: 0.75rem;
+}
+
+.consultations-header p {
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    font-size: 1rem;
+}
+.btn-header{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, var(--medical-blue), var(--medical-light));
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(8, 145, 178, 0.3);
+}
+.btn-header:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(8, 145, 178, 0.4);
+}
+
+
+/* ============================================
+   ALERTS
+   ============================================ */
+
+.alert {
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  animation: slideDown 0.3s ease-out;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
 }
 
 @keyframes slideDown {
-    from {
-        transform: translateY(-20px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .alert-success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
+  background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+  color: #065f46;
+  border: 1px solid #6ee7b7;
 }
 
 .alert-error {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
+  background: linear-gradient(135deg, #fee2e2, #fecaca);
+  color: #7f1d1d;
+  border: 1px solid #fca5a5;
 }
 
-/* Modal Styles */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    animation: fadeIn 0.3s;
+.alert i {
+  font-size: 1.2rem;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
+/* ============================================
+   TABS
+   ============================================ */
 
-.modal-content {
-    background-color: #fff;
-    margin: 10% auto;
-    padding: 30px;
-    border-radius: 12px;
-    width: 90%;
-    max-width: 500px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    animation: slideUp 0.3s ease-out;
-}
-
-@keyframes slideUp {
-    from {
-        transform: translateY(50px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 2px solid #f0f0f0;
-}
-
-.modal-header h3 {
-    margin: 0;
-    color: #2c3e50;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.close {
-    font-size: 28px;
-    font-weight: bold;
-    color: #999;
-    cursor: pointer;
-    transition: color 0.3s;
-    line-height: 1;
-}
-
-.close:hover {
-    color: #333;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    color: #333;
-    font-weight: 500;
-}
-
-.form-group textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 14px;
-    resize: vertical;
-    min-height: 100px;
-    font-family: inherit;
-    transition: border-color 0.3s;
-}
-
-.form-group textarea:focus {
-    outline: none;
-    border-color: #4A90E2;
-    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
-}
-
-.modal-footer {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.btn-modal {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.3s;
-}
-
-.btn-cancel {
-    background-color: #e0e0e0;
-    color: #333;
-}
-
-.btn-cancel:hover {
-    background-color: #d0d0d0;
-}
-
-.btn-submit {
-    background-color: #dc3545;
-    color: white;
-}
-
-.btn-submit:hover {
-    background-color: #c82333;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
-}
-
-/* Reservation Card Styles */
-.reservation-card {
-    background: white;
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.reservation-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.reservation-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-    padding-bottom: 15px;
-    border-bottom: 2px solid #f0f0f0;
-}
-
-.patient-info {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.patient-avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
-}
-
-.patient-details h4 {
-    margin: 0 0 5px 0;
-    color: #2c3e50;
-    font-size: 18px;
-}
-
-.patient-details p {
-    margin: 0;
-    color: #7f8c8d;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.reservation-body {
-    margin-bottom: 15px;
-}
-
-.info-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-    color: #555;
-    padding: 8px 0;
-}
-
-.info-row i {
-    width: 20px;
-    color: #4A90E2;
-}
-
-.reservation-actions {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.3s;
-}
-
-.btn-success {
-    background-color: #28a745;
-    color: white;
-}
-
-.btn-success:hover {
-    background-color: #218838;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
-}
-
-.btn-danger {
-    background-color: #dc3545;
-    color: white;
-}
-
-.btn-danger:hover {
-    background-color: #c82333;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
-}
-
-/* Empty State */
-.empty-state {
-    text-align: center;
-    padding: 60px 20px;
-    color: #999;
-}
-
-.empty-state i {
-    font-size: 64px;
-    margin-bottom: 20px;
-    color: #ddd;
-}
-
-.empty-state h3 {
-    color: #666;
-    margin-bottom: 10px;
-}
-
-.empty-state p {
-    color: #999;
-}
-
-/* Section Title */
-.section-title {
-    color: #2c3e50;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 24px;
-}
-
-.section-title i {
-    color: #4A90E2;
-}
-
-/* Tabs */
 .tabs {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 30px;
-    border-bottom: 2px solid #f0f0f0;
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  background: var(--white);
+  padding: 0.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--gray-200);
 }
 
 .tab {
-    padding: 12px 24px;
-    cursor: pointer;
-    border: none;
-    background: none;
-    color: #7f8c8d;
-    font-size: 16px;
-    font-weight: 500;
-    border-bottom: 3px solid transparent;
-    transition: all 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.tab.active {
-    color: #4A90E2;
-    border-bottom-color: #4A90E2;
+  flex: 1;
+  padding: 0.875rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--gray-600);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .tab:hover {
-    color: #4A90E2;
+  background: var(--gray-100);
+  color: var(--primary);
 }
 
+.tab.active {
+  background: var(--gradient-medical);
+  color: white;
+  box-shadow: 0 4px 12px rgba(8, 145, 178, 0.2);
+}
+
+.tab i {
+  font-size: 1rem;
+}
+
+.badge {
+  background: rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.tab.active .badge {
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--secondary);
+}
+
+/* ============================================
+   TAB CONTENT
+   ============================================ */
+
 .tab-content {
-    display: none;
-    animation: fadeIn 0.3s;
+  display: none;
+  animation: fadeIn 0.4s ease;
 }
 
 .tab-content.active {
-    display: block;
+  display: block;
 }
 
-/* Badge */
-.badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Responsive Design */
+.section-title {
+  color: var(--primary);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.section-title i {
+  color: var(--secondary);
+}
+
+/* ============================================
+   RESERVATION CARDS
+   ============================================ */
+
+.reservation-card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--gray-200);
+  border-left: 4px solid var(--secondary);
+  transition: all 0.3s ease;
+}
+
+.reservation-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(8, 145, 178, 0.1);
+}
+
+.reservation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.patient-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.patient-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--secondary), var(--accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(8, 145, 178, 0.2);
+}
+
+.patient-details h4 {
+  margin: 0 0 0.35rem 0;
+  color: var(--primary);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.patient-details p {
+  margin: 0;
+  color: var(--gray-600);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ============================================
+   RESERVATION BODY
+   ============================================ */
+
+.reservation-body {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  color: var(--gray-600);
+  font-size: 0.95rem;
+}
+
+.info-row i {
+  color: var(--secondary);
+  font-size: 1rem;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.info-row strong {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* ============================================
+   RESERVATION ACTIONS
+   ============================================ */
+
+.reservation-actions {
+  display: flex;
+  gap: 53.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--gray-200);
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  flex: 1;
+  justify-content: center;
+}
+
+.btn-success {
+  background: linear-gradient(135deg, var(--success), var(--medical-teal));
+  color: white;
+}
+
+.btn-success:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, var(--danger), #f97316);
+  color: white;
+}
+
+.btn-danger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--gray-600);
+  background: var(--white);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--gray-200);
+}
+
+.empty-state i {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+  color: var(--gray-200);
+}
+
+.empty-state h3 {
+  margin: 0 0 0.75rem 0;
+  color: var(--primary);
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* ============================================
+   MODAL
+   ============================================ */
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  background: var(--white);
+  margin: 5% auto;
+  padding: 1rem;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 550px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.3s ease;
+  position: relative;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: var(--primary);
+  font-size: 1.25rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.modal-header h3 i {
+  color: var(--danger);
+}
+
+.close {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: var(--gray-600);
+  cursor: pointer;
+  transition: color 0.3s;
+  border: none;
+  background: none;
+  padding: 0;
+  line-height: 1;
+}
+
+.close:hover {
+  color: var(--primary);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.form-group textarea {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 120px;
+  transition: all 0.3s ease;
+  color: var(--primary);
+}
+
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--secondary);
+  box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.1);
+}
+
+.form-group textarea::placeholder {
+  color: var(--gray-400);
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.btn-modal {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-cancel {
+  background: var(--gray-200);
+  color: var(--primary);
+}
+
+.btn-cancel:hover {
+  background: var(--gray-300);
+}
+
+.btn-submit {
+  background: linear-gradient(135deg, var(--danger), #f97316);
+  color: white;
+}
+
+.btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
 @media (max-width: 768px) {
-    .reservation-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .reservation-actions {
-        width: 100%;
-    }
-    
-    .reservation-actions .btn {
-        flex: 1;
-        justify-content: center;
-    }
-    
-    .tabs {
-        overflow-x: auto;
-    }
-    
-    .modal-content {
-        margin: 20% auto;
-        width: 95%;
-    }
+  .header-title h1 {
+    font-size: 1.5rem;
+  }
+
+  .tabs {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .reservation-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .reservation-body {
+    grid-template-columns: 1fr;
+  }
+
+  .reservation-actions {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .modal-content {
+    width: 95%;
+    margin: 20% auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 1.25rem;
+  }
+
+  .header-title h1 {
+    font-size: 1.35rem;
+  }
+
+  .header-title p {
+    font-size: 0.9rem;
+  }
+
+  .reservation-card {
+    padding: 1rem;
+  }
+
+  .patient-avatar {
+    width: 48px;
+    height: 48px;
+    font-size: 1rem;
+  }
+
+  .patient-details h4 {
+    font-size: 1rem;
+  }
+
+  .section-title {
+    font-size: 1.1rem;
+  }
+
+  .empty-state {
+    padding: 3rem 1.5rem;
+  }
+
+  .empty-state i {
+    font-size: 3rem;
+  }
 }

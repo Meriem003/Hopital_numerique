@@ -1,0 +1,382 @@
+/* ============================================
+   DÉTAILS CONSULTATION - STYLE MINIMALISTE
+   ============================================ */
+
+:root {
+  --primary: #0f172a;
+  --secondary: #0891b2;
+  --accent: #06b6d4;
+  --medical-teal: #14b8a6;
+  --white: #ffffff;
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+  --gray-200: #e2e8f0;
+  --gray-600: #475569;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --info: #3b82f6;
+}
+
+/* ============================================
+   BACK LINK
+   ============================================ */
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--secondary);
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.back-link:hover {
+  color: var(--accent);
+  transform: translateX(-3px);
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--gray-200);
+}
+
+.header-left h1 {
+  margin: 0 0 0.5rem 0;
+  color: var(--primary);
+  font-size: 1.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.header-left p {
+  margin: 0;
+  color: var(--gray-600);
+  font-size: 1rem;
+}
+
+.status-badge {
+  padding: 0.75rem 1.5rem;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.status-badge.reserved {
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+  color: #1e40af;
+}
+
+.status-badge.confirmed {
+  background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+  color: #166534;
+}
+
+.status-badge.completed {
+  background: linear-gradient(135deg, #e9d5ff, #ddd6fe);
+  color: #6b21a8;
+}
+
+.status-badge.cancelled {
+  background: linear-gradient(135deg, #fee2e2, #fecaca);
+  color: #991b1b;
+}
+
+/* ============================================
+   PATIENT CARD
+   ============================================ */
+
+.patient-card {
+  background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
+  color: white;
+  padding: 2rem;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 20px rgba(8, 145, 178, 0.15);
+}
+
+.patient-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.patient-avatar-large {
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 2rem;
+  flex-shrink: 0;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.patient-info h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.patient-info p {
+  margin: 0.35rem 0;
+  opacity: 0.95;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.patient-vitals {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.patient-vitals span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ============================================
+   DETAILS GRID
+   ============================================ */
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.detail-section {
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--gray-200);
+}
+
+.detail-section h3 {
+  margin: 0 0 1rem 0;
+  color: var(--primary);
+  font-size: 1.1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.detail-section h3 i {
+  color: var(--secondary);
+}
+
+.detail-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.detail-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--gray-100);
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: var(--gray-600);
+  font-size: 0.95rem;
+}
+
+.detail-value {
+  color: var(--primary);
+  font-size: 0.95rem;
+}
+
+.detail-content {
+  padding: 1rem;
+  border-radius: 8px;
+  line-height: 1.6;
+  color: var(--primary);
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.detail-content.motif {
+  background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+  border-left: 4px solid var(--success);
+}
+
+.detail-content.diagnostic {
+  background: linear-gradient(135deg, #eff6ff, #dbeafe);
+  border-left: 4px solid var(--info);
+}
+
+.detail-content.treatment {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  border-left: 4px solid var(--warning);
+}
+
+.detail-content.report {
+  background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+  border-left: 4px solid var(--gray-600);
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: var(--gray-600);
+}
+
+.empty-state i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--gray-200);
+}
+
+.empty-state h3 {
+  margin: 0;
+  color: var(--primary);
+  font-size: 1.25rem;
+}
+
+/* ============================================
+   ACTIONS
+   ============================================ */
+
+.actions-section {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-top: 1.5rem;
+  border-top: 2px solid var(--gray-200);
+}
+
+.btn-action {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-back {
+  background: var(--gray-200);
+  color: var(--primary);
+}
+
+.btn-back:hover {
+  background: var(--gray-300);
+  transform: translateX(-2px);
+}
+
+.btn-validate {
+  background: linear-gradient(135deg, var(--success), var(--medical-teal));
+  color: white;
+}
+
+.btn-validate:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .detail-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .patient-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .patient-vitals {
+    justify-content: center;
+  }
+
+  .detail-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .detail-label {
+    font-weight: 700;
+  }
+}
+
+@media (max-width: 480px) {
+  .detail-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .patient-avatar-large {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+
+  .patient-info h2 {
+    font-size: 1.25rem;
+  }
+
+  .actions-section {
+    flex-direction: column;
+  }
+
+  .btn-action {
+    width: 100%;
+    justify-content: center;
+  }
+}
+/* ============================================
+   FIN DU FICHIER détailsConsultation.css
+   ============================================ */

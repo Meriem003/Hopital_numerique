@@ -329,7 +329,7 @@
         <%
             Patient patient = (Patient) request.getAttribute("patient");
             List<Consultation> historique = (List<Consultation>) request.getAttribute("historique");
-            
+
             if (patient == null) {
         %>
             <div class="empty-state">
@@ -344,7 +344,7 @@
                 long consultationsTerminees = 0;
                 long consultationsValidees = 0;
                 long consultationsAnnulees = 0;
-                
+
                 if (historique != null) {
                     for (Consultation c : historique) {
                         switch (c.getStatut()) {
@@ -354,7 +354,7 @@
                         }
                     }
                 }
-                
+
                 DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd MMMM yyyy");
                 DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
         %>
@@ -370,7 +370,7 @@
                     <p><i class="fas fa-envelope"></i> <%= patient.getEmail() %></p>
                 </div>
             </div>
-            
+
             <div class="patient-details-grid">
                 <% if (patient.getPoids() != null) { %>
                 <div class="detail-item">
@@ -460,7 +460,7 @@
                     for (Consultation consultation : historique) {
                         String statusClass = "";
                         String statusIcon = "";
-                        
+
                         switch (consultation.getStatut()) {
                             case TERMINEE:
                                 statusClass = "status-terminee";
@@ -484,7 +484,7 @@
                         <div class="timeline-header">
                             <div class="timeline-date">
                                 <i class="fas fa-calendar-alt"></i>
-                                <%= consultation.getDateHeure().format(dateFormatter) %> à 
+                                <%= consultation.getDateHeure().format(dateFormatter) %> à
                                 <%= consultation.getDateHeure().format(timeFormatter) %>
                             </div>
                             <span class="status-badge <%= statusClass %>">
@@ -559,11 +559,11 @@
         function filterConsultations(status) {
             const items = document.querySelectorAll('.timeline-item');
             const buttons = document.querySelectorAll('.filter-btn');
-            
+
             // Mettre à jour les boutons actifs
             buttons.forEach(btn => btn.classList.remove('active'));
             event.target.closest('.filter-btn').classList.add('active');
-            
+
             // Filtrer les consultations
             items.forEach(item => {
                 if (status === 'all' || item.getAttribute('data-status') === status) {

@@ -43,7 +43,7 @@
         <nav>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/admin/dashboard" class="nav-link">
+                    <a href="${pageContext.request.contextPath}/admin/dashboard" class="nav-link ">
                         <i class="fas fa-chart-line"></i>
                         <span>Dashboard</span>
                     </a>
@@ -72,24 +72,6 @@
                         <span>Salles</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/views/admin/consultations.jsp" class="nav-link">
-                        <i class="fas fa-calendar-check"></i>
-                        <span>Consultations</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/views/admin/statistiques.jsp" class="nav-link">
-                        <i class="fas fa-chart-pie"></i>
-                        <span>Statistiques</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/views/admin/parametres.jsp" class="nav-link">
-                        <i class="fas fa-cog"></i>
-                        <span>Paramètres</span>
-                    </a>
-                </li>
             </ul>
         </nav>
 
@@ -102,101 +84,109 @@
     <!-- Main Content -->
     <main class="main-content">
         <!-- Header -->
-        <header class="header">
-            <div class="header-title">
-                <h1>Gestion des Départements</h1>
-                <p>Gérez les départements de la clinique</p>
+        <div class="consultations-header">
+            <div class="header-content">
+                <div>
+                    <h1>
+                        <i class="fas fa-building"></i>
+                        Gestion des Départements
+                    </h1>
+                    <p>Gérez les départements de votre établissement médical</p>
+                </div>
+                <a href="${pageContext.request.contextPath}/admin/departements?action=nouveau" class="btn-header">
+                    <i class="fas fa-plus-circle"></i>
+                    Ajouter un Département
+                </a>
             </div>
-        </header>
+        </div>
 
         <!-- Messages -->
         <c:if test="${not empty sessionScope.successMessage}">
             <div class="alert alert-success">
-                <i class="fas fa-check-circle"></i> ${sessionScope.successMessage}
+                <i class="fas fa-check-circle"></i>
+                <span>${sessionScope.successMessage}</span>
             </div>
             <c:remove var="successMessage" scope="session" />
         </c:if>
         
         <c:if test="${not empty sessionScope.errorMessage}">
             <div class="alert alert-error">
-                <i class="fas fa-exclamation-circle"></i> ${sessionScope.errorMessage}
+                <i class="fas fa-exclamation-circle"></i>
+                <span>${sessionScope.errorMessage}</span>
             </div>
             <c:remove var="errorMessage" scope="session" />
         </c:if>
 
-        <!-- Action Section -->
-        <div class="search-section">
-            <div class="search-container">
-                <a href="${pageContext.request.contextPath}/admin/departements?action=nouveau" class="btn-primary">
-                    <i class="fas fa-plus"></i>
-                    Ajouter Département
-                </a>
-            </div>
-        </div>
-
         <!-- Table Card -->
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Liste des Départements</h3>
+                <h3 class="card-title">
+                    <i class="fas fa-list-alt"></i>
+                    Liste des Départements
+                </h3>
             </div>
-
-            <div class="table-actions">
-                <div class="table-info">
-                    <span id="tableInfo">Affichage de <strong>${departements != null ? departements.size() : 0}</strong> département(s)</span>
-                </div>
-            </div>
-
             <div class="table-container">
                 <table class="data-table" id="departementsTable">
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Nom du Département</th>
-                            <th>Description</th>
-                            <th>Nombre de Docteurs</th>
-                            <th>Nombre de Salles</th>
-                            <th>Statut</th>
-                            <th>Actions</th>
+                            <th><i class="fas fa-building"></i> Nom du Département</th>
+                            <th><i class="fas fa-align-left"></i> Description</th>
+                            <th><i class="fas fa-toggle-on"></i> Statut</th>
+                            <th style="text-align: center;"><i class="fas fa-cog"></i> Actions</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
-                        <!-- Affichage dynamique des départements depuis la base de données -->
+                        <!-- Affichage dynamique des départements -->
                         <c:choose>
                             <c:when test="${not empty departements}">
                                 <c:forEach items="${departements}" var="dept">
                                     <tr data-status="${dept.actif ? 'actif' : 'inactif'}">
-                                        <td>#${dept.id}</td>
+                                        <td><strong class="id-badge">${dept.id}</strong></td>
                                         <td>
                                             <div class="departement-badge">
-                                                <i class="fas ${not empty dept.icone ? dept.icone : 'fa-building'}"></i>
-                                                ${dept.nom}
+                                                <span>${dept.nom}</span>
                                             </div>
                                         </td>
-                                        <td>${dept.description}</td>
-                                        <td>-</td>
-                                        <td>-</td>
+                                        <td class="description-cell">
+                                            <c:choose>
+                                                <c:when test="${not empty dept.description}">
+                                                    ${dept.description}
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <span class="no-data">
+                                                        <i class="fas fa-minus-circle"></i>
+                                                        Aucune description
+                                                    </span>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
                                         <td>
                                             <c:choose>
                                                 <c:when test="${dept.actif}">
-                                                    <span class="badge success"><i class="fas fa-check"></i> Actif</span>
+                                                    <span class="badge success">
+                                                        <i class="fas fa-check-circle"></i> Actif
+                                                    </span>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <span class="badge warning"><i class="fas fa-pause"></i> Inactif</span>
+                                                    <span class="badge warning">
+                                                        <i class="fas fa-pause-circle"></i> Inactif
+                                                    </span>
                                                 </c:otherwise>
                                             </c:choose>
                                         </td>
                                         <td>
                                             <div class="action-btns">
                                                 <a href="${pageContext.request.contextPath}/admin/departements?action=modifier&id=${dept.id}" 
-                                                   class="action-btn edit" 
-                                                   title="Modifier">
+                                                   class="action-btn editdep" 
+                                                   title="Modifier le département">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 <a href="${pageContext.request.contextPath}/admin/departements?action=supprimer&id=${dept.id}" 
-                                                   class="action-btn delete" 
-                                                   title="Supprimer"
-                                                   onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce département ?');">
-                                                    <i class="fas fa-trash"></i>
+                                                   class="action-btn deletedep" 
+                                                   title="Supprimer le département"
+                                                   onclick="return confirm('⚠️ Êtes-vous sûr de vouloir supprimer ce département ?\n\nCette action est irréversible.');">
+                                                    <i class="fas fa-trash-alt"></i>
                                                 </a>
                                             </div>
                                         </td>
@@ -204,12 +194,13 @@
                                 </c:forEach>
                             </c:when>
                             <c:otherwise>
-                                <!-- Données exemples si aucune donnée n'est disponible -->
-                                <tr data-status="actif">
-                                    <td colspan="7" style="text-align: center; padding: 2rem; color: var(--gray-600);">
-                                        <i class="fas fa-inbox" style="font-size: 3rem; color: var(--gray-300); display: block; margin-bottom: 1rem;"></i>
-                                        <h3>Aucun département disponible</h3>
-                                        <p>Cliquez sur "Ajouter Département" pour créer votre premier département</p>
+                                <tr>
+                                    <td colspan="5">
+                                        <div class="empty-state">
+                                            <i class="fas fa-folder-open"></i>
+                                            <h3>Aucun département disponible</h3>
+                                            <p>Commencez par créer votre premier département en cliquant sur le bouton ci-dessus</p>
+                                        </div>
                                     </td>
                                 </tr>
                             </c:otherwise>
@@ -220,80 +211,17 @@
         </div>
     </main>
 
-    <style>
-        .alert {
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-        
-        .alert-success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        
-        .alert-error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        
-        .alert i {
-            font-size: 1.25rem;
-        }
-        
-        .action-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.5rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            color: white;
-            font-size: 0.9rem;
-            margin: 0 0.25rem;
-        }
-        
-        .action-btn.edit {
-            background: #3498db;
-        }
-        
-        .action-btn.edit:hover {
-            background: #2980b9;
-        }
-        
-        .action-btn.delete {
-            background: #e74c3c;
-        }
-        
-        .action-btn.delete:hover {
-            background: #c0392b;
-        }
-        
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            background: #3498db;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            text-decoration: none;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        
-        .btn-primary:hover {
-            background: #2980b9;
-        }
-    </style>
+    <script>
+        // Auto-hide alerts after 5 seconds
+        window.addEventListener('DOMContentLoaded', () => {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(alert => {
+                setTimeout(() => {
+                    alert.style.opacity = '0';
+                    setTimeout(() => alert.remove(), 300);
+                }, 5000);
+            });
+        });
+    </script>
 </body>
 </html>

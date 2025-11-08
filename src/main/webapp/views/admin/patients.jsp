@@ -30,193 +30,7 @@
     <title>Gestion des Patients - Clinique Excellence</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/assets/css/admin-dashboard.css" rel="stylesheet">
-    <style>
-        .search-filter-section {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .search-filter-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr auto;
-            gap: 15px;
-            align-items: end;
-        }
-        
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .form-group label {
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #2c3e50;
-            font-size: 14px;
-        }
-        
-        .form-control {
-            padding: 10px 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-        
-        .form-control:focus {
-            outline: none;
-            border-color: #3498db;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
-        }
-        
-        .btn-group {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .btn-search, .btn-reset {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .btn-search {
-            background: #3498db;
-            color: white;
-        }
-        
-        .btn-search:hover {
-            background: #2980b9;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
-        }
-        
-        .btn-reset {
-            background: #95a5a6;
-            color: white;
-        }
-        
-        .btn-reset:hover {
-            background: #7f8c8d;
-        }
-        
-        .alert {
-            padding: 15px 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            animation: slideDown 0.3s ease;
-        }
-        
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .alert-success {
-            background: #d4edda;
-            color: #155724;
-            border-left: 4px solid #28a745;
-        }
-        
-        .alert-error {
-            background: #f8d7da;
-            color: #721c24;
-            border-left: 4px solid #dc3545;
-        }
-        
-        .stats-bar {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        
-        .stat-item {
-            background: white;
-            padding: 15px 20px;
-            border-radius: 8px;
-            flex: 1;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        
-        .stat-item .stat-value {
-            font-size: 24px;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-        
-        .stat-item .stat-label {
-            font-size: 14px;
-            color: #7f8c8d;
-            margin-top: 5px;
-        }
-        
-        .imc-badge {
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-        
-        .imc-underweight {
-            background: #fff3cd;
-            color: #856404;
-        }
-        
-        .imc-normal {
-            background: #d4edda;
-            color: #155724;
-        }
-        
-        .imc-overweight {
-            background: #fff3cd;
-            color: #856404;
-        }
-        
-        .imc-obese {
-            background: #f8d7da;
-            color: #721c24;
-        }
-        
-        .no-data {
-            text-align: center;
-            padding: 60px 20px;
-            color: #7f8c8d;
-        }
-        
-        .no-data i {
-            font-size: 64px;
-            margin-bottom: 20px;
-            opacity: 0.3;
-        }
-        
-        @media (max-width: 768px) {
-            .search-filter-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats-bar {
-                flex-direction: column;
-            }
-        }
-    </style>
+    <link href="${pageContext.request.contextPath}/assets/css/patients-table.css" rel="stylesheet">
 </head>
 <body>
     <!-- Sidebar -->
@@ -263,12 +77,6 @@
                         <span>Salles</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/views/admin/consultations.jsp" class="nav-link">
-                        <i class="fas fa-calendar-check"></i>
-                        <span>Consultations</span>
-                    </a>
-                </li>
             </ul>
         </nav>
 
@@ -281,10 +89,15 @@
     <!-- Main Content -->
     <main class="main-content">
         <!-- Header -->
-        <header class="header">
-            <div class="header-title">
-                <h1><i class="fas fa-users"></i> Gestion des Patients</h1>
-                <p>Liste complète des patients inscrits</p>
+        <header class="consultations-header">
+            <div class="header-content">
+                <div class="header-text">
+                    <h1>
+                        <i class="fas fa-users"></i>
+                        Gestion des Patients
+                    </h1>
+                    <p>Liste complète des patients inscrits</p>
+                </div>
             </div>
         </header>
 
@@ -292,128 +105,47 @@
         <% if (successMessage != null) { %>
             <div class="alert alert-success">
                 <i class="fas fa-check-circle"></i>
-                <%= successMessage %>
+                <span><%= successMessage %></span>
             </div>
         <% } %>
         
         <% if (errorMessage != null) { %>
             <div class="alert alert-error">
                 <i class="fas fa-exclamation-circle"></i>
-                <%= errorMessage %>
+                <span><%= errorMessage %></span>
             </div>
         <% } %>
-
-        <!-- Statistiques -->
-        <div class="stats-bar">
-            <div class="stat-item">
-                <div class="stat-value"><%= totalPatients != null ? totalPatients : 0 %></div>
-                <div class="stat-label">Total Patients</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-value">
-                    <%= patients != null ? patients.stream().filter(p -> p.getIMC() != null).count() : 0 %>
-                </div>
-                <div class="stat-label">Avec données médicales</div>
-            </div>
-        </div>
-
-        <!-- Recherche et Filtres -->
-        <div class="search-filter-section">
-            <form method="get" action="${pageContext.request.contextPath}/admin/patients">
-                <input type="hidden" name="action" value="rechercher">
-                <div class="search-filter-grid">
-                    <div class="form-group">
-                        <label for="critere">
-                            <i class="fas fa-search"></i> Rechercher un patient
-                        </label>
-                        <input 
-                            type="text" 
-                            id="critere" 
-                            name="critere" 
-                            class="form-control" 
-                            placeholder="Nom, prénom ou email..."
-                            value="<%= critereRecherche != null ? critereRecherche : "" %>">
-                    </div>
-                    
-                    <div class="btn-group">
-                        <button type="submit" class="btn-search">
-                            <i class="fas fa-search"></i>
-                            Rechercher
-                        </button>
-                        <a href="${pageContext.request.contextPath}/admin/patients" class="btn-reset">
-                            <i class="fas fa-redo"></i>
-                            Réinitialiser
-                        </a>
-                    </div>
-                </div>
-            </form>
-            
-            <hr style="margin: 20px 0; border: none; border-top: 1px solid #e0e0e0;">
-            
-            <!-- Filtre IMC -->
-            <form method="get" action="${pageContext.request.contextPath}/admin/patients">
-                <input type="hidden" name="action" value="filtrer">
-                <div class="search-filter-grid">
-                    <div class="form-group">
-                        <label for="imcFilter">
-                            <i class="fas fa-filter"></i> Filtrer par catégorie IMC
-                        </label>
-                        <select id="imcFilter" name="imcFilter" class="form-control">
-                            <option value="">Tous les patients</option>
-                            <option value="underweight" <%= "underweight".equals(imcFilter) ? "selected" : "" %>>
-                                Insuffisance pondérale (IMC &lt; 18.5)
-                            </option>
-                            <option value="normal" <%= "normal".equals(imcFilter) ? "selected" : "" %>>
-                                Poids normal (18.5 ≤ IMC &lt; 25)
-                            </option>
-                            <option value="overweight" <%= "overweight".equals(imcFilter) ? "selected" : "" %>>
-                                Surpoids (25 ≤ IMC &lt; 30)
-                            </option>
-                            <option value="obese" <%= "obese".equals(imcFilter) ? "selected" : "" %>>
-                                Obésité (IMC ≥ 30)
-                            </option>
-                        </select>
-                    </div>
-                    
-                    <div class="btn-group">
-                        <button type="submit" class="btn-search">
-                            <i class="fas fa-filter"></i>
-                            Filtrer
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
 
         <!-- Table des patients -->
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">
+                    <i class="fas fa-list-alt"></i>
                     Liste des Patients
                     <% if (critereRecherche != null || imcFilter != null) { %>
-                        <span style="font-size: 14px; font-weight: normal; color: #7f8c8d;">
-                            (Résultats filtrés)
-                        </span>
+                        <span class="filter-badge">Résultats filtrés</span>
                     <% } %>
                 </h3>
-                <div class="card-action">
-                    <%= totalPatients != null ? totalPatients : 0 %> patient(s)
+                <div class="card-actions">
+                    <span class="total-count">
+                        <i class="fas fa-users"></i>
+                        <%= totalPatients != null ? totalPatients : 0 %> patient(s)
+                    </span>
                 </div>
             </div>
             
             <% if (patients != null && !patients.isEmpty()) { %>
                 <div class="table-container">
-                    <table class="data-table">
+                    <table class="data-table" id="patientsTable">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Nom Complet</th>
-                                <th>Email</th>
-                                <th>Poids (kg)</th>
-                                <th>Taille (cm)</th>
-                                <th>IMC</th>
-                                <th>Consultations</th>
-                                <th>Actions</th>
+                                <th><i class="fas fa-hashtag"></i> ID</th>
+                                <th><i class="fas fa-user"></i> Nom Complet</th>
+                                <th><i class="fas fa-envelope"></i> Email</th>
+                                <th><i class="fas fa-weight"></i> Poids (kg)</th>
+                                <th><i class="fas fa-ruler-vertical"></i> Taille (cm)</th>
+                                <th><i class="fas fa-chart-line"></i> IMC</th>
+                                <th style="text-align: center;"><i class="fas fa-cog"></i> Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -438,47 +170,70 @@
                                     }
                                 }
                             %>
-                                <tr>
-                                    <td>#<%= patient.getId() %></td>
+                                <tr class="patient-row">
                                     <td>
-                                        <strong><%= patient.getPrenom() %> <%= patient.getNom() %></strong>
-                                    </td>
-                                    <td><%= patient.getEmail() %></td>
-                                    <td>
-                                        <%= patient.getPoids() != null ? patient.getPoids() : "-" %>
+                                        <strong class="id-badge"><%= patient.getId() %></strong>
                                     </td>
                                     <td>
-                                        <%= patient.getTaille() != null ? patient.getTaille() : "-" %>
+                                        <div class="patient-info">
+                                            <i class="fas fa-user-circle patient-icon"></i>
+                                            <strong class="patient-name"><%= patient.getPrenom() %> <%= patient.getNom() %></strong>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="email-cell">
+                                            <i class="fas fa-envelope"></i>
+                                            <span><%= patient.getEmail() %></span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="metric-cell">
+                                            <% if (patient.getPoids() != null) { %>
+                                                <span class="metric-value"><%= patient.getPoids() %></span>
+                                                <span class="metric-unit">kg</span>
+                                            <% } else { %>
+                                                <span class="no-data">-</span>
+                                            <% } %>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="metric-cell">
+                                            <% if (patient.getTaille() != null) { %>
+                                                <span class="metric-value"><%= patient.getTaille() %></span>
+                                                <span class="metric-unit">cm</span>
+                                            <% } else { %>
+                                                <span class="no-data">-</span>
+                                            <% } %>
+                                        </div>
                                     </td>
                                     <td>
                                         <% if (imc != null) { %>
-                                            <span class="imc-badge <%= imcClass %>">
+                                            <span class="badge-imc <%= imcClass %>">
+                                                <i class="fas fa-chart-line"></i>
                                                 <%= imc %> - <%= imcLabel %>
                                             </span>
                                         <% } else { %>
-                                            <span style="color: #95a5a6;">N/A</span>
+                                            <span class="badge-imc badge-secondary">
+                                                <i class="fas fa-minus-circle"></i>
+                                                N/A
+                                            </span>
                                         <% } %>
                                     </td>
-                                    <td>
-                                        <span class="badge info">
-                                            -
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <div class="action-btns">
+                                    <td style="text-align: center;">
+                                        <div class="action-buttons-modern">
                                             <a href="${pageContext.request.contextPath}/admin/patients?action=modifier&id=<%= patient.getId() %>" 
-                                               class="action-btn edit" 
-                                               title="Modifier">
+                                               class="action-btn btn-edit" 
+                                               title="Modifier le patient">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <form method="get" 
                                                   action="${pageContext.request.contextPath}/admin/patients" 
                                                   style="display: inline;"
-                                                  onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce patient ?');">
+                                                  onsubmit="return confirm('⚠️ Êtes-vous sûr de vouloir supprimer ce patient ?\nCette action est irréversible.');">
                                                 <input type="hidden" name="action" value="supprimer">
                                                 <input type="hidden" name="id" value="<%= patient.getId() %>">
-                                                <button type="submit" class="action-btn delete" title="Supprimer">
-                                                    <i class="fas fa-trash"></i>
+                                                <button type="submit" class="action-btn btn-delete" title="Supprimer le patient">
+                                                    <i class="fas fa-trash-alt"></i>
                                                 </button>
                                             </form>
                                         </div>
@@ -486,10 +241,9 @@
                                 </tr>
                             <% } %>
                         </tbody>
-                    </table>
                 </div>
             <% } else { %>
-                <div class="no-data">
+                <div class="empty-state">
                     <i class="fas fa-users"></i>
                     <h3>Aucun patient trouvé</h3>
                     <% if (critereRecherche != null || imcFilter != null) { %>

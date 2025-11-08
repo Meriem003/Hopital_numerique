@@ -1,281 +1,171 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inscription - Clinique Excellence</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/assets/css/register.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clinique Excellence - Connexion & Inscription</title>
+    
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/register.css" />
 </head>
 <body>
-    <!-- <a href="${pageContext.request.contextPath}/" class="back-home">
-        <i class="fas fa-arrow-left"></i>
-        Retour à l'accueil
-    </a> -->
+    <!-- Animated Background -->
+    <div class="animated-background">
+        <div class="medical-icon icon-1"><i class="fas fa-heartbeat"></i></div>
+        <div class="medical-icon icon-2"><i class="fas fa-stethoscope"></i></div>
+        <div class="medical-icon icon-3"><i class="fas fa-user-md"></i></div>
+        <div class="medical-icon icon-4"><i class="fas fa-pills"></i></div>
+        <div class="medical-icon icon-5"><i class="fas fa-syringe"></i></div>
+        <div class="medical-icon icon-6"><i class="fas fa-hospital"></i></div>
+        <div class="medical-icon icon-7"><i class="fas fa-notes-medical"></i></div>
+        <div class="medical-icon icon-8"><i class="fas fa-ambulance"></i></div>
+        <div class="medical-icon icon-9"><i class="fas fa-dna"></i></div>
+        <div class="medical-icon icon-10"><i class="fas fa-microscope"></i></div>
+        
+        <!-- Floating Circles -->
+        <div class="floating-circle circle-1"></div>
+        <div class="floating-circle circle-2"></div>
+        <div class="floating-circle circle-3"></div>
+        <div class="floating-circle circle-4"></div>
+        <div class="floating-circle circle-5"></div>
+    </div>
 
-    <div class="register-container">
-        <!-- Left Side - Branding -->
-        <div class="register-brand">
-            <div class="brand-content">
-                <div class="brand-logo">
-                    <div class="brand-logo-icon">
-                        <i class="fas fa-hospital-symbol"></i>
-                    </div>
-                    <div class="brand-logo-text">
-                        <div class="brand-logo-title">Clinique Excellence</div>
-                        <div class="brand-logo-subtitle">Medical Platform</div>
-                    </div>
-                </div>
-
-                <h1 class="brand-title">Rejoignez notre plateforme médicale</h1>
-                <p class="brand-description">
-                    Créez votre compte patient pour accéder à tous nos services médicaux digitaux et gérer vos consultations en ligne.
-                </p>
-
-                <ul class="brand-features">
-                    <li>
-                        <i class="fas fa-check"></i>
-                        <span>Inscription rapide et sécurisée</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-check"></i>
-                        <span>Accès immédiat aux services</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-check"></i>
-                        <span>Gestion complète de votre santé</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-check"></i>
-                        <span>Support disponible 24/7</span>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="brand-footer">
-                © 2025 Clinique Excellence. Tous droits réservés.
-            </div>
+    <!-- Message d'alerte -->
+    <% 
+        String error = (String) request.getAttribute("error");
+        String registerSuccess = request.getParameter("register");
+        if (error != null) { 
+    %>
+        <div class="alert alert-error">
+            <i class="fas fa-exclamation-circle"></i>
+            <span><%= error %></span>
+            <button class="close-alert" onclick="this.parentElement.style.display='none'">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
+    <% } %>
+    
+    <% if ("success".equals(registerSuccess)) { %>
+        <div class="alert alert-success">
+            <i class="fas fa-check-circle"></i>
+            <span>Inscription réussie ! Vous pouvez maintenant vous connecter.</span>
+            <button class="close-alert" onclick="this.parentElement.style.display='none'">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    <% } %>
 
-        <!-- Right Side - Register Form -->
-        <div class="register-form-container">
-            <div class="form-header">
-                <h2 class="form-title">Créer un compte</h2>
-            </div>
+    <%
+        // Récupérer le mode depuis l'attribut (priorité) ou paramètre URL
+        String modeAttr = (String) request.getAttribute("mode");
+        String modeParam = request.getParameter("mode");
+        String mode = modeAttr != null ? modeAttr : modeParam;
+        
+        // Par défaut, afficher le formulaire de connexion
+        boolean showSignupForm = "signup".equals(mode);
+    %>
 
-            <!-- Register Form -->
-            <form class="register-form" action="${pageContext.request.contextPath}/register" method="POST" id="registerForm">
+    <div class="container" id="container" data-mode="<%= mode != null ? mode : "login" %>">
+        <!-- Sign Up Form -->
+        <div class="sign-up">
+            <form action="${pageContext.request.contextPath}/register" method="POST">
+                <h1>Créer un Compte</h1>
+                <div class="icons">
+            <a href="#" class="icon"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" class="icon"><i class="fa-brands fa-google"></i></a>
+          </div>
+          <span>or use email for registeration</span>
+                <div class="form-row">
+                    <input type="text" name="nom" placeholder="Nom *" required />
+                    <input type="text" name="prenom" placeholder="Prénom *" required />
+                </div>
                 
-                <!-- Section 1: Informations Personnelles -->
-                <div class="form-section">
-                    <div class="section-header">
-                        <div class="section-title">
-                            <div class="section-icon">
-                                <i class="fas fa-user"></i>
-                            </div>
-                            <span>Informations Personnelles</span>
-                        </div>
-                        <div class="toggle-btn">
-                            <i class="fas fa-chevron-up"></i>
-                        </div>
-                    </div>
-                    <div class="section-content">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label" for="nom">
-                                    Nom <span class="required">*</span>
-                                </label>
-                                <div class="input-wrapper">
-                                    <i class="fas fa-user input-icon"></i>
-                                    <input 
-                                        type="text" 
-                                        id="nom" 
-                                        name="nom" 
-                                        class="form-input" 
-                                        placeholder="Votre nom"
-                                        value="${param.nom}"
-                                        required
-                                    >
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label" for="prenom">
-                                    Prénom <span class="required">*</span>
-                                </label>
-                                <div class="input-wrapper">
-                                    <i class="fas fa-user input-icon"></i>
-                                    <input 
-                                        type="text" 
-                                        id="prenom" 
-                                        name="prenom" 
-                                        class="form-input" 
-                                        placeholder="Votre prénom"
-                                        value="${param.prenom}"
-                                        required
-                                    >
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label" for="email">
-                                Adresse Email <span class="required">*</span>
-                            </label>
-                            <div class="input-wrapper">
-                                <i class="fas fa-envelope input-icon"></i>
-                                <input 
-                                    type="email" 
-                                    id="email" 
-                                    name="email" 
-                                    class="form-input" 
-                                    placeholder="votre.email@exemple.com"
-                                    value="${param.email}"
-                                    required
-                                >
-                            </div>
-                        </div>
-                    </div>
+                <input type="email" name="email" placeholder="Email *" required />
+                
+                <div class="form-row">
+                    <input type="password" name="motDePasse" id="passwordRegister" placeholder="Mot de passe *" required minlength="6" />
+                    <input type="password" name="confirmPassword" id="confirmPasswordRegister" placeholder="Confirmer mot de passe *" required minlength="6" />
                 </div>
-
-                <!-- Section 2: Informations Médicales -->
-                <div class="form-section">
-                    <div class="section-header">
-                        <div class="section-title">
-                            <div class="section-icon">
-                                <i class="fas fa-heartbeat"></i>
-                            </div>
-                            <span>Informations Médicales</span>
-                        </div>
-                        <div class="toggle-btn">
-                            <i class="fas fa-chevron-up"></i>
-                        </div>
-                    </div>
-                    <div class="section-content">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label" for="poids">
-                                    Poids <span class="required">*</span>
-                                </label>
-                                <div class="input-wrapper">
-                                    <i class="fas fa-weight input-icon"></i>
-                                    <input 
-                                        type="number" 
-                                        id="poids" 
-                                        name="poids" 
-                                        class="form-input" 
-                                        placeholder="70"
-                                        min="20"
-                                        max="300"
-                                        step="0.1"
-                                        value="${param.poids}"
-                                        required
-                                    >
-                                    <span class="input-unit">kg</span>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label" for="taille">
-                                    Taille <span class="required">*</span>
-                                </label>
-                                <div class="input-wrapper">
-                                    <i class="fas fa-ruler-vertical input-icon"></i>
-                                    <input 
-                                        type="number" 
-                                        id="taille" 
-                                        name="taille" 
-                                        class="form-input" 
-                                        placeholder="170"
-                                        min="100"
-                                        max="250"
-                                        step="0.1"
-                                        value="${param.taille}"
-                                        required
-                                    >
-                                    <span class="input-unit">cm</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                
+                <div class="form-row optional">
+                    <input type="number" name="poids" step="0.1" min="0" max="500" placeholder="Poids (kg)" />
+                    <input type="number" name="taille" min="0" max="250" placeholder="Taille (cm)" />
                 </div>
-
-                <!-- Section 3: Sécurité -->
-                <div class="form-section">
-                    <div class="section-header">
-                        <div class="section-title">
-                            <div class="section-icon">
-                                <i class="fas fa-lock"></i>
-                            </div>
-                            <span>Sécurité du Compte</span>
-                        </div>
-                        <div class="toggle-btn">
-                            <i class="fas fa-chevron-up"></i>
-                        </div>
-                    </div>
-                    <div class="section-content">
-                        <div class="form-group">
-                            <label class="form-label" for="motDePasse">
-                                Mot de passe <span class="required">*</span>
-                            </label>
-                            <div class="input-wrapper">
-                                <i class="fas fa-lock input-icon"></i>
-                                <input 
-                                    type="password" 
-                                    id="password" 
-                                    name="motDePasse" 
-                                    class="form-input" 
-                                    placeholder="••••••••"
-                                    required
-                                    minlength="8"
-                                >
-                            </div>
-                            <div class="password-strength">
-                                <div class="password-strength-bar" id="passwordStrengthBar"></div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label" for="confirmPassword">
-                                Confirmer le mot de passe <span class="required">*</span>
-                            </label>
-                            <div class="input-wrapper">
-                                <i class="fas fa-lock input-icon"></i>
-                                <input 
-                                    type="password" 
-                                    id="confirmPassword" 
-                                    name="confirmPassword" 
-                                    class="form-input" 
-                                    placeholder="••••••••"
-                                    required
-                                >
-                            </div>
-                        </div>
-
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="terms" name="terms" required>
-                            <label for="terms">
-                                J'accepte les <a href="#">conditions d'utilisation</a> et la <a href="#">politique de confidentialité</a>
-                            </label>
-                        </div>
-                    </div>
+                
+                <div class="password-strength" id="passwordStrength">
+                    <div class="strength-bar"></div>
                 </div>
-
-                <button type="submit" class="submit-btn">
-                    <span>Créer mon compte</span>
-                    <i class="fas fa-arrow-right"></i>
+                
+                <button type="submit">
+                    <i class="fas fa-user-plus"></i> S'inscrire
                 </button>
             </form>
+        </div>
 
-            <div class="divider">
-                <span>ou</span>
+        <!-- Sign In Form -->
+        <div class="sign-in">
+            <form action="${pageContext.request.contextPath}/login" method="POST">
+                <h1>Se Connecter</h1>
+                <div class="icons">
+            <a href="#" class="icon"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" class="icon"><i class="fa-brands fa-google"></i></a>
+          </div>
+          <span>or use email for registeration</span>
+                <input type="email" name="email" placeholder="Email" required />
+                <input type="password" name="motDePasse" placeholder="Mot de passe" required />
+                
+                <a href="${pageContext.request.contextPath}/forgot-password">
+                    <i class="fas fa-lock"></i> Mot de passe oublié ?
+                </a>
+                
+                <button type="submit">
+                    <i class="fas fa-sign-in-alt"></i> Connexion
+                </button>
+            </form>
+        </div>
+
+        <!-- Toggle Container -->
+        <div class="toogle-container">
+            <div class="toogle">
+                <div class="toogle-panel toogle-left">
+                    <div class="logo-icon">
+                        <i class="fas fa-hospital-symbol"></i>
+                    </div>
+                    <h1>Rejoignez-nous !</h1>
+                    <p>Connectez-vous pour accéder à vos consultations et gérer votre santé</p>
+                    <button class="hidden" id="login">
+                        <i class="fas fa-sign-in-alt"></i> Se Connecter
+                    </button>
+                </div>
+                <div class="toogle-panel toogle-right">
+                    <div class="logo-icon">
+                        <i class="fas fa-hospital-symbol"></i>
+                    </div>
+                    <h1>Welcome Back !</h1>
+                    <p>Créez votre compte pour bénéficier de nos services médicaux</p>
+                    <button class="hidden" id="register">
+                        <i class="fas fa-user-plus"></i> S'inscrire
+                    </button>
+                </div>
             </div>
-
-            <p class="login-link">
-                Vous avez déjà un compte ? <a href="${pageContext.request.contextPath}/login">Se connecter</a>
-            </p>
         </div>
     </div>
 

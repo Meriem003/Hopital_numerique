@@ -1,236 +1,321 @@
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    // Section collapse/expand functionality
-    initializeSectionToggle();
-    
-    // Password strength checker
-    initializePasswordStrength();
-    
-    // Form validation
-    initializeFormValidation();
-    
-    // Password visibility toggle
-    initializePasswordToggle();
-    
-    // Input animations
-    initializeInputAnimations();
-    
-    // Email validation
-    initializeEmailValidation();
-    
-    // Weight and height validation
-    initializeWeightHeightValidation();
+// ============================================
+// CLINIQUE EXCELLENCE - REGISTER/LOGIN TOGGLE
+// ============================================
+
+const container = document.getElementById("container");
+const registerbtn = document.getElementById("register");
+const loginbtn = document.getElementById("login");
+
+// Toggle to Sign Up
+if (registerbtn) {
+  registerbtn.addEventListener("click", () => {
+    container.classList.add("active");
+  });
+}
+
+// Toggle to Sign In
+if (loginbtn) {
+  loginbtn.addEventListener("click", () => {
+    container.classList.remove("active");
+  });
+}
+
+// ============================================
+// CHECK URL PARAMETERS FOR MODE
+// ============================================
+
+window.addEventListener("DOMContentLoaded", () => {
+  // Vérifier l'attribut data-mode du container (défini par le serveur)
+  const dataMode = container.getAttribute('data-mode');
+  
+  // Si data-mode est défini, l'utiliser
+  if (dataMode === 'signup') {
+    container.classList.add("active");
+  } else {
+    // Par défaut, afficher le formulaire de connexion
+    container.classList.remove("active");
+  }
 });
 
-// Section toggle functionality
-function initializeSectionToggle() {
-    const sections = document.querySelectorAll('.form-section');
+// ============================================
+// ANIMATED BACKGROUND PARTICLES
+// ============================================
+
+window.addEventListener("load", () => {
+  container.style.opacity = "0";
+  container.style.transform = "translateY(20px)";
+  
+  setTimeout(() => {
+    container.style.transition = "all 0.6s ease";
+    container.style.opacity = "1";
+    container.style.transform = "translateY(0)";
+  }, 100);
+  
+  // Add extra floating particles dynamically
+  createFloatingParticles();
+});
+
+function createFloatingParticles() {
+  const background = document.querySelector('.animated-background');
+  if (!background) return;
+  
+  const particleCount = 15;
+  const colors = ['#0891b2', '#06b6d4', '#14b8a6'];
+  
+  for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
     
-    sections.forEach((section, index) => {
-        const header = section.querySelector('.section-header');
-        const content = section.querySelector('.section-content');
-        const toggleBtn = section.querySelector('.toggle-btn');
-        
-        // First section is open by default
-        if (index === 0) {
-            header.classList.add('active');
-        } else {
-            content.classList.add('collapsed');
-            if (toggleBtn) {
-                toggleBtn.classList.add('rotated');
-            }
-        }
-        
-        header.addEventListener('click', function() {
-            const isCollapsed = content.classList.contains('collapsed');
-            
-            if (isCollapsed) {
-                // Expand this section
-                content.classList.remove('collapsed');
-                header.classList.add('active');
-                if (toggleBtn) {
-                    toggleBtn.classList.remove('rotated');
-                }
-            } else {
-                // Collapse this section
-                content.classList.add('collapsed');
-                header.classList.remove('active');
-                if (toggleBtn) {
-                    toggleBtn.classList.add('rotated');
-                }
-            }
-        });
-    });
+    const size = Math.random() * 4 + 2;
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const left = Math.random() * 100;
+    const animationDuration = Math.random() * 10 + 15;
+    const delay = Math.random() * 5;
     
-    // Watch for input changes to update section badges
-    document.addEventListener('input', function(e) {
-        if (e.target.classList.contains('form-input') || e.target.type === 'checkbox') {
-            const section = e.target.closest('.form-section');
-            if (section) {
-                checkSectionCompletion(section);
-            }
-        }
-    });
+    particle.style.cssText = `
+      position: absolute;
+      width: ${size}px;
+      height: ${size}px;
+      background: ${color};
+      border-radius: 50%;
+      left: ${left}%;
+      bottom: -10px;
+      opacity: 0;
+      animation: riseUp ${animationDuration}s ease-in ${delay}s infinite;
+      box-shadow: 0 0 10px ${color};
+    `;
+    
+    background.appendChild(particle);
+  }
 }
 
-// Check if section is completed
-function checkSectionCompletion(sectionElement) {
-    const inputs = sectionElement.querySelectorAll('input[required]');
-    let allFilled = true;
+// Add CSS animation for particles
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes riseUp {
+    0% {
+      bottom: -10px;
+      opacity: 0;
+      transform: translateX(0) scale(0.5);
+    }
+    10% {
+      opacity: 0.6;
+    }
+    90% {
+      opacity: 0.4;
+    }
+    100% {
+      bottom: 110%;
+      opacity: 0;
+      transform: translateX(${Math.random() * 100 - 50}px) scale(1);
+    }
+  }
+`;
+document.head.appendChild(style);
+
+// ============================================
+// PASSWORD STRENGTH INDICATOR
+// ============================================
+
+const passwordInput = document.getElementById("passwordRegister");
+const strengthIndicator = document.getElementById("passwordStrength");
+const strengthBar = strengthIndicator.querySelector(".strength-bar");
+
+if (passwordInput) {
+  passwordInput.addEventListener("input", function() {
+    const password = this.value;
     
-    inputs.forEach(input => {
-        if (!input.value || (input.type === 'checkbox' && !input.checked)) {
-            allFilled = false;
-        }
-    });
+    if (password.length === 0) {
+      strengthIndicator.classList.remove("active");
+      strengthBar.className = "strength-bar";
+      return;
+    }
     
-    const header = sectionElement.querySelector('.section-header');
-    const badge = header.querySelector('.section-badge');
+    strengthIndicator.classList.add("active");
     
-    if (allFilled) {
-        if (!badge) {
-            const newBadge = document.createElement('span');
-            newBadge.className = 'section-badge';
-            newBadge.innerHTML = '<i class="fas fa-check"></i> Complété';
-            header.insertBefore(newBadge, header.querySelector('.toggle-btn'));
-        }
+    const strength = calculatePasswordStrength(password);
+    
+    strengthBar.classList.remove("weak", "medium", "strong");
+    
+    if (strength < 3) {
+      strengthBar.classList.add("weak");
+    } else if (strength < 5) {
+      strengthBar.classList.add("medium");
     } else {
-        if (badge) {
-            badge.remove();
+      strengthBar.classList.add("strong");
+    }
+  });
+}
+
+function calculatePasswordStrength(password) {
+  let strength = 0;
+  
+  // Length check
+  if (password.length >= 8) strength++;
+  if (password.length >= 12) strength++;
+  
+  // Contains lowercase
+  if (/[a-z]/.test(password)) strength++;
+  
+  // Contains uppercase
+  if (/[A-Z]/.test(password)) strength++;
+  
+  // Contains numbers
+  if (/\d/.test(password)) strength++;
+  
+  // Contains special characters
+  if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) strength++;
+  
+  return strength;
+}
+
+// ============================================
+// FORM VALIDATION
+// ============================================
+
+const forms = document.querySelectorAll("form");
+
+forms.forEach((form) => {
+  form.addEventListener("submit", (e) => {
+    const inputs = form.querySelectorAll("input[required]");
+    let isValid = true;
+    let errorMessage = "";
+
+    inputs.forEach((input) => {
+      if (!input.value.trim()) {
+        isValid = false;
+        input.style.borderColor = "#ef4444";
+        
+        setTimeout(() => {
+          input.style.borderColor = "";
+        }, 2000);
+      }
+    });
+
+    // Check if it's the register form
+    const isRegisterForm = form.querySelector('input[name="confirmPassword"]') !== null;
+    
+    if (isRegisterForm && isValid) {
+      const password = form.querySelector('input[name="motDePasse"]').value;
+      const confirmPassword = form.querySelector('input[name="confirmPassword"]').value;
+      
+      // Password match validation
+      if (password !== confirmPassword) {
+        e.preventDefault();
+        isValid = false;
+        errorMessage = "Les mots de passe ne correspondent pas";
+        showAlert(errorMessage, "error");
+      }
+      
+      // Password strength validation
+      if (password.length < 6) {
+        e.preventDefault();
+        isValid = false;
+        errorMessage = "Le mot de passe doit contenir au moins 6 caractères";
+        showAlert(errorMessage, "error");
+      }
+      
+      // Email validation
+      const email = form.querySelector('input[name="email"]').value;
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        e.preventDefault();
+        isValid = false;
+        errorMessage = "Veuillez entrer une adresse email valide";
+        showAlert(errorMessage, "error");
+      }
+      
+      // Poids validation (optional but if provided must be valid)
+      const poidsInput = form.querySelector('input[name="poids"]');
+      if (poidsInput && poidsInput.value) {
+        const poids = parseFloat(poidsInput.value);
+        if (poids <= 0 || poids > 500) {
+          e.preventDefault();
+          isValid = false;
+          errorMessage = "Le poids doit être entre 0 et 500 kg";
+          showAlert(errorMessage, "error");
         }
-    }
-}
-
-// Password strength checker
-function initializePasswordStrength() {
-    const passwordInput = document.getElementById('password');
-    const strengthBar = document.getElementById('passwordStrengthBar');
-
-    if (passwordInput && strengthBar) {
-        passwordInput.addEventListener('input', function() {
-            const password = this.value;
-            let strength = 0;
-
-            if (password.length >= 8) strength++;
-            if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength++;
-            if (password.match(/[0-9]/)) strength++;
-            if (password.match(/[^a-zA-Z0-9]/)) strength++;
-
-            strengthBar.className = 'password-strength-bar';
-            
-            if (strength === 0 || strength === 1) {
-                strengthBar.classList.add('strength-weak');
-            } else if (strength === 2 || strength === 3) {
-                strengthBar.classList.add('strength-medium');
-            } else if (strength === 4) {
-                strengthBar.classList.add('strength-strong');
-            }
-        });
-    }
-}
-
-// Form validation
-function initializeFormValidation() {
-    const registerForm = document.getElementById('registerForm');
-    if (registerForm) {
-        registerForm.addEventListener('submit', function(e) {
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            const terms = document.getElementById('terms');
-
-            if (password !== confirmPassword) {
-                e.preventDefault();
-                alert('Les mots de passe ne correspondent pas');
-                return false;
-            }
-
-            if (terms && !terms.checked) {
-                e.preventDefault();
-                alert('Veuillez accepter les conditions d\'utilisation');
-                return false;
-            }
-
-            if (password.length < 8) {
-                e.preventDefault();
-                alert('Le mot de passe doit contenir au moins 8 caractères');
-                return false;
-            }
-        });
-    }
-}
-
-// Toggle password visibility
-function initializePasswordToggle() {
-    document.querySelectorAll('.input-icon.fa-lock').forEach(icon => {
-        icon.style.cursor = 'pointer';
-        icon.addEventListener('click', function() {
-            const input = this.parentElement.querySelector('input');
-            if (input.type === 'password') {
-                input.type = 'text';
-                this.classList.remove('fa-lock');
-                this.classList.add('fa-lock-open');
-            } else {
-                input.type = 'password';
-                this.classList.remove('fa-lock-open');
-                this.classList.add('fa-lock');
-            }
-        });
-    });
-}
-
-// Input animations
-function initializeInputAnimations() {
-    document.querySelectorAll('.form-input').forEach(input => {
-        input.addEventListener('focus', function() {
-            this.parentElement.style.transform = 'scale(1.01)';
-            this.parentElement.style.transition = 'transform 0.3s';
-        });
-
-        input.addEventListener('blur', function() {
-            this.parentElement.style.transform = 'scale(1)';
-        });
-    });
-}
-
-// Email validation
-function initializeEmailValidation() {
-    const emailInput = document.getElementById('email');
-    if (emailInput) {
-        emailInput.addEventListener('blur', function() {
-            const email = this.value;
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            
-            if (email && !emailRegex.test(email)) {
-                this.style.borderColor = 'var(--danger)';
-            } else {
-                this.style.borderColor = 'var(--gray-200)';
-            }
-        });
-    }
-}
-
-// Weight and height validation
-function initializeWeightHeightValidation() {
-    const poidsInput = document.getElementById('poids');
-    const tailleInput = document.getElementById('taille');
-
-    if (poidsInput) {
-        poidsInput.addEventListener('input', function() {
-            if (this.value < 20 || this.value > 300) {
-                this.setCustomValidity('Le poids doit être entre 20 et 300 kg');
-            } else {
-                this.setCustomValidity('');
-            }
-        });
+      }
+      
+      // Taille validation (optional but if provided must be valid)
+      const tailleInput = form.querySelector('input[name="taille"]');
+      if (tailleInput && tailleInput.value) {
+        const taille = parseInt(tailleInput.value);
+        if (taille <= 0 || taille > 250) {
+          e.preventDefault();
+          isValid = false;
+          errorMessage = "La taille doit être entre 0 et 250 cm";
+          showAlert(errorMessage, "error");
+        }
+      }
     }
 
-    if (tailleInput) {
-        tailleInput.addEventListener('input', function() {
-            if (this.value < 100 || this.value > 250) {
-                this.setCustomValidity('La taille doit être entre 100 et 250 cm');
-            } else {
-                this.setCustomValidity('');
-            }
-        });
+    if (!isValid && errorMessage === "") {
+      e.preventDefault();
+      showAlert("Veuillez remplir tous les champs obligatoires", "error");
     }
+  });
+});
+
+// ============================================
+// SHOW ALERT FUNCTION
+// ============================================
+
+function showAlert(message, type) {
+  // Remove existing alerts
+  const existingAlerts = document.querySelectorAll('.alert');
+  existingAlerts.forEach(alert => alert.remove());
+  
+  const alert = document.createElement('div');
+  alert.className = `alert alert-${type}`;
+  
+  const icon = type === 'error' 
+    ? '<i class="fas fa-exclamation-circle"></i>' 
+    : '<i class="fas fa-check-circle"></i>';
+  
+  alert.innerHTML = `
+    ${icon}
+    <span>${message}</span>
+    <button class="close-alert" onclick="this.parentElement.remove()">
+      <i class="fas fa-times"></i>
+    </button>
+  `;
+  
+  document.body.appendChild(alert);
+  
+  // Auto remove after 5 seconds
+  setTimeout(() => {
+    alert.style.opacity = '0';
+    setTimeout(() => alert.remove(), 300);
+  }, 5000);
 }
+
+// ============================================
+// INPUT FOCUS EFFECTS
+// ============================================
+
+const inputs = document.querySelectorAll("input");
+
+inputs.forEach((input) => {
+  input.addEventListener("focus", () => {
+    input.style.transform = "scale(1.02)";
+  });
+
+  input.addEventListener("blur", () => {
+    input.style.transform = "scale(1)";
+  });
+});
+
+// ============================================
+// AUTO-DISMISS ALERTS
+// ============================================
+
+window.addEventListener("load", () => {
+  const alerts = document.querySelectorAll('.alert');
+  alerts.forEach(alert => {
+    setTimeout(() => {
+      alert.style.opacity = '0';
+      setTimeout(() => alert.remove(), 300);
+    }, 5000);
+  });
+});

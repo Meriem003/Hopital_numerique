@@ -22,174 +22,8 @@
     <title>Modifier Patient - Clinique Excellence</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/assets/css/admin-dashboard.css" rel="stylesheet">
-    <style>
-        .form-container {
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            max-width: 800px;
-        }
-        
-        .form-header {
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #e0e0e0;
-        }
-        
-        .form-header h2 {
-            color: #2c3e50;
-            margin-bottom: 5px;
-        }
-        
-        .form-header p {
-            color: #7f8c8d;
-            font-size: 14px;
-        }
-        
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        
-        .form-group-full {
-            grid-column: 1 / -1;
-        }
-        
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .form-group label {
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #2c3e50;
-            font-size: 14px;
-        }
-        
-        .form-group label .required {
-            color: #e74c3c;
-        }
-        
-        .form-control {
-            padding: 12px 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-        
-        .form-control:focus {
-            outline: none;
-            border-color: #3498db;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
-        }
-        
-        .form-control:disabled {
-            background: #f5f5f5;
-            cursor: not-allowed;
-        }
-        
-        .form-help {
-            font-size: 12px;
-            color: #7f8c8d;
-            margin-top: 5px;
-        }
-        
-        .info-box {
-            background: #e8f4f8;
-            border-left: 4px solid #3498db;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        
-        .info-box h4 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-            font-size: 14px;
-        }
-        
-        .info-box p {
-            color: #555;
-            font-size: 13px;
-            margin: 5px 0;
-        }
-        
-        .btn-group {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 2px solid #e0e0e0;
-        }
-        
-        .btn {
-            padding: 12px 30px;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-        }
-        
-        .btn-primary {
-            background: #3498db;
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background: #2980b9;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
-        }
-        
-        .btn-secondary {
-            background: #95a5a6;
-            color: white;
-        }
-        
-        .btn-secondary:hover {
-            background: #7f8c8d;
-        }
-        
-        .alert {
-            padding: 15px 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .alert-error {
-            background: #f8d7da;
-            color: #721c24;
-            border-left: 4px solid #dc3545;
-        }
-        
-        @media (max-width: 768px) {
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .btn-group {
-                flex-direction: column;
-            }
-            
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-    </style>
+    <link href="${pageContext.request.contextPath}/assets/css/patient-form.css" rel="stylesheet">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/departement-form.css">
 </head>
 <body>
     <!-- Sidebar -->
@@ -248,10 +82,21 @@
     <!-- Main Content -->
     <main class="main-content">
         <!-- Header -->
-        <header class="header">
-            <div class="header-title">
-                <h1><i class="fas fa-user-edit"></i> Modifier Patient</h1>
-                <p>Modification des informations du patient</p>
+        <header class="consultations-header">
+            <div class="header-content">
+                <div class="header-text">
+                    <h1>
+                        <i class="fas fa-user-edit"></i>
+                        Modifier Patient
+                    </h1>
+                    <p>Modification des informations du patient</p>
+                </div>
+                <div class="header-actions">
+                    <a href="${pageContext.request.contextPath}/admin/patients" class="btn-header">
+                        <i class="fas fa-arrow-left"></i>
+                        Retour à la liste
+                    </a>
+                </div>
             </div>
         </header>
 
@@ -263,125 +108,180 @@
             </div>
         <% } %>
 
-        <% if (patient != null) { %>
-            <!-- Informations actuelles -->
-            <div class="info-box">
-                <h4><i class="fas fa-info-circle"></i> Informations actuelles</h4>
-                <p><strong>Patient ID:</strong> #<%= patient.getId() %></p>
-                <% if (patient.getIMC() != null) { %>
-                    <p><strong>IMC actuel:</strong> <%= patient.getIMC() %></p>
-                <% } %>
-            </div>
-
-            <!-- Formulaire -->
-            <div class="form-container">
-                <div class="form-header">
-                    <h2>Formulaire de modification</h2>
-                    <p>Modifiez les informations du patient ci-dessous</p>
-                </div>
-
-                <form method="post" action="${pageContext.request.contextPath}/admin/patients">
-                    <input type="hidden" name="action" value="modifier">
-                    <input type="hidden" name="id" value="<%= patient.getId() %>">
-
-                    <div class="form-grid">
-                        <!-- Nom -->
-                        <div class="form-group">
-                            <label for="nom">
-                                <i class="fas fa-user"></i> Nom <span class="required">*</span>
-                            </label>
-                            <input 
-                                type="text" 
-                                id="nom" 
-                                name="nom" 
-                                class="form-control" 
-                                value="<%= patient.getNom() %>"
-                                required>
+        <div class="form-page">
+            <div class="form-card">
+                <% if (patient != null) { %>
+                    <!-- Step Indicator -->
+                    <div class="form-step-indicator">
+                        <div class="step active">
+                            <div class="step-number">1</div>
+                            <div class="step-label">Informations personnelles</div>
                         </div>
-
-                        <!-- Prénom -->
-                        <div class="form-group">
-                            <label for="prenom">
-                                <i class="fas fa-user"></i> Prénom <span class="required">*</span>
-                            </label>
-                            <input 
-                                type="text" 
-                                id="prenom" 
-                                name="prenom" 
-                                class="form-control" 
-                                value="<%= patient.getPrenom() %>"
-                                required>
-                        </div>
-
-                        <!-- Email -->
-                        <div class="form-group form-group-full">
-                            <label for="email">
-                                <i class="fas fa-envelope"></i> Email <span class="required">*</span>
-                            </label>
-                            <input 
-                                type="email" 
-                                id="email" 
-                                name="email" 
-                                class="form-control" 
-                                value="<%= patient.getEmail() %>"
-                                required>
-                        </div>
-
-                        <!-- Poids -->
-                        <div class="form-group">
-                            <label for="poids">
-                                <i class="fas fa-weight"></i> Poids (kg)
-                            </label>
-                            <input 
-                                type="number" 
-                                step="0.1" 
-                                id="poids" 
-                                name="poids" 
-                                class="form-control" 
-                                value="<%= patient.getPoids() != null ? patient.getPoids() : "" %>"
-                                placeholder="Ex: 70.5">
-                            <span class="form-help">Entrez le poids en kilogrammes</span>
-                        </div>
-
-                        <!-- Taille -->
-                        <div class="form-group">
-                            <label for="taille">
-                                <i class="fas fa-ruler-vertical"></i> Taille (cm)
-                            </label>
-                            <input 
-                                type="number" 
-                                id="taille" 
-                                name="taille" 
-                                class="form-control" 
-                                value="<%= patient.getTaille() != null ? patient.getTaille() : "" %>"
-                                placeholder="Ex: 175">
-                            <span class="form-help">Entrez la taille en centimètres</span>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-label">Informations médicales</div>
                         </div>
                     </div>
 
-                    <!-- Boutons d'action -->
-                    <div class="btn-group">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save"></i>
-                            Enregistrer les modifications
-                        </button>
-                        <a href="${pageContext.request.contextPath}/admin/patients" class="btn btn-secondary">
-                            <i class="fas fa-times"></i>
-                            Annuler
+                    <!-- Informations actuelles -->
+                    <div class="info-banner">
+                        <i class="fas fa-info-circle"></i>
+                        <div>
+                            <strong>Informations actuelles</strong>
+                            <p>Patient ID:<%= patient.getId() %><% if (patient.getIMC() != null) { %> - IMC actuel: <%= patient.getIMC() %><% } %></p>
+                        </div>
+                    </div>
+
+                    <!-- Formulaire -->
+                    <form method="post" action="${pageContext.request.contextPath}/admin/patients">
+                        <input type="hidden" name="action" value="modifier">
+                        <input type="hidden" name="id" value="<%= patient.getId() %>">
+
+                        <!-- Section: Informations personnelles -->
+                        <div class="form-section">
+                            <div class="section-header">
+                                <div class="section-icon">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div>
+                                    <h3 class="section-title">Informations personnelles</h3>
+                                    <p class="section-subtitle">Coordonnées du patient</p>
+                                </div>
+                            </div>
+
+                            <div class="form-grid-2">
+                                <!-- Nom -->
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        Nom <span class="required">*</span>
+                                    </label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-user input-icon"></i>
+                                        <input 
+                                            type="text" 
+                                            id="nom" 
+                                            name="nom" 
+                                            class="form-input" 
+                                            value="<%= patient.getNom() %>"
+                                            required>
+                                    </div>
+                                </div>
+
+                                <!-- Prénom -->
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        Prénom <span class="required">*</span>
+                                    </label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-user input-icon"></i>
+                                        <input 
+                                            type="text" 
+                                            id="prenom" 
+                                            name="prenom" 
+                                            class="form-input" 
+                                            value="<%= patient.getPrenom() %>"
+                                            required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Email <span class="required">*</span>
+                                </label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-envelope input-icon"></i>
+                                    <input 
+                                        type="email" 
+                                        id="email" 
+                                        name="email" 
+                                        class="form-input" 
+                                        value="<%= patient.getEmail() %>"
+                                        required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section: Informations médicales -->
+                        <div class="form-section">
+                            <div class="section-header">
+                                <div class="section-icon">
+                                    <i class="fas fa-heartbeat"></i>
+                                </div>
+                                <div>
+                                    <h3 class="section-title">Informations médicales</h3>
+                                    <p class="section-subtitle">Données de santé</p>
+                                </div>
+                            </div>
+
+                            <div class="form-grid-2">
+                                <!-- Poids -->
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        Poids (kg)
+                                    </label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-weight input-icon"></i>
+                                        <input 
+                                            type="number" 
+                                            step="0.1" 
+                                            id="poids" 
+                                            name="poids" 
+                                            class="form-input" 
+                                            value="<%= patient.getPoids() != null ? patient.getPoids() : "" %>"
+                                            placeholder="Ex: 70.5">
+                                    </div>
+                                    <span class="help-text">Entrez le poids en kilogrammes</span>
+                                </div>
+
+                                <!-- Taille -->
+                                <div class="form-group">
+                                    <label class="form-label">
+                                        Taille (cm)
+                                    </label>
+                                    <div class="input-wrapper">
+                                        <i class="fas fa-ruler-vertical input-icon"></i>
+                                        <input 
+                                            type="number" 
+                                            id="taille" 
+                                            name="taille" 
+                                            class="form-input" 
+                                            value="<%= patient.getTaille() != null ? patient.getTaille() : "" %>"
+                                            placeholder="Ex: 175">
+                                    </div>
+                                    <span class="help-text">Entrez la taille en centimètres</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Boutons d'action -->
+                        <div class="form-actions">
+                            <a href="${pageContext.request.contextPath}/admin/patients" class="btn-cancel">
+                                <i class="fas fa-times"></i>
+                                Annuler
+                            </a>
+                            <button type="submit" class="btn-submit">
+                                <i class="fas fa-save"></i>
+                                Enregistrer les modifications
+                            </button>
+                        </div>
+                        </div>
+                    </form>
+                <% } else { %>
+                    <div class="alert alert-error">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Patient introuvable
+                    </div>
+                    <div class="form-actions">
+                        <a href="${pageContext.request.contextPath}/admin/patients" class="btn-cancel">
+                            <i class="fas fa-arrow-left"></i>
+                            Retour à la liste
                         </a>
                     </div>
-                </form>
+                <% } %>
             </div>
-        <% } else { %>
-            <div class="alert alert-error">
-                <i class="fas fa-exclamation-circle"></i>
-                Patient introuvable
-            </div>
-            <a href="${pageContext.request.contextPath}/admin/patients" class="btn btn-secondary">
-                <i class="fas fa-arrow-left"></i>
-                Retour à la liste
-            </a>
-        <% } %>
+        </div>
     </main>
 </body>
 </html>

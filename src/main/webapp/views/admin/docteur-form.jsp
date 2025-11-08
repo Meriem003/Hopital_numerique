@@ -27,107 +27,8 @@
     <title><%= isEdit ? "Modifier" : "Nouveau" %> Docteur - Clinique Excellence</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/assets/css/admin-dashboard.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/assets/css/departements.css" rel="stylesheet">
-    <style>
-        .form-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-        }
-        
-        .form-grid.full {
-            grid-template-columns: 1fr;
-        }
-        
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-        
-        .form-group label {
-            font-weight: 600;
-            color: #2d3748;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .form-group label .required {
-            color: #e53e3e;
-        }
-        
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            padding: 0.75rem 1rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-        
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-        
-        .form-actions {
-            display: flex;
-            gap: 1rem;
-            justify-content: flex-end;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 2px solid #e2e8f0;
-        }
-        
-        .help-text {
-            font-size: 0.875rem;
-            color: #718096;
-            margin-top: 0.25rem;
-        }
-        
-        .section-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #2d3748;
-            margin: 2rem 0 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #e2e8f0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .info-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-        }
-        
-        .info-box h4 {
-            margin: 0 0 0.5rem 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .info-box p {
-            margin: 0;
-            font-size: 0.875rem;
-            opacity: 0.9;
-        }
-    </style>
+    <link href="${pageContext.request.contextPath}/assets/css/docteur-form.css" rel="stylesheet">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/departement-form.css">
 </head>
 <body data-context-path="${pageContext.request.contextPath}">
     <!-- Sidebar -->
@@ -174,12 +75,6 @@
                         <span>Salles</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/views/admin/consultations.jsp" class="nav-link">
-                        <i class="fas fa-calendar-check"></i>
-                        <span>Consultations</span>
-                    </a>
-                </li>
             </ul>
         </nav>
 
@@ -192,15 +87,21 @@
     <!-- Main Content -->
     <main class="main-content">
         <!-- Header -->
-        <header class="header">
-            <div class="header-title">
-                <h1>
-                    <i class="fas fa-user-md"></i>
-                    <%= isEdit ? "Modifier le Docteur" : "Nouveau Docteur" %>
-                </h1>
-                <p>
-                    <%= isEdit ? "Modifiez les informations du docteur" : "Ajoutez un nouveau médecin à la clinique" %>
-                </p>
+        <header class="consultations-header">
+            <div class="header-content">
+                <div class="header-text">
+                    <h1>
+                        <i class="fas fa-user-md"></i>
+                        <%= isEdit ? "Modifier le Docteur" : "Nouveau Docteur" %>
+                    </h1>
+                    <p><%= isEdit ? "Modifiez les informations du docteur" : "Ajoutez un nouveau médecin à la clinique" %></p>
+                </div>
+                <div class="header-actions">
+                    <a href="${pageContext.request.contextPath}/admin/docteurs" class="btn-header">
+                        <i class="fas fa-arrow-left"></i>
+                        Retour à la liste
+                    </a>
+                </div>
             </div>
         </header>
 
@@ -219,18 +120,27 @@
             <c:remove var="errorMessage" scope="session" />
         </c:if>
 
-        <div class="form-container">
-            <div class="card">
+        <div class="form-page">
+            <div class="form-card">
+                <!-- Step Indicator -->
+                <div class="form-step-indicator">
+                    <div class="step active">
+                        <div class="step-number">1</div>
+                        <div class="step-label">Informations personnelles</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-label">Informations professionnelles</div>
+                    </div>
+                </div>
+
                 <% if (!isEdit) { %>
-                <div class="info-box">
-                    <h4>
-                        <i class="fas fa-info-circle"></i>
-                        Information importante
-                    </h4>
-                    <p>
-                        Chaque docteur doit être associé à un département. 
-                        L'affectation à une salle est optionnelle mais recommandée pour faciliter la gestion des consultations.
-                    </p>
+                <div class="info-banner">
+                    <i class="fas fa-info-circle"></i>
+                    <div>
+                        <strong>Information importante</strong>
+                        <p>Chaque docteur doit être associé à un département. L'affectation à une salle est optionnelle mais recommandée.</p>
+                    </div>
                 </div>
                 <% } %>
                 
@@ -241,141 +151,172 @@
                     <% } %>
                     
                     <!-- Section: Informations personnelles -->
-                    <div class="section-title">
-                        <i class="fas fa-user"></i>
-                        Informations personnelles
-                    </div>
-                    
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>
+                    <div class="form-section">
+                        <div class="section-header">
+                            <div class="section-icon">
                                 <i class="fas fa-user"></i>
-                                Nom <span class="required">*</span>
-                            </label>
-                            <input type="text" 
-                                   name="nom" 
-                                   id="nom" 
-                                   required
-                                   value="<%= isEdit && docteur != null ? docteur.getNom() : "" %>"
-                                   placeholder="Nom du docteur">
+                            </div>
+                            <div>
+                                <h3 class="section-title">Informations personnelles</h3>
+                                <p class="section-subtitle">Renseignez les coordonnées du docteur</p>
+                            </div>
+                        </div>
+
+                        <div class="form-grid-2">
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Nom <span class="required">*</span>
+                                </label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-user input-icon"></i>
+                                    <input type="text" 
+                                           name="nom" 
+                                           id="nom" 
+                                           class="form-input"
+                                           required
+                                           value="<%= isEdit && docteur != null ? docteur.getNom() : "" %>"
+                                           placeholder="Nom du docteur">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Prénom <span class="required">*</span>
+                                </label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-user input-icon"></i>
+                                    <input type="text" 
+                                           name="prenom" 
+                                           id="prenom" 
+                                           class="form-input"
+                                           required
+                                           value="<%= isEdit && docteur != null ? docteur.getPrenom() : "" %>"
+                                           placeholder="Prénom du docteur">
+                                </div>
+                            </div>
                         </div>
                         
-                        <div class="form-group">
-                            <label>
-                                <i class="fas fa-user"></i>
-                                Prénom <span class="required">*</span>
-                            </label>
-                            <input type="text" 
-                                   name="prenom" 
-                                   id="prenom" 
-                                   required
-                                   value="<%= isEdit && docteur != null ? docteur.getPrenom() : "" %>"
-                                   placeholder="Prénom du docteur">
+                        <div class="form-grid-2">
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Email <span class="required">*</span>
+                                </label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-envelope input-icon"></i>
+                                    <input type="email" 
+                                           name="email" 
+                                           id="email" 
+                                           class="form-input"
+                                           required
+                                           value="<%= isEdit && docteur != null ? docteur.getEmail() : "" %>"
+                                           placeholder="email@exemple.com">
+                                </div>
+                                <span class="help-text">Utilisé pour la connexion au système</span>
+                            </div>
+                            
+                            <% if (!isEdit) { %>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Mot de passe <span class="required">*</span>
+                                </label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-lock input-icon"></i>
+                                    <input type="password" 
+                                           name="motDePasse" 
+                                           id="motDePasse" 
+                                           class="form-input"
+                                           required
+                                           placeholder="Mot de passe sécurisé"
+                                           minlength="6">
+                                </div>
+                                <span class="help-text">Minimum 6 caractères</span>
+                            </div>
+                            <% } %>
                         </div>
-                    </div>
-                    
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>
-                                <i class="fas fa-envelope"></i>
-                                Email <span class="required">*</span>
-                            </label>
-                            <input type="email" 
-                                   name="email" 
-                                   id="email" 
-                                   required
-                                   value="<%= isEdit && docteur != null ? docteur.getEmail() : "" %>"
-                                   placeholder="email@exemple.com">
-                            <span class="help-text">Utilisé pour la connexion au système</span>
-                        </div>
-                        
-                        <% if (!isEdit) { %>
-                        <div class="form-group">
-                            <label>
-                                <i class="fas fa-lock"></i>
-                                Mot de passe <span class="required">*</span>
-                            </label>
-                            <input type="password" 
-                                   name="motDePasse" 
-                                   id="motDePasse" 
-                                   required
-                                   placeholder="Mot de passe sécurisé"
-                                   minlength="6">
-                            <span class="help-text">Minimum 6 caractères</span>
-                        </div>
-                        <% } %>
                     </div>
                     
                     <!-- Section: Informations professionnelles -->
-                    <div class="section-title">
-                        <i class="fas fa-stethoscope"></i>
-                        Informations professionnelles
-                    </div>
-                    
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>
+                    <div class="form-section">
+                        <div class="section-header">
+                            <div class="section-icon">
                                 <i class="fas fa-stethoscope"></i>
-                                Spécialité <span class="required">*</span>
-                            </label>
-                            <input type="text" 
-                                   name="specialite" 
-                                   id="specialite" 
-                                   required
-                                   value="<%= isEdit && docteur != null ? docteur.getSpecialite() : "" %>"
-                                   placeholder="Ex: Cardiologie, Pédiatrie, etc.">
+                            </div>
+                            <div>
+                                <h3 class="section-title">Informations professionnelles</h3>
+                                <p class="section-subtitle">Spécialité et affectation</p>
+                            </div>
+                        </div>
+
+                        <div class="form-grid-2">
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Spécialité <span class="required">*</span>
+                                </label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-stethoscope input-icon"></i>
+                                    <input type="text" 
+                                           name="specialite" 
+                                           id="specialite" 
+                                           class="form-input"
+                                           required
+                                           value="<%= isEdit && docteur != null ? docteur.getSpecialite() : "" %>"
+                                           placeholder="Ex: Cardiologie, Pédiatrie, etc.">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Département <span class="required">*</span>
+                                </label>
+                                <div class="input-wrapper">
+                                    <i class="fas fa-building input-icon"></i>
+                                    <select name="departementId" id="departementId" class="form-input" required onchange="chargerSallesDuDepartement(this.value)">
+                                        <option value="">Sélectionnez un département</option>
+                                        <% if (departements != null) {
+                                            for (Departement dept : departements) { %>
+                                                <option value="<%= dept.getId() %>" 
+                                                        <%= isEdit && docteur != null && docteur.getDepartement() != null && 
+                                                            docteur.getDepartement().getId().equals(dept.getId()) ? "selected" : "" %>>
+                                                    <%= dept.getNom() %>
+                                                </option>
+                                            <% }
+                                        } %>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         
                         <div class="form-group">
-                            <label>
-                                <i class="fas fa-building"></i>
-                                Département <span class="required">*</span>
+                            <label class="form-label">
+                                Salle <span class="required">*</span>
                             </label>
-                            <select name="departementId" id="departementId" required onchange="chargerSallesDuDepartement(this.value)">
-                                <option value="">Sélectionnez un département</option>
-                                <% if (departements != null) {
-                                    for (Departement dept : departements) { %>
-                                        <option value="<%= dept.getId() %>" 
-                                                <%= isEdit && docteur != null && docteur.getDepartement() != null && 
-                                                    docteur.getDepartement().getId().equals(dept.getId()) ? "selected" : "" %>>
-                                            <%= dept.getNom() %>
-                                        </option>
-                                    <% }
-                                } %>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label>
-                                <i class="fas fa-door-open"></i>
-                                Salle
-                            </label>
-                            <select name="salleId" id="salleId">
-                                <option value="">Aucune salle (optionnel)</option>
-                                <% if (salles != null) {
-                                    for (Salle salle : salles) { %>
-                                        <option value="<%= salle.getId() %>" 
-                                                data-departement="<%= salle.getDepartement().getId() %>"
-                                                <%= isEdit && docteur != null && docteur.getSalle() != null && 
-                                                    docteur.getSalle().getId().equals(salle.getId()) ? "selected" : "" %>>
-                                            <%= salle.getNomSalle() %> - <%= salle.getDepartement().getNom() %>
-                                        </option>
-                                    <% }
-                                } %>
-                            </select>
+                            <div class="input-wrapper">
+                                <i class="fas fa-door-open input-icon"></i>
+                                <select name="salleId" id="salleId" class="form-input">
+                                    <option value="">Aucune salle </option>
+                                    <% if (salles != null) {
+                                        for (Salle salle : salles) { %>
+                                            <option value="<%= salle.getId() %>" 
+                                                    data-departement="<%= salle.getDepartement().getId() %>"
+                                                    <%= isEdit && docteur != null && docteur.getSalle() != null && 
+                                                        docteur.getSalle().getId().equals(salle.getId()) ? "selected" : "" %>>
+                                                <%= salle.getNomSalle() %> - <%= salle.getDepartement().getNom() %>
+                                            </option>
+                                        <% }
+                                    } %>
+                                </select>
+                            </div>
                             <span class="help-text">La salle sera filtrée selon le département sélectionné</span>
                         </div>
                     </div>
                     
                     <!-- Actions -->
                     <div class="form-actions">
-                        <a href="${pageContext.request.contextPath}/admin/docteurs" class="btn-secondary">
+                        <a href="${pageContext.request.contextPath}/admin/docteurs" class="btn-cancel">
                             <i class="fas fa-times"></i>
                             Annuler
                         </a>
-                        <button type="submit" class="btn-primary">
+                        <button type="submit" class="btn-submit">
                             <i class="fas fa-save"></i>
                             <%= isEdit ? "Enregistrer les modifications" : "Créer le docteur" %>
                         </button>

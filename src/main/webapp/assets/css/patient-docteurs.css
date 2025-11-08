@@ -1,0 +1,393 @@
+/* ============================================
+   NOS DOCTEURS - THÈME SANTÉ ÉLÉGANT
+   ============================================ */
+
+:root {
+    --primary: #0f172a;
+    --secondary: #0891b2;
+    --accent: #06b6d4;
+    --medical-teal: #14b8a6;
+    --gold: #f59e0b;
+    --white: #ffffff;
+    --gray-50: #f8fafc;
+    --gray-100: #f1f5f9;
+    --gray-200: #e2e8f0;
+    --gray-600: #475569;
+    --gray-900: #0f172a;
+    --success: #10b981;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --info: #3b82f6;
+    
+    /* Gradients médicaux */
+    --gradient-medical: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
+}
+
+/* Les styles du header sont déjà dans patient-dashboard.css */
+
+/* ============================================
+   SEARCH & FILTER SECTION
+   ============================================ */
+
+.search-filter-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--gray-200);
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    background: var(--gray-50);
+    border-radius: 12px;
+    border: 2px solid var(--gray-200);
+    transition: all 0.3s ease;
+}
+
+.search-bar:focus-within {
+    background: white;
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 4px rgba(8, 145, 178, 0.1);
+}
+
+.search-bar i {
+    color: var(--secondary);
+    font-size: 1.25rem;
+}
+
+.search-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    color: var(--gray-900);
+    font-weight: 500;
+}
+
+.search-input:focus {
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: var(--gray-600);
+}
+
+/* ============================================
+   DOCTORS GRID
+   ============================================ */
+
+.doctors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2rem;
+}
+
+.doctor-card {
+    background: white;
+    border-radius: 20px;
+    padding: 0;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    border: 1px solid var(--gray-200);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    position: relative;
+}
+
+.doctor-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: var(--gradient-medical);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.doctor-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+    border-color: var(--secondary);
+}
+
+.doctor-card:hover::before {
+    transform: scaleX(1);
+}
+
+/* Card Header */
+.doctor-card-header {
+    background: linear-gradient(135deg, var(--gray-50), white);
+    padding: 2rem;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.doctor-name {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--gray-900);
+    margin: 0 0 0.75rem 0;
+}
+
+.doctor-specialty {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.25rem;
+    background: linear-gradient(135deg, rgba(8, 145, 178, 0.1), rgba(6, 182, 212, 0.15));
+    color: var(--secondary);
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: 1px solid rgba(8, 145, 178, 0.2);
+}
+
+/* Card Body */
+.doctor-card-body {
+    padding: 2rem;
+}
+
+.doctor-info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.doctor-info-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--gray-50);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.doctor-info-item:hover {
+    background: rgba(8, 145, 178, 0.08);
+    transform: translateX(4px);
+}
+
+.info-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: white;
+    color: var(--secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.info-content {
+    flex: 1;
+    font-size: 0.95rem;
+    color: var(--gray-600);
+    font-weight: 500;
+}
+
+/* Card Footer */
+.doctor-card-footer {
+    padding: 2rem;
+    background: var(--gray-50);
+    border-top: 1px solid var(--gray-200);
+}
+
+.btn-book-doctor {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    background: var(--gradient-medical);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    box-shadow: 0 4px 15px rgba(8, 145, 178, 0.3);
+}
+
+.btn-book-doctor:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(8, 145, 178, 0.4);
+}
+
+.btn-book-doctor:active {
+    transform: translateY(0);
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+
+.empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 5rem 2rem;
+    background: white;
+    border-radius: 16px;
+    border: 2px dashed var(--gray-200);
+}
+
+.empty-state-icon {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gray-100), var(--gray-200));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    color: var(--gray-600);
+}
+
+.empty-state h3 {
+    font-size: 1.75rem;
+    color: var(--gray-900);
+    margin: 0 0 0.75rem 0;
+    font-weight: 700;
+}
+
+.empty-state p {
+    font-size: 1.05rem;
+    color: var(--gray-600);
+    margin: 0;
+}
+
+/* ============================================
+   LOADING SKELETON
+   ============================================ */
+
+.skeleton {
+    animation: skeleton-loading 1.5s infinite;
+    background: linear-gradient(90deg, var(--gray-100) 25%, var(--gray-200) 50%, var(--gray-100) 75%);
+    background-size: 200% 100%;
+    border-radius: 8px;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Les styles .alert sont déjà dans patient-dashboard.css */
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .doctors-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .consultations-header .header-content {
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: flex-start;
+    }
+    
+    .header-actions {
+        width: 100%;
+    }
+    
+    .btn-header {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .doctors-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .search-filter-section {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .consultations-header {
+        padding: 2rem 1.5rem;
+    }
+    
+    .header-text h1 {
+        font-size: 1.5rem;
+    }
+    
+    .header-text p {
+        font-size: 0.9rem;
+    }
+    
+    .doctor-card-header {
+        padding: 1.5rem;
+    }
+    
+    .doctor-card-body {
+        padding: 1.5rem;
+    }
+    
+    .doctor-card-footer {
+        padding: 1.5rem;
+    }
+    
+    .doctor-name {
+        font-size: 1.2rem;
+    }
+    
+    .doctor-specialty {
+        font-size: 0.85rem;
+        padding: 0.4rem 1rem;
+    }
+}

@@ -1,0 +1,314 @@
+/* ============================================
+   ENHANCED PATIENTS PAGE STYLES
+   ============================================ */
+
+/* ============================================
+   MODERN SEARCH BAR
+   ============================================ */
+
+.search-bar-modern {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.search-input-group {
+    flex: 1;
+    min-width: 300px;
+    position: relative;
+}
+
+.search-input-group .search-icon {
+    position: absolute;
+    left: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #0891b2;
+    font-size: 1.1rem;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.search-input-group .search-input {
+    width: 100%;
+    padding: 0.875rem 1.25rem 0.875rem 3.25rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.search-input-group .search-input:focus {
+    border-color: #0891b2;
+    box-shadow: 0 0 0 4px rgba(8, 145, 178, 0.1);
+    outline: none;
+}
+
+.search-input-group .search-input::placeholder {
+    color: #94a3b8;
+}
+
+.search-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+/* ============================================
+   ENHANCED TABLE ROWS
+   ============================================ */
+
+.patient-row {
+    transition: all 0.2s ease;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.patient-row:hover {
+    background: linear-gradient(135deg, rgba(67, 206, 162, 0.05) 0%, rgba(24, 90, 157, 0.02) 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.patient-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.patient-icon {
+    color: #0891b2;
+    font-size: 1.5rem;
+}
+
+.patient-name {
+    color: #1e293b;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.email-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #475569;
+    font-size: 0.9rem;
+}
+
+.email-cell i {
+    color: #06b6d4;
+    font-size: 0.85rem;
+}
+
+/* ============================================
+   METRIC CELLS
+   ============================================ */
+
+.metric-cell {
+    display: flex;
+    align-items: baseline;
+    gap: 0.25rem;
+    justify-content: flex-start;
+}
+
+.metric-value {
+    font-weight: 600;
+    color: #1e293b;
+    font-size: 1rem;
+}
+
+.metric-unit {
+    font-size: 0.8rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.no-data {
+    color: #cbd5e1;
+    font-style: italic;
+    font-weight: 500;
+}
+
+/* ============================================
+   ENHANCED IMC BADGES
+   ============================================ */
+
+.badge-imc {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.875rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.badge-imc:hover {
+    transform: scale(1.05);
+}
+
+.badge-imc i {
+    font-size: 0.9rem;
+}
+
+.badge-imc.imc-underweight {
+    background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%);
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+.badge-imc.imc-normal {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    color: #155724;
+    border: 1px solid #b3d9bf;
+}
+
+.badge-imc.imc-overweight {
+    background: linear-gradient(135deg, #ffe0b2 0%, #ffcc80 100%);
+    color: #e65100;
+    border: 1px solid #ffb74d;
+}
+
+.badge-imc.imc-obese {
+    background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+    color: #721c24;
+    border: 1px solid #f1b0b7;
+}
+
+.badge-imc.badge-secondary {
+    background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+    color: #6c757d;
+    border: 1px solid #ced4da;
+}
+
+.badge-info {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.75rem;
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    color: #0d47a1;
+    border-radius: 16px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid #90caf9;
+}
+
+/* ============================================
+   MODERN ACTION BUTTONS
+   ============================================ */
+
+.action-buttons-modern {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.action-buttons-modern .action-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.action-buttons-modern .btn-edit {
+    background: linear-gradient(135deg, #4fc3f7 0%, #0288d1 100%);
+    color: white;
+    box-shadow: 0 2px 6px rgba(3, 169, 244, 0.3);
+}
+
+.action-buttons-modern .btn-edit:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 12px rgba(3, 169, 244, 0.4);
+}
+
+.action-buttons-modern .btn-delete {
+    background: linear-gradient(135deg, #ef5350 0%, #d32f2f 100%);
+    color: white;
+    box-shadow: 0 2px 6px rgba(244, 67, 54, 0.3);
+}
+
+.action-buttons-modern .btn-delete:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 12px rgba(244, 67, 54, 0.4);
+}
+
+.action-buttons-modern .btn-delete:active,
+.action-buttons-modern .btn-edit:active {
+    transform: translateY(0) scale(0.95);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 968px) {
+    .search-bar-modern {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .search-input-group {
+        min-width: 100%;
+    }
+    
+    .search-actions {
+        width: 100%;
+    }
+    
+    .search-actions .btn-search,
+    .search-actions .btn-reset {
+        flex: 1;
+        justify-content: center;
+    }
+    
+    .patient-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .metric-cell {
+        justify-content: center;
+    }
+    
+    .badge-imc {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.7rem;
+    }
+    
+    .action-buttons-modern .action-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .search-input-group .search-input {
+        font-size: 0.875rem;
+        padding: 0.75rem 1rem 0.75rem 3rem;
+    }
+    
+    .patient-name {
+        font-size: 0.9rem;
+    }
+    
+    .email-cell {
+        font-size: 0.85rem;
+    }
+    
+    .metric-value {
+        font-size: 0.9rem;
+    }
+}

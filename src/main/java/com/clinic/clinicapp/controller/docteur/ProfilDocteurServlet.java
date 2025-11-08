@@ -45,7 +45,7 @@ public class ProfilDocteurServlet extends HttpServlet {
         
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("userId") == null) {
-            response.sendRedirect(request.getContextPath() + "/views/auth/login.jsp");
+            response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
         
@@ -56,7 +56,7 @@ public class ProfilDocteurServlet extends HttpServlet {
             Optional<Docteur> optionalDocteur = docteurRepository.findById(docteurId);
             
             if (!optionalDocteur.isPresent()) {
-                response.sendRedirect(request.getContextPath() + "/views/auth/login.jsp");
+                response.sendRedirect(request.getContextPath() + "/login");
                 return;
             }
             
@@ -101,7 +101,7 @@ public class ProfilDocteurServlet extends HttpServlet {
         
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("userId") == null) {
-            response.sendRedirect(request.getContextPath() + "/views/auth/login.jsp");
+            response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
         
@@ -112,7 +112,7 @@ public class ProfilDocteurServlet extends HttpServlet {
             Optional<Docteur> optionalDocteur = docteurRepository.findById(docteurId);
             
             if (!optionalDocteur.isPresent()) {
-                response.sendRedirect(request.getContextPath() + "/views/auth/login.jsp");
+                response.sendRedirect(request.getContextPath() + "/login");
                 return;
             }
             

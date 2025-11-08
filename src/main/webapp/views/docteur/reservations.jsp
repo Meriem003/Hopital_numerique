@@ -11,264 +11,7 @@
     <title>Réservations - Clinique Excellence</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/docteur-dashboard.css">
-    <style>
-        .alert {
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .alert-success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        .alert-error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-        }
-        .modal-content {
-            background-color: #fff;
-            margin: 10% auto;
-            padding: 30px;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-        .modal-header h3 {
-            margin: 0;
-            color: #2c3e50;
-        }
-        .close {
-            font-size: 28px;
-            font-weight: bold;
-            color: #999;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-        .close:hover {
-            color: #333;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #333;
-            font-weight: 500;
-        }
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 14px;
-            resize: vertical;
-            min-height: 100px;
-            font-family: inherit;
-        }
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #4A90E2;
-        }
-        .modal-footer {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        .btn-modal {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-        .btn-cancel {
-            background-color: #e0e0e0;
-            color: #333;
-        }
-        .btn-cancel:hover {
-            background-color: #d0d0d0;
-        }
-        .btn-submit {
-            background-color: #dc3545;
-            color: white;
-        }
-        .btn-submit:hover {
-            background-color: #c82333;
-        }
-        .reservation-card {
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .reservation-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-        .reservation-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-        .patient-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .patient-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 18px;
-        }
-        .patient-details h4 {
-            margin: 0 0 5px 0;
-            color: #2c3e50;
-            font-size: 18px;
-        }
-        .patient-details p {
-            margin: 0;
-            color: #7f8c8d;
-            font-size: 14px;
-        }
-        .reservation-body {
-            margin-bottom: 15px;
-        }
-        .info-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-            color: #555;
-        }
-        .info-row i {
-            width: 20px;
-            color: #4A90E2;
-        }
-        .reservation-actions {
-            display: flex;
-            gap: 10px;
-        }
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s;
-        }
-        .btn-success {
-            background-color: #28a745;
-            color: white;
-        }
-        .btn-success:hover {
-            background-color: #218838;
-        }
-        .btn-danger {
-            background-color: #dc3545;
-            color: white;
-        }
-        .btn-danger:hover {
-            background-color: #c82333;
-        }
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: #999;
-        }
-        .empty-state i {
-            font-size: 64px;
-            margin-bottom: 20px;
-            color: #ddd;
-        }
-        .empty-state h3 {
-            color: #666;
-            margin-bottom: 10px;
-        }
-        .section-title {
-            color: #2c3e50;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .section-title i {
-            color: #4A90E2;
-        }
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-            border-bottom: 2px solid #f0f0f0;
-        }
-        .tab {
-            padding: 12px 24px;
-            cursor: pointer;
-            border: none;
-            background: none;
-            color: #7f8c8d;
-            font-size: 16px;
-            font-weight: 500;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s;
-        }
-        .tab.active {
-            color: #4A90E2;
-            border-bottom-color: #4A90E2;
-        }
-        .tab:hover {
-            color: #4A90E2;
-        }
-        .tab-content {
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
-        }
-    </style>
+   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/reservations.css">
 </head>
 <body>
     <aside class="sidebar">
@@ -329,13 +72,22 @@
     </aside>
 
     <main class="main-content">
-        <header class="header">
-            <div class="header-title">
-                <h1>Gestion des Réservations</h1>
-                <p><i class="fas fa-calendar-check"></i> Gérez les demandes de rendez-vous de vos patients</p>
+                <!-- Header Section -->
+        <div class="consultations-header">
+            <div class="header-content">
+                <div>
+                    <h1>
+                        <i class="fas fa-calendar-check"></i>
+                        Gestion des Réservations
+                    </h1>
+                    <p>Gérez les demandes de rendez-vous de vos patients</p>
+                </div>
+                <a href="${pageContext.request.contextPath}/docteur/consultations" class="btn-header">
+                    <i class="fas fa-calendar-plus"></i>
+                    consultations
+                </a>
             </div>
-        </header>
-
+        </div>
         <%
             String success = request.getParameter("success");
             String error = request.getParameter("error");
@@ -415,11 +167,6 @@
 
         <!-- Réservations en attente -->
         <div id="enAttente" class="tab-content active">
-            <h2 class="section-title">
-                <i class="fas fa-clock"></i>
-                Réservations en Attente de Validation
-            </h2>
-
             <% 
                 if (reservationsEnAttente == null || reservationsEnAttente.isEmpty()) {
             %>
@@ -490,10 +237,6 @@
 
         <!-- Consultations validées -->
         <div id="validees" class="tab-content">
-            <h2 class="section-title">
-                <i class="fas fa-check-circle"></i>
-                Consultations Validées
-            </h2>
 
             <% 
                 if (consultationsValidees == null || consultationsValidees.isEmpty()) {

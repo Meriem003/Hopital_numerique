@@ -30,7 +30,8 @@
     <title><%= isEdit ? "Modifier" : "Ajouter" %> Salle - Clinique Excellence</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/assets/css/admin-dashboard.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/assets/css/departements.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/assets/css/salle-form.css" rel="stylesheet">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/departement-form.css">
 </head>
 <body>
     <!-- Sidebar -->
@@ -77,24 +78,6 @@
                         <span>Salles</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/views/admin/consultations.jsp" class="nav-link">
-                        <i class="fas fa-calendar-check"></i>
-                        <span>Consultations</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/views/admin/statistiques.jsp" class="nav-link">
-                        <i class="fas fa-chart-pie"></i>
-                        <span>Statistiques</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/views/admin/parametres.jsp" class="nav-link">
-                        <i class="fas fa-cog"></i>
-                        <span>Paramètres</span>
-                    </a>
-                </li>
             </ul>
         </nav>
 
@@ -107,245 +90,185 @@
     <!-- Main Content -->
     <main class="main-content">
         <!-- Header -->
-        <header class="header">
-            <div class="header-title">
-                <h1><%= isEdit ? "Modifier" : "Ajouter" %> une Salle</h1>
-                <p><%= isEdit ? "Modifiez les informations de la salle" : "Ajoutez une nouvelle salle de consultation" %></p>
+        <div class="consultations-header">
+            <div class="header-content">
+                <div>
+                    <h1>
+                        <i class="fas <%= isEdit ? "fa-edit" : "fa-plus-circle" %>"></i>
+                        <%= isEdit ? "Modifier la Salle" : "Nouvelle Salle" %>
+                    </h1>
+                    <p><%= isEdit ? "Modifiez les informations de la salle" : "Ajoutez une nouvelle salle de consultation à votre établissement" %></p>
+                </div>
+                <a href="${pageContext.request.contextPath}/admin/salles" class="btn-header-back">
+                    <i class="fas fa-arrow-left"></i>
+                    Retour à la liste
+                </a>
             </div>
-        </header>
+        </div>
 
         <!-- Messages -->
         <c:if test="${not empty sessionScope.successMessage}">
             <div class="alert alert-success">
-                <i class="fas fa-check-circle"></i> ${sessionScope.successMessage}
+                <i class="fas fa-check-circle"></i>
+                <span>${sessionScope.successMessage}</span>
             </div>
             <c:remove var="successMessage" scope="session" />
         </c:if>
         
         <c:if test="${not empty sessionScope.errorMessage}">
             <div class="alert alert-error">
-                <i class="fas fa-exclamation-circle"></i> ${sessionScope.errorMessage}
+                <i class="fas fa-exclamation-circle"></i>
+                <span>${sessionScope.errorMessage}</span>
             </div>
             <c:remove var="errorMessage" scope="session" />
         </c:if>
 
         <!-- Form Card -->
-        <div class="card form-card">
-            <div class="card-header">
-                <h3 class="card-title">
-                    <i class="fas fa-door-open"></i>
-                    Informations de la Salle
-                </h3>
-            </div>
+        <div class="form-page">
+            <div class="form-card">
+                <div class="form-header">
+                    <div class="form-step-indicator">
+                        <div class="step-item active">
+                            <div class="step-number">1</div>
+                            <div class="step-label">Informations</div>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step-item">
+                            <div class="step-number">2</div>
+                            <div class="step-label">Validation</div>
+                        </div>
+                    </div>
+                </div>
 
-            <form method="POST" action="${pageContext.request.contextPath}/admin/salles">
-                <input type="hidden" name="action" value="<%= isEdit ? "modifier" : "creer" %>">
-                <% if (isEdit && salle != null) { %>
-                    <input type="hidden" name="id" value="<%= salle.getId() %>">
-                <% } %>
+                <form method="POST" action="${pageContext.request.contextPath}/admin/salles">
+                    <input type="hidden" name="action" value="<%= isEdit ? "modifier" : "creer" %>">
+                    <% if (isEdit && salle != null) { %>
+                        <input type="hidden" name="id" value="<%= salle.getId() %>">
+                    <% } %>
 
-                <div class="form-grid">
                     <!-- Nom de la salle -->
                     <div class="form-group">
-                        <label for="nomSalle" class="form-label">
-                            <i class="fas fa-door-open"></i>
-                            Nom de la Salle <span class="required">*</span>
+                        <label for="nomSalle">
+                            <i class="fas fa-door-open"></i> Nom de la Salle <span class="required">*</span>
                         </label>
-                        <input 
-                            type="text" 
-                            id="nomSalle" 
-                            name="nomSalle" 
-                            class="form-control"
-                            placeholder="Ex: Salle 101"
-                            value="<%= isEdit && salle != null ? salle.getNomSalle() : "" %>"
-                            required
-                        >
+                        <div class="input-wrapper">
+                            <input 
+                                type="text" 
+                                id="nomSalle" 
+                                name="nomSalle" 
+                                required 
+                                placeholder="Ex: Salle 101, Cabinet A, Bloc Opératoire 1..."
+                                value="<%= isEdit && salle != null ? salle.getNomSalle() : "" %>"
+                            >
+                            <i class="input-icon fas fa-door-open"></i>
+                        </div>
+                        <small class="help-text">Le nom doit être unique et descriptif</small>
                     </div>
 
                     <!-- Département -->
                     <div class="form-group">
-                        <label for="departementId" class="form-label">
-                            <i class="fas fa-building"></i>
-                            Département <span class="required">*</span>
+                        <label for="departementId">
+                            <i class="fas fa-building"></i> Département <span class="required">*</span>
                         </label>
-                        <select id="departementId" name="departementId" class="form-control" required>
-                            <option value="">-- Sélectionner un département --</option>
-                            <c:forEach items="${departements}" var="dept">
-                                <option value="${dept.id}">
-                                    ${dept.nom}
-                                </option>
-                            </c:forEach>
-                        </select>
+                        <div class="input-wrapper">
+                            <select id="departementId" name="departementId" required>
+                                <option value="">-- Sélectionner un département --</option>
+                                <c:forEach items="${departements}" var="dept">
+                                    <option value="${dept.id}" 
+                                            <c:if test="${isEdit && salle != null && salle.departement != null && salle.departement.id == dept.id}">selected</c:if>>
+                                        ${dept.nom}
+                                    </option>
+                                </c:forEach>
+                            </select>
+                            <i class="input-icon fas fa-building"></i>
+                        </div>
+                        <small class="help-text">
+                            <i class="fas fa-info-circle"></i>
+                            Choisissez le département auquel cette salle appartient
+                        </small>
                     </div>
 
                     <!-- Capacité -->
                     <div class="form-group">
-                        <label for="capacite" class="form-label">
-                            <i class="fas fa-users"></i>
-                            Capacité
+                        <label for="capacite">
+                            <i class="fas fa-users"></i> Capacité
                         </label>
-                        <input 
-                            type="number" 
-                            id="capacite" 
-                            name="capacite" 
-                            class="form-control"
-                            placeholder="Ex: 1"
-                            min="1"
-                            value="<%= isEdit && salle != null && salle.getCapacite() != null ? salle.getCapacite() : "" %>"
-                        >
+                        <div class="input-wrapper">
+                            <input 
+                                type="number" 
+                                id="capacite" 
+                                name="capacite" 
+                                placeholder="Ex: 1, 2, 5..."
+                                min="1"
+                                max="100"
+                                value="<%= isEdit && salle != null && salle.getCapacite() != null ? salle.getCapacite() : "" %>"
+                            >
+                            <i class="input-icon fas fa-users"></i>
+                        </div>
+                        <small class="help-text">
+                            <i class="fas fa-lightbulb"></i>
+                            Nombre de personnes pouvant être accueillies simultanément
+                        </small>
                     </div>
-                </div>
 
-                <!-- Description -->
-                <div class="form-group">
-                    <label for="description" class="form-label">
-                        <i class="fas fa-align-left"></i>
-                        Description
-                    </label>
-                    <textarea 
-                        id="description" 
-                        name="description" 
-                        class="form-control"
-                        rows="4"
-                        placeholder="Ajoutez une description de la salle..."
-                    ><%= isEdit && salle != null && salle.getDescription() != null ? salle.getDescription() : "" %></textarea>
-                </div>
+                    <!-- Description -->
+                    <div class="form-group">
+                        <label for="description">
+                            <i class="fas fa-align-left"></i> Description
+                        </label>
+                        <div class="input-wrapper">
+                            <textarea 
+                                id="description" 
+                                name="description" 
+                                rows="5"
+                                placeholder="Décrivez l'équipement et les caractéristiques de la salle..."
+                            ><%= isEdit && salle != null && salle.getDescription() != null ? salle.getDescription() : "" %></textarea>
+                            <i class="input-icon fas fa-align-left"></i>
+                        </div>
+                        <small class="help-text">
+                            <i class="fas fa-info-circle"></i>
+                            Ajoutez des détails sur l'équipement, les spécificités ou les particularités
+                        </small>
+                    </div>
 
-                <!-- Boutons d'action -->
-                <div class="form-actions">
-                    <a href="${pageContext.request.contextPath}/admin/salles" class="btn btn-secondary">
-                        <i class="fas fa-times"></i>
-                        Annuler
-                    </a>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas <%= isEdit ? "fa-save" : "fa-plus" %>"></i>
-                        <%= isEdit ? "Enregistrer" : "Créer" %>
-                    </button>
-                </div>
-            </form>
+                    <!-- Boutons d'action -->
+                    <div class="form-actions">
+                        <a href="${pageContext.request.contextPath}/admin/salles" class="btn btn-secondary">
+                            <i class="fas fa-times-circle"></i>
+                            Annuler
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas <%= isEdit ? "fa-save" : "fa-plus-circle" %>"></i>
+                            <%= isEdit ? "Mettre à jour la salle" : "Créer la salle" %>
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </main>
 
-    <style>
-        .alert {
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-        
-        .alert-success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        
-        .alert-error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        
-        .alert i {
-            font-size: 1.25rem;
-        }
-
-        .form-card {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-label {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-            color: #2c3e50;
-        }
-
-        .form-label i {
-            color: #3498db;
-        }
-
-        .required {
-            color: #e74c3c;
-        }
-
-        .form-control {
-            padding: 0.75rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: #3498db;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
-        }
-
-        textarea.form-control {
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        .form-actions {
-            display: flex;
-            gap: 1rem;
-            justify-content: flex-end;
-            margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid #eee;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 4px;
-            font-size: 1rem;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .btn-primary {
-            background: #3498db;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #2980b9;
-        }
-
-        .btn-secondary {
-            background: #95a5a6;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: #7f8c8d;
-        }
-    </style>
-
+    <script>
+        // Auto-hide alerts after 5 seconds
+        window.addEventListener('DOMContentLoaded', () => {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(alert => {
+                setTimeout(() => {
+                    alert.style.opacity = '0';
+                    setTimeout(() => alert.remove(), 300);
+                }, 5000);
+            });
+            
+            // Pre-select department if editing
+            <% if (isEdit && salle != null && salle.getDepartement() != null) { %>
+                const departementSelect = document.getElementById('departementId');
+                if (departementSelect) {
+                    departementSelect.value = '<%= salle.getDepartement().getId() %>';
+                }
+            <% } %>
+        });
+    </script>
+</body>
+</html>
     <script>
         // Pré-sélectionner le département en mode édition
         document.addEventListener('DOMContentLoaded', function() {

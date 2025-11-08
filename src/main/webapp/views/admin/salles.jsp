@@ -39,7 +39,6 @@
                 <p>Admin Panel</p>
             </div>
         </div>
-
         <nav>
             <ul class="nav-menu">
                 <li class="nav-item">
@@ -72,24 +71,6 @@
                         <span>Salles</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/views/admin/consultations.jsp" class="nav-link">
-                        <i class="fas fa-calendar-check"></i>
-                        <span>Consultations</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/views/admin/statistiques.jsp" class="nav-link">
-                        <i class="fas fa-chart-pie"></i>
-                        <span>Statistiques</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="${pageContext.request.contextPath}/views/admin/parametres.jsp" class="nav-link">
-                        <i class="fas fa-cog"></i>
-                        <span>Paramètres</span>
-                    </a>
-                </li>
             </ul>
         </nav>
 
@@ -102,60 +83,57 @@
     <!-- Main Content -->
     <main class="main-content">
         <!-- Header -->
-        <header class="header">
-            <div class="header-title">
-                <h1>Gestion des Salles</h1>
-                <p>Gérez les salles de consultation de la clinique</p>
+        <div class="consultations-header">
+            <div class="header-content">
+                <div>
+                    <h1>
+                        <i class="fas fa-door-open"></i>
+                        Gestion des Salles
+                    </h1>
+                    <p>Gérez les salles de consultation de votre établissement médical</p>
+                </div>
+                <a href="${pageContext.request.contextPath}/admin/salles?action=nouveau" class="btn-header">
+                    <i class="fas fa-plus-circle"></i>
+                    Ajouter une Salle
+                </a>
             </div>
-        </header>
+        </div>
 
         <!-- Messages -->
         <c:if test="${not empty sessionScope.successMessage}">
             <div class="alert alert-success">
-                <i class="fas fa-check-circle"></i> ${sessionScope.successMessage}
+                <i class="fas fa-check-circle"></i>
+                <span>${sessionScope.successMessage}</span>
             </div>
             <c:remove var="successMessage" scope="session" />
         </c:if>
         
         <c:if test="${not empty sessionScope.errorMessage}">
             <div class="alert alert-error">
-                <i class="fas fa-exclamation-circle"></i> ${sessionScope.errorMessage}
+                <i class="fas fa-exclamation-circle"></i>
+                <span>${sessionScope.errorMessage}</span>
             </div>
             <c:remove var="errorMessage" scope="session" />
         </c:if>
 
-        <!-- Action Section -->
-        <div class="search-section">
-            <div class="search-container">
-                <a href="${pageContext.request.contextPath}/admin/salles?action=nouveau" class="btn-primary">
-                    <i class="fas fa-plus"></i>
-                    Ajouter Salle
-                </a>
-            </div>
-        </div>
-
         <!-- Table Card -->
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Liste des Salles</h3>
+                <h3 class="card-title">
+                    <i class="fas fa-list-alt"></i>
+                    Liste des Salles
+                </h3>
             </div>
-
-            <div class="table-actions">
-                <div class="table-info">
-                    <span id="tableInfo">Affichage de <strong>${salles != null ? salles.size() : 0}</strong> salle(s)</span>
-                </div>
-            </div>
-
             <div class="table-container">
                 <table class="data-table" id="sallesTable">
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Nom de la Salle</th>
-                            <th>Département</th>
-                            <th>Capacité</th>
-                            <th>Description</th>
-                            <th>Actions</th>
+                            <th><i class="fas fa-door-open"></i> Nom de la Salle</th>
+                            <th><i class="fas fa-building"></i> Département</th>
+                            <th><i class="fas fa-users"></i> Capacité</th>
+                            <th><i class="fas fa-align-left"></i> Description</th>
+                            <th style="text-align: center;"><i class="fas fa-cog"></i> Actions</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
@@ -164,15 +142,15 @@
                             <c:when test="${not empty salles}">
                                 <c:forEach items="${salles}" var="salle">
                                     <tr>
-                                        <td>#${salle.id}</td>
+                                        <td><strong class="id-badge">${salle.id}</strong></td>
                                         <td>
-                                            <div class="salle-badge">
+                                            <div class="departement-badge">
                                                 <i class="fas fa-door-open"></i>
-                                                ${salle.nomSalle}
+                                                <span>${salle.nomSalle}</span>
                                             </div>
                                         </td>
                                         <td>
-                                            <span class="badge info">
+                                            <span class="badge success">
                                                 <i class="fas ${not empty salle.departement.icone ? salle.departement.icone : 'fa-building'}"></i>
                                                 ${salle.departement.nom}
                                             </span>
@@ -181,32 +159,42 @@
                                             <c:choose>
                                                 <c:when test="${not empty salle.capacite}">
                                                     <span class="capacity-badge">
-                                                        <i class="fas fa-users"></i> ${salle.capacite}
+                                                        <i class="fas fa-user-friends"></i> ${salle.capacite}
                                                     </span>
                                                 </c:when>
-                                                <c:otherwise>-</c:otherwise>
+                                                <c:otherwise>
+                                                    <span class="no-data">
+                                                        <i class="fas fa-minus-circle"></i>
+                                                        Non défini
+                                                    </span>
+                                                </c:otherwise>
                                             </c:choose>
                                         </td>
-                                        <td>
+                                        <td class="description-cell">
                                             <c:choose>
                                                 <c:when test="${not empty salle.description}">
                                                     ${salle.description.length() > 50 ? salle.description.substring(0, 50).concat('...') : salle.description}
                                                 </c:when>
-                                                <c:otherwise>-</c:otherwise>
+                                                <c:otherwise>
+                                                    <span class="no-data">
+                                                        <i class="fas fa-minus-circle"></i>
+                                                        Aucune description
+                                                    </span>
+                                                </c:otherwise>
                                             </c:choose>
                                         </td>
                                         <td>
                                             <div class="action-btns">
                                                 <a href="${pageContext.request.contextPath}/admin/salles?action=modifier&id=${salle.id}" 
                                                    class="action-btn edit" 
-                                                   title="Modifier">
+                                                   title="Modifier la salle">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 <a href="${pageContext.request.contextPath}/admin/salles?action=supprimer&id=${salle.id}" 
                                                    class="action-btn delete" 
-                                                   title="Supprimer"
-                                                   onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette salle ?');">
-                                                    <i class="fas fa-trash"></i>
+                                                   title="Supprimer la salle"
+                                                   onclick="return confirm('⚠️ Êtes-vous sûr de vouloir supprimer cette salle ?\n\nCette action est irréversible.');">
+                                                    <i class="fas fa-trash-alt"></i>
                                                 </a>
                                             </div>
                                         </td>
@@ -214,12 +202,13 @@
                                 </c:forEach>
                             </c:when>
                             <c:otherwise>
-                                <!-- Données exemples si aucune donnée n'est disponible -->
                                 <tr>
-                                    <td colspan="6" style="text-align: center; padding: 2rem; color: var(--gray-600);">
-                                        <i class="fas fa-inbox" style="font-size: 3rem; color: var(--gray-300); display: block; margin-bottom: 1rem;"></i>
-                                        <h3>Aucune salle disponible</h3>
-                                        <p>Cliquez sur "Ajouter Salle" pour créer votre première salle</p>
+                                    <td colspan="6">
+                                        <div class="empty-state">
+                                            <i class="fas fa-folder-open"></i>
+                                            <h3>Aucune salle disponible</h3>
+                                            <p>Commencez par créer votre première salle en cliquant sur le bouton ci-dessus</p>
+                                        </div>
                                     </td>
                                 </tr>
                             </c:otherwise>
@@ -231,107 +220,30 @@
     </main>
 
     <style>
-        .alert {
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-        
-        .alert-success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        
-        .alert-error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        
-        .alert i {
-            font-size: 1.25rem;
-        }
-        
-        .action-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.5rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            color: white;
-            font-size: 0.9rem;
-            margin: 0 0.25rem;
-        }
-        
-        .action-btn.edit {
-            background: #3498db;
-        }
-        
-        .action-btn.edit:hover {
-            background: #2980b9;
-        }
-        
-        .action-btn.delete {
-            background: #e74c3c;
-        }
-        
-        .action-btn.delete:hover {
-            background: #c0392b;
-        }
-        
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            background: #3498db;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            text-decoration: none;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        
-        .btn-primary:hover {
-            background: #2980b9;
-        }
-        
-        .salle-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 500;
-        }
-        
         .capacity-badge {
             display: inline-flex;
             align-items: center;
-            gap: 0.25rem;
-            padding: 0.25rem 0.75rem;
-            background: #e3f2fd;
-            color: #1976d2;
-            border-radius: 4px;
-            font-size: 0.9rem;
-        }
-        
-        .badge.info {
-            background: #e3f2fd;
-            color: #1976d2;
-        }
-        
-        .badge.warning {
-            background: #fff3cd;
-            color: #856404;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            color: #1e40af;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.875rem;
         }
     </style>
+
+    <script>
+        // Auto-hide alerts after 5 seconds
+        window.addEventListener('DOMContentLoaded', () => {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(alert => {
+                setTimeout(() => {
+                    alert.style.opacity = '0';
+                    setTimeout(() => alert.remove(), 300);
+                }, 5000);
+            });
+        });
+    </script>
 </body>
 </html>
